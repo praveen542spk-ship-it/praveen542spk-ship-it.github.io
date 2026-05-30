@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume | Praveen Kumar S</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-primary: #0a0a0f;
+      --color-accent: #6c63ff;
+      --color-text: #2d3748;
+      --color-text-muted: #718096;
+      --color-border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--color-text);
+      line-height: 1.6;
+      background-color: #f7fafc;
+      padding: 2rem 1rem;
+    }
+
+    .resume-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 3rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--color-border);
+    }
+
+    .print-banner {
+      background: rgba(108, 99, 255, 0.08);
+      border: 1px solid rgba(108, 99, 255, 0.2);
+      color: var(--color-accent);
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .print-banner button {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 0.75rem;
+      transition: background 0.2s;
+    }
+
+    .print-banner button:hover {
+      background: #5a52e0;
+    }
+
+    header {
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .header-left h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .header-left p {
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .header-right a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .header-right a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 0.25rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .skill-category {
+      font-size: 0.95rem;
+    }
+
+    .skill-category strong {
+      color: var(--color-primary);
+    }
+
+    .timeline-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-subheader {
+      font-style: italic;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-details {
+      font-size: 0.95rem;
+      padding-left: 1.25rem;
+    }
+
+    .timeline-details li {
+      margin-bottom: 0.25rem;
+    }
+
+    @media print {
+      body {
+        background-color: white;
+        padding: 0;
+      }
+      .resume-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .print-banner {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="resume-container">
+    <!-- Interactive Banner for browser viewing -->
+    <div class="print-banner">
+      💡 Press <strong>Ctrl + P</strong> (Windows) or <strong>Cmd + P</strong> (Mac) to save this page as a professional PDF resume!
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <header>
+      <div class="header-left">
+        <h1>Praveen Kumar S</h1>
+        <p>B.E. Computer Science and Engineering Student</p>
+      </div>
+      <div class="header-right">
+        <div>Email: <a href="mailto:praveen542spk@gmail.com">praveen542spk@gmail.com</a></div>
+        <div>GitHub: <a href="https://github.com/praveen542spk-ship-it" target="_blank">github.com/praveen542spk-ship-it</a></div>
+        <div>LinkedIn: <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank">linkedin.com/in/praveen-kumar-s-0bab05411</a></div>
+        <div>Location: Thiruvallur, Tamil Nadu</div>
+      </div>
+    </header>
+
+    <!-- EDUCATION -->
+    <section>
+      <h2 class="section-title">Education</h2>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span>R.M.D. Engineering College</span>
+          <span>2025 — Present</span>
+        </div>
+        <div class="timeline-subheader">Bachelor of Engineering (B.E.) in Computer Science and Engineering · 1st Year</div>
+        <ul class="timeline-details">
+          <li>Actively learning fundamental computer systems, software structures, and algorithmic principles.</li>
+          <li>Building hands-on projects to supplement the academic curriculum.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <strong>Languages:</strong> Python, C Programming, JavaScript (ES6)
+        </div>
+        <div class="skill-category">
+          <strong>Frontend Development:</strong> HTML5, CSS3, React
+        </div>
+        <div class="skill-category">
+          <strong>Backend Development:</strong> Node.js, Express, MongoDB
+        </div>
+        <div class="skill-category">
+          <strong>Tools & Systems:</strong> VS Code, Git, GitHub, Windows
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section>
+      <h2 class="section-title">Academic & Personal Projects</h2>
+      
+      <!-- Project 1 -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span>Job Application Tracker</span>
+          <span>Web Application</span>
+        </div>
+        <div class="timeline-subheader">React, Node.js, Express, MongoDB, HTML, CSS</div>
+        <ul class="timeline-details">
+          <li>Designed and built a full-stack dashboard tool for tracking active job applications.</li>
+          <li>Integrated a custom Kanban drag-and-drop board for visual organization of application pipelines.</li>
+          <li>Implemented application analytics, search status filters, and robust form validation features.</li>
+        </ul>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span>Jarvis AI Voice Assistant</span>
+          <span>Desktop Assistant</span>
+        </div>
+        <div class="timeline-subheader">Python, SpeechRecognition, Pyttsx3, OS Automation</div>
+        <ul class="timeline-details">
+          <li>Created a Python-based voice assistant utilizing speech-to-text and text-to-speech translation.</li>
+          <li>Automated system commands to open desktop applications, run web searches, and fetch encyclopedia details.</li>
+          <li>Implemented clean, modular, and optimized offline operations for immediate local tasks.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projects by Praveen Kumar S — Full Stack Developer. Browse my portfolio of web applications and projects." />
+  <meta name="author" content="Praveen Kumar S" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Projects | Praveen Kumar S" />
+  <meta property="og:description" content="Browse my portfolio of web development projects." />
+  <meta property="og:type" content="website" />
+  <title>Projects | Praveen Kumar S</title>
+  <link rel="canonical" href="https://github.com/praveen542spk-ship-it" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <nav class="container nav-inner" aria-label="Primary navigation" role="navigation">
+      <a href="index.html" class="nav-logo" aria-label="Praveen Kumar S - Go to homepage">Praveen<span>.</span></a>
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a></li>
+        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
+      </ul>
+      <button class="menu-toggle" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main id="main-content">
+
+    <!-- Page Hero -->
+    <section class="page-hero" aria-labelledby="projects-heading">
+      <div class="container">
+        <span class="section-label" aria-hidden="true">My Work</span>
+        <h1 id="projects-heading">Projects</h1>
+        <div class="divider" role="presentation" style="margin: 1.5rem auto;"></div>
+        <p class="section-desc" style="margin:0 auto; text-align:center; color:var(--color-text-muted);">
+          A selection of things I've built — from side projects to production apps.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filter (accessible) -->
+    <section class="section" style="padding-top:1rem; padding-bottom:0;" aria-label="Filter projects">
+      <div class="container">
+        <div role="group" aria-label="Filter projects by technology" style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+          <button class="btn btn-primary" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="true" data-filter="all">All</button>
+          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="react">React</button>
+          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="node">Node.js</button>
+          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="python">Python</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="section" style="padding-top:2.5rem;" aria-labelledby="projects-grid-heading">
+      <div class="container">
+        <h2 id="projects-grid-heading" class="sr-only">All Projects</h2>
+
+        <ul class="projects-grid" role="list" id="projects-list" aria-label="Project cards">
+
+          <li data-tags="react node">
+            <article class="project-card">
+              <div class="project-thumb-wrapper" role="img" aria-label="Job Application Tracker project preview">
+                <div class="project-thumb">💼</div>
+              </div>
+              <div class="project-body">
+                <div class="skill-tags" style="margin-bottom:0.75rem;">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express</span>
+                  <span class="tag">MongoDB</span>
+                </div>
+                <h3 class="project-title">Job Application Tracker</h3>
+                <p class="project-desc">
+                  A full-stack tracking application designed to help job seekers manage their applications.
+                  Includes a custom Kanban board, status analytics, calendar tracking, and resume management.
+                </p>
+                <nav class="project-links" aria-label="Job Application Tracker project links">
+                  <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Job Application Tracker live demo">Live Demo</a>
+                  <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Job Application Tracker source code on GitHub">GitHub</a>
+                </nav>
+              </div>
+            </article>
+          </li>
+
+          <li data-tags="python">
+            <article class="project-card">
+              <div class="project-thumb-wrapper" role="img" aria-label="Jarvis AI Assistant project preview">
+                <div class="project-thumb">🎙️</div>
+              </div>
+              <div class="project-body">
+                <div class="skill-tags" style="margin-bottom:0.75rem;">
+                  <span class="tag">Python</span>
+                  <span class="tag">SpeechRecognition</span>
+                  <span class="tag">NLP</span>
+                  <span class="tag">Automation</span>
+                </div>
+                <h3 class="project-title">Jarvis AI Voice Assistant</h3>
+                <p class="project-desc">
+                  An intelligent desktop voice assistant that automates tasks using speech-to-text.
+                  Enables opening apps, web searches, retrieving info, and performing voice-controlled actions.
+                </p>
+                <nav class="project-links" aria-label="Jarvis AI Assistant project links">
+                  <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Jarvis AI Assistant live demo">Live Demo</a>
+                  <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Jarvis AI Assistant source code on GitHub">GitHub</a>
+                </nav>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+
+        <!-- Empty state (hidden by default) -->
+        <div id="no-results" role="status" aria-live="polite" hidden
+          style="text-align:center; padding:4rem; color:var(--color-text-muted);">
+          No projects found for this filter.
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p class="footer-copy">&copy; <time datetime="2026">2026</time> Praveen Kumar S. Crafted with passion &amp; code 🚀</p>
+      <nav class="footer-social" aria-label="Social media links">
+        <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">GH</a>
+        <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">LI</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

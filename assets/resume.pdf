@@ -1,0 +1,11 @@
+Praveen Kumar S - Resume / CV Placeholder.
+=========================================
+
+Hi! This is a placeholder file for your resume/CV. 
+
+To make the "Download CV" button work perfectly:
+1. Create your real resume/CV in PDF format.
+2. Rename your PDF file to "resume.pdf".
+3. Save or overwrite this file inside this "assets/" folder: "d:/portfolio website/assets/resume.pdf".
+
+Once you replace this placeholder with your real PDF, clicking the button on your portfolio will open and download your real CV in a new tab!
