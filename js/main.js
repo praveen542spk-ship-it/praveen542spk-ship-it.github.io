@@ -244,3 +244,30 @@
     });
   });
 })();
+
+
+/* ---- Dynamic Light/Dark Mode Theme ---- */
+(function () {
+  const themeBtn = document.getElementById('theme-btn');
+  if (!themeBtn) return;
+
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  
+  if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+    document.body.classList.add('light-theme');
+    themeBtn.textContent = '🌙';
+    themeBtn.setAttribute('aria-label', 'Switch to dark mode');
+  } else {
+    themeBtn.textContent = '☀️';
+    themeBtn.setAttribute('aria-label', 'Switch to light mode');
+  }
+
+  themeBtn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-theme');
+    localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+    
+    themeBtn.textContent = isLight ? '🌙' : '☀️';
+    themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  });
+})();

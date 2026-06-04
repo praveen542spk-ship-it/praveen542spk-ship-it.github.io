@@ -18,6 +18,11 @@
 </head>
 
 <body>
+  <script>
+    if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.body.classList.add('light-theme');
+    }
+  </script>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- HEADER -->
@@ -30,6 +35,7 @@
         <li><a href="projects.html" aria-current="page">Projects</a></li>
         <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
       </ul>
+      <button id="theme-btn" class="theme-btn" aria-label="Switch to light mode">☀️</button>
       <button class="menu-toggle" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
     </nav>
   </header>
