@@ -188,6 +188,7 @@
 
     if (!email || !emailRegex.test(email)) {
       showError('email', 'email-error', 'Please enter a valid email address.');
+      alert('Please enter a valid email address!');
       hasError = true;
     } else {
       clearError('email', 'email-error');
