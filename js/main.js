@@ -271,3 +271,23 @@
     themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
   });
 })();
+
+
+/* ---- Form Select Placeholder Style Helper ---- */
+(function () {
+  const select = document.getElementById('project-type');
+  if (!select) return;
+
+  // Initial check
+  if (select.value === "") {
+    select.style.color = "var(--color-text-muted)";
+  }
+
+  select.addEventListener('change', () => {
+    if (select.value === "") {
+      select.style.color = "var(--color-text-muted)";
+    } else {
+      select.style.color = "var(--color-text)";
+    }
+  });
+})();
