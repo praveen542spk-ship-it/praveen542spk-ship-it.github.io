@@ -34,6 +34,16 @@ Live Website: [https://praveen542spk-ship-it.github.io/](https://praveen542spk-s
 
 ---
 
+## 📂 Featured Projects
+I have designed and built several academic and personal projects demonstrating full-stack engineering, automation, and frontend styling:
+1. 💼 **Job Application Tracker** (React, Node.js, Express, MongoDB) – Full-stack Kanban board and analytics dashboard.
+2. 🎙️ **Jarvis AI Voice Assistant** (Python, SpeechRecognition, Automation) – Desktop AI assistant utilizing speech-to-text.
+3. 🛒 **E-Commerce Application** (React, Node.js, Express, MongoDB) – Modern e-commerce web portal with auth and admin dashboard.
+4. 	✅ **To-Do Productivity App** (React, LocalStorage, CSS3) – Task tracker featuring offline session persistence.
+5. 🌤️ **Weather Forecast Application** (React, OpenWeatherMap API, CSS3) – Geolocation-enabled dynamic weather forecast.
+
+---
+
 ## 🛠️ Technologies Used
 - **Core:** HTML5, CSS3 (Advanced Custom Properties, Flexbox, Grid), JavaScript (ES6+, IIFE modules).
 - **API Integration:** Web3Forms (Mail submissions).
