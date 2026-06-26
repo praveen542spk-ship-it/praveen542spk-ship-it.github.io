@@ -292,3 +292,91 @@
     }
   });
 })();
+
+
+/* ---- Photo Lightbox ---- */
+(function () {
+
+  // Build overlay DOM once
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Photo viewer');
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'lightbox-close';
+  closeBtn.setAttribute('aria-label', 'Close photo viewer');
+  closeBtn.innerHTML = '✕';
+
+  const img = document.createElement('img');
+  img.alt = '';
+
+  const caption = document.createElement('div');
+  caption.className = 'lightbox-caption';
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(img);
+  overlay.appendChild(caption);
+  document.body.appendChild(overlay);
+
+  // Open lightbox
+  function openLightbox(src, altText) {
+    img.src = src;
+    img.alt = altText || '';
+    caption.textContent = altText || '';
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  // Close lightbox
+  function closeLightbox() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    // Return focus to trigger
+    if (overlay._lastTrigger) {
+      overlay._lastTrigger.focus();
+      overlay._lastTrigger = null;
+    }
+  }
+
+  // Bind all lightbox triggers on the page
+  document.querySelectorAll('.lightbox-trigger').forEach((trigger) => {
+    const imgEl = trigger.querySelector('img');
+    if (!imgEl) return;
+
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('aria-label', 'View photo fullscreen: ' + (imgEl.alt || 'Profile photo'));
+
+    trigger.addEventListener('click', () => {
+      overlay._lastTrigger = trigger;
+      openLightbox(imgEl.src, imgEl.alt);
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        overlay._lastTrigger = trigger;
+        openLightbox(imgEl.src, imgEl.alt);
+      }
+    });
+  });
+
+  // Close on button click
+  closeBtn.addEventListener('click', closeLightbox);
+
+  // Close on backdrop click (but not on the image itself)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+
+})();
