@@ -63,6 +63,11 @@
 - **Canonical URLs** — Prevents duplicate content issues
 - **Descriptive Meta Tags** — All pages have unique titles and descriptions
 
+### 🖼️ Photo Lightbox (Interactive Viewer)
+- **Glassmorphism Overlay** — clicking on profile photos opens a beautiful full-screen interactive overlay
+- **Smooth Animations** — scale and translate spring animations for opening/closing
+- **Accessibility & Dismissal** — close via close button, clicking outside, or hitting the `Escape` key
+
 ---
 
 ## 📂 Featured Projects
@@ -72,6 +77,8 @@
 | 💼 | **Job Application Tracker** | React, Node.js, Express, MongoDB | [GitHub](https://github.com/praveen542spk-ship-it/job-app) |
 | 🎙️ | **Jarvis AI Voice Assistant** | Python, SpeechRecognition, NLP | [GitHub](https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant) |
 | 🛒 | **E-Commerce Application** | React, Node.js, Express, MongoDB | [GitHub](https://github.com/praveen542spk-ship-it/ecom-app) |
+| 📱 | **Social Media Platform** | JavaScript, Node.js, Express, Vercel | [GitHub](https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform) · [Live](https://code-alpha-social-media-platform-self.vercel.app) |
+| 🌐 | **Community Hub** | JavaScript, Node.js, HTML5, CSS3 | [GitHub](https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub) |
 | ✅ | **To-Do Productivity App** | React, CSS3, LocalStorage | [GitHub](https://github.com/praveen542spk-ship-it/To-Do) · [Live](https://praveen542spk-ship-it.github.io/To-Do/) |
 | 🌤️ | **Weather Forecast App** | React, OpenWeatherMap API, CSS3 | [GitHub](https://github.com/praveen542spk-ship-it/weather-dashboard) · [Live](https://praveen542spk-ship-it.github.io/weather-dashboard/weather-dashboard/) |
 
