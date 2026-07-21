@@ -593,7 +593,7 @@ body.light-theme .site-header {
 ======================== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 3rem;
   align-items: stretch;
@@ -621,8 +621,14 @@ body.light-theme .site-header {
   margin-top: auto;
 }
 
-/* Responsive: single column on small screens */
-@media (max-width: 680px) {
+/* Responsive: 2 cols on tablet, 1 col on mobile */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
