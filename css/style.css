@@ -593,9 +593,39 @@ body.light-theme .site-header {
 ======================== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 3rem;
+  align-items: stretch;
+}
+
+/* Each list item and article fill full height */
+.projects-grid > li {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-grid > li > .project-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card .project-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card .project-links {
+  margin-top: auto;
+}
+
+/* Responsive: single column on small screens */
+@media (max-width: 680px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project-card {
