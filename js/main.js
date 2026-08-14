@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     13. BULLETPROOF INSTANT VOICE INTRO & SOUND CONTROL
+     13. DEFAULT MALE VOICE INTRO AUTO-PLAY & SOUND CONTROL
      -------------------------------------------------------------------------- */
   const soundBtn = document.getElementById('sound-toggle-btn');
   const bgProfile3D = document.querySelector('.bg-profile-3d');
@@ -508,6 +508,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (soundBtn && 'speechSynthesis' in window) {
     let currentUtterance = null;
     let cachedVoices = [];
+    let hasAutoPlayed = false;
+    let userMuted = localStorage.getItem('portfolio-voice-muted') === 'true';
 
     // Pre-load voices immediately
     const loadVoices = () => {
@@ -519,39 +521,56 @@ document.addEventListener('DOMContentLoaded', () => {
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
 
-    const stopSpeech = () => {
+    const stopSpeech = (manualMute = true) => {
       window.speechSynthesis.cancel();
       currentUtterance = null;
+      if (manualMute) {
+        userMuted = true;
+        localStorage.setItem('portfolio-voice-muted', 'true');
+      }
       soundBtn.innerHTML = '🔇';
       soundBtn.classList.remove('is-playing');
-      soundBtn.setAttribute('title', 'Play Voice Presentation');
+      soundBtn.setAttribute('title', 'Unmute Voice Presentation');
       if (bgProfile3D) bgProfile3D.classList.remove('audio-active');
     };
 
     const startSpeech = () => {
       // Force cancel any stuck or pending speech queue
       window.speechSynthesis.cancel();
+      userMuted = false;
+      localStorage.setItem('portfolio-voice-muted', 'false');
 
       const introText = "Welcome to my portfolio! I am Praveen Kumar S, a Computer Science Engineering student at R.M.D. Engineering College and a Full-Stack Developer. Explore my built projects, skills, and certifications!";
 
       currentUtterance = new SpeechSynthesisUtterance(introText);
       currentUtterance.lang = 'en-US';
       currentUtterance.rate = 0.95;
-      currentUtterance.pitch = 1.0;
+      currentUtterance.pitch = 0.9; // Slightly deeper male tone
 
-      // Select natural English voice if available
+      // Select deep professional MALE voice
       const voices = cachedVoices.length ? cachedVoices : window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (
-        v.name.includes('Google') || 
-        v.name.includes('Natural') || 
-        v.name.includes('Samantha') || 
+      
+      const maleVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (
+        v.name.includes('Guy') || 
+        v.name.includes('David') || 
+        v.name.includes('Mark') || 
+        v.name.includes('Christopher') || 
         v.name.includes('Daniel') || 
-        v.name.includes('Alex') || 
-        v.name.includes('Microsoft')
+        v.name.includes('George') || 
+        v.name.includes('James') || 
+        v.name.includes('Male') || 
+        v.name.includes('Google UK English Male') ||
+        v.name.includes('Google US English Male')
+      )) || voices.find(v => v.lang && v.lang.startsWith('en') && (
+        !v.name.includes('Zira') && 
+        !v.name.includes('Hazel') && 
+        !v.name.includes('Susan') && 
+        !v.name.includes('Samantha') && 
+        !v.name.includes('Victoria')
       ));
 
-      if (preferredVoice) {
-        currentUtterance.voice = preferredVoice;
+      if (maleVoice) {
+        currentUtterance.voice = maleVoice;
       }
 
       currentUtterance.onstart = () => {
@@ -570,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       currentUtterance.onerror = () => {
-        stopSpeech();
+        stopSpeech(false);
       };
 
       // Resume if Chrome paused speech engine
@@ -578,14 +597,32 @@ document.addEventListener('DOMContentLoaded', () => {
         window.speechSynthesis.resume();
       }
 
-      // Speak INSTANTLY
       window.speechSynthesis.speak(currentUtterance);
     };
 
+    // Auto-Play Trigger Logic
+    const triggerAutoPlay = () => {
+      if (hasAutoPlayed || userMuted) return;
+      hasAutoPlayed = true;
+      startSpeech();
+    };
+
+    // Attempt default autoplay after slight delay for voice loading
+    setTimeout(triggerAutoPlay, 600);
+
+    // Fallback for browser autoplay policies: trigger on first user interaction
+    const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
+    const handleFirstInteraction = () => {
+      triggerAutoPlay();
+      interactionEvents.forEach(evt => document.removeEventListener(evt, handleFirstInteraction));
+    };
+    interactionEvents.forEach(evt => document.addEventListener(evt, handleFirstInteraction, { once: true }));
+
+    // Sound Toggle Button Click
     soundBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       if (window.speechSynthesis.speaking || window.speechSynthesis.pending || currentUtterance) {
-        stopSpeech();
+        stopSpeech(true);
       } else {
         startSpeech();
       }
