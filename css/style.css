@@ -830,14 +830,31 @@ body.light-theme .site-header.scrolled {
   box-shadow: var(--shadow-glow);
 }
 
-/* Hero Avatar Card */
+/* 3D Holographic Developer Photo Card */
 .hero-visual {
   position: relative;
+  perspective: 1200px;
+}
+
+.hero-avatar-card-3d {
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 .hero-avatar-card {
-  padding: 1rem;
+  padding: 1.15rem;
   position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.25);
+}
+
+.hero-avatar-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.7), 0 0 45px rgba(99, 102, 241, 0.5);
 }
 
 .avatar-wrapper {
@@ -845,17 +862,51 @@ body.light-theme .site-header.scrolled {
   border-radius: var(--radius-md);
   overflow: hidden;
   aspect-ratio: 4/4.5;
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
 }
 
 .avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-normal);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(10px);
 }
 
-.hero-avatar-card:hover .avatar-img {
-  transform: scale(1.02);
+.avatar-3d-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    transparent 50%,
+    rgba(99, 102, 241, 0.2) 100%
+  );
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, background 0.2s ease;
+}
+
+.avatar-3d-badge {
+  position: absolute;
+  bottom: 1.8rem;
+  left: 1.8rem;
+  background: rgba(8, 9, 17, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transform: translateZ(45px);
+  pointer-events: none;
 }
 
 /* Stats Row */

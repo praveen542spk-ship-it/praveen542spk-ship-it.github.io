@@ -483,14 +483,21 @@ document.addEventListener('DOMContentLoaded', () => {
           bg3DInner.style.transform = `rotateY(${mouseX * 14}deg) rotateX(${-mouseY * 14}deg) translateZ(15px)`;
         }
 
-        // Hero Profile Card 3D Perspective Tilt
+        // Hero Profile Card 3D Perspective Tilt & Holographic Specular Shine
         if (heroCard) {
           const rect = heroCard.getBoundingClientRect();
-          if (e.clientX >= rect.left - 150 && e.clientX <= rect.right + 150 &&
-              e.clientY >= rect.top - 150 && e.clientY <= rect.bottom + 150) {
+          if (e.clientX >= rect.left - 250 && e.clientX <= rect.right + 250 &&
+              e.clientY >= rect.top - 250 && e.clientY <= rect.bottom + 250) {
             const cardX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
             const cardY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-            heroCard.style.transform = `perspective(1000px) rotateY(${cardX * 15}deg) rotateX(${-cardY * 15}deg) scale3d(1.02, 1.02, 1.02)`;
+            heroCard.style.transform = `perspective(1000px) rotateY(${cardX * 18}deg) rotateX(${-cardY * 18}deg) scale3d(1.04, 1.04, 1.04)`;
+            
+            const shine = heroCard.querySelector('.avatar-3d-shine');
+            if (shine) {
+              const shineX = Math.round(((cardX + 1) / 2) * 100);
+              const shineY = Math.round(((cardY + 1) / 2) * 100);
+              shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 255, 255, 0.45) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 80%)`;
+            }
           } else {
             heroCard.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
           }
