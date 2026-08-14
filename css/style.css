@@ -1722,6 +1722,13 @@ body.light-theme .form-select option {
 .delay-3 { transition-delay: 0.24s; }
 .delay-4 { transition-delay: 0.32s; }
 
+/* Hero section immediate visibility guarantee */
+#home .reveal,
+.hero-section .reveal {
+  opacity: 1;
+  transform: none;
+}
+
 /* Section 1: Hero -> About (Cinematic Reveal) */
 #about .reveal {
   transform: translateY(32px) scale(0.98);

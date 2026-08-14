@@ -98,6 +98,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   const revealElements = document.querySelectorAll('.reveal');
+  
+  // Safety Guarantee: Immediately activate all Hero & initial viewport elements
+  const activateInitialElements = () => {
+    revealElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight || el.closest('#home, .hero-section')) {
+        el.classList.add('active');
+      }
+    });
+  };
+
+  activateInitialElements();
+  window.addEventListener('load', activateInitialElements);
+
   if (revealElements.length) {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -105,16 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
           entry.target.classList.add('active');
           entry.target.classList.toggle('scroll-down', scrollDirection === 'down');
           entry.target.classList.toggle('scroll-up', scrollDirection === 'up');
-        } else {
-          // Re-trigger smooth entrance when scrolling back into viewport
-          if (entry.boundingClientRect.top > window.innerHeight) {
-            entry.target.classList.remove('active');
-          }
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px 50px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
