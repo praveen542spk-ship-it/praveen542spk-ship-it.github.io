@@ -500,17 +500,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     13. VOICE INTRO AUDIO SPEECH PRESENTATION & SOUND CONTROL
+     13. BULLETPROOF INSTANT VOICE INTRO & SOUND CONTROL
      -------------------------------------------------------------------------- */
   const soundBtn = document.getElementById('sound-toggle-btn');
   const bgProfile3D = document.querySelector('.bg-profile-3d');
 
   if (soundBtn && 'speechSynthesis' in window) {
-    let isSpeaking = false;
+    let currentUtterance = null;
+    let cachedVoices = [];
+
+    // Pre-load voices immediately
+    const loadVoices = () => {
+      cachedVoices = window.speechSynthesis.getVoices();
+    };
+
+    loadVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
 
     const stopSpeech = () => {
       window.speechSynthesis.cancel();
-      isSpeaking = false;
+      currentUtterance = null;
       soundBtn.innerHTML = '🔇';
       soundBtn.classList.remove('is-playing');
       soundBtn.setAttribute('title', 'Play Voice Presentation');
@@ -518,50 +529,62 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const startSpeech = () => {
+      // Force cancel any stuck or pending speech queue
       window.speechSynthesis.cancel();
-      
+
       const introText = "Welcome to my portfolio! I am Praveen Kumar S, a Computer Science Engineering student at R.M.D. Engineering College and a Full-Stack Developer. Explore my built projects, skills, and certifications!";
-      const utterance = new SpeechSynthesisUtterance(introText);
-      utterance.rate = 0.96;
-      utterance.pitch = 1.0;
 
-      // Select crisp English voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Alex')));
-      if (preferredVoice) utterance.voice = preferredVoice;
+      currentUtterance = new SpeechSynthesisUtterance(introText);
+      currentUtterance.lang = 'en-US';
+      currentUtterance.rate = 0.95;
+      currentUtterance.pitch = 1.0;
 
-      utterance.onstart = () => {
-        isSpeaking = true;
+      // Select natural English voice if available
+      const voices = cachedVoices.length ? cachedVoices : window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (
+        v.name.includes('Google') || 
+        v.name.includes('Natural') || 
+        v.name.includes('Samantha') || 
+        v.name.includes('Daniel') || 
+        v.name.includes('Alex') || 
+        v.name.includes('Microsoft')
+      ));
+
+      if (preferredVoice) {
+        currentUtterance.voice = preferredVoice;
+      }
+
+      currentUtterance.onstart = () => {
         soundBtn.innerHTML = '🔊';
         soundBtn.classList.add('is-playing');
         soundBtn.setAttribute('title', 'Click to Mute Sound');
         if (bgProfile3D) bgProfile3D.classList.add('audio-active');
       };
 
-      utterance.onend = () => {
-        isSpeaking = false;
+      currentUtterance.onend = () => {
+        currentUtterance = null;
         soundBtn.innerHTML = '🔊';
         soundBtn.classList.remove('is-playing');
         soundBtn.setAttribute('title', 'Play Voice Presentation');
         if (bgProfile3D) bgProfile3D.classList.remove('audio-active');
       };
 
-      utterance.onerror = () => {
+      currentUtterance.onerror = () => {
         stopSpeech();
       };
 
-      window.speechSynthesis.speak(utterance);
+      // Resume if Chrome paused speech engine
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+
+      // Speak INSTANTLY
+      window.speechSynthesis.speak(currentUtterance);
     };
 
-    // Pre-fetch voices
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        window.speechSynthesis.getVoices();
-      };
-    }
-
-    soundBtn.addEventListener('click', () => {
-      if (isSpeaking || window.speechSynthesis.speaking) {
+    soundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending || currentUtterance) {
         stopSpeech();
       } else {
         startSpeech();
