@@ -500,171 +500,73 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     13. DEFAULT MALE VOICE INTRO AUTO-PLAY & SOUND CONTROL
+     13. VOICE INTRO AUDIO SPEECH PRESENTATION & SOUND CONTROL
      -------------------------------------------------------------------------- */
   const soundBtn = document.getElementById('sound-toggle-btn');
   const bgProfile3D = document.querySelector('.bg-profile-3d');
 
   if (soundBtn && 'speechSynthesis' in window) {
-    let currentUtterance = null;
-    let cachedVoices = [];
-    let hasAutoPlayed = false;
-    let userMuted = localStorage.getItem('portfolio-voice-muted') === 'true';
+    let isSpeaking = false;
 
-    // Pre-load voices immediately
-    const loadVoices = () => {
-      cachedVoices = window.speechSynthesis.getVoices();
-    };
-
-    loadVoices();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
-
-    const stopSpeech = (manualMute = true) => {
+    const stopSpeech = () => {
       window.speechSynthesis.cancel();
-      currentUtterance = null;
-      if (manualMute) {
-        userMuted = true;
-        localStorage.setItem('portfolio-voice-muted', 'true');
-      }
+      isSpeaking = false;
       soundBtn.innerHTML = '🔇';
       soundBtn.classList.remove('is-playing');
-      soundBtn.setAttribute('title', 'Unmute Voice Presentation');
+      soundBtn.setAttribute('title', 'Play Voice Presentation');
       if (bgProfile3D) bgProfile3D.classList.remove('audio-active');
     };
 
     const startSpeech = () => {
-      // Force cancel any stuck or pending speech queue
       window.speechSynthesis.cancel();
-      userMuted = false;
-      localStorage.setItem('portfolio-voice-muted', 'false');
-
-      const introText = "Welcome to my portfolio! I am Praveen Kumar S, a Computer Science Engineering student at R.M.D. Engineering College and a Full-Stack Developer. Explore my built projects, skills, and certifications!";
-
-      currentUtterance = new SpeechSynthesisUtterance(introText);
-      currentUtterance.lang = 'en-US';
-      currentUtterance.rate = 0.95;
-      currentUtterance.pitch = 0.9; // Slightly deeper male tone
-
-      // Select deep professional MALE voice
-      const voices = cachedVoices.length ? cachedVoices : window.speechSynthesis.getVoices();
       
-      const maleVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (
-        v.name.includes('Guy') || 
-        v.name.includes('David') || 
-        v.name.includes('Mark') || 
-        v.name.includes('Christopher') || 
-        v.name.includes('Daniel') || 
-        v.name.includes('George') || 
-        v.name.includes('James') || 
-        v.name.includes('Male') || 
-        v.name.includes('Google UK English Male') ||
-        v.name.includes('Google US English Male')
-      )) || voices.find(v => v.lang && v.lang.startsWith('en') && (
-        !v.name.includes('Zira') && 
-        !v.name.includes('Hazel') && 
-        !v.name.includes('Susan') && 
-        !v.name.includes('Samantha') && 
-        !v.name.includes('Victoria')
-      ));
+      const introText = "Welcome to my portfolio! I am Praveen Kumar S, a Computer Science Engineering student at R.M.D. Engineering College and a Full-Stack Developer. Explore my built projects, skills, and certifications!";
+      const utterance = new SpeechSynthesisUtterance(introText);
+      utterance.rate = 0.96;
+      utterance.pitch = 1.0;
 
-      if (maleVoice) {
-        currentUtterance.voice = maleVoice;
-      }
+      // Select crisp English voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Alex')));
+      if (preferredVoice) utterance.voice = preferredVoice;
 
-      currentUtterance.onstart = () => {
+      utterance.onstart = () => {
+        isSpeaking = true;
         soundBtn.innerHTML = '🔊';
         soundBtn.classList.add('is-playing');
         soundBtn.setAttribute('title', 'Click to Mute Sound');
         if (bgProfile3D) bgProfile3D.classList.add('audio-active');
       };
 
-      currentUtterance.onend = () => {
-        currentUtterance = null;
+      utterance.onend = () => {
+        isSpeaking = false;
         soundBtn.innerHTML = '🔊';
         soundBtn.classList.remove('is-playing');
         soundBtn.setAttribute('title', 'Play Voice Presentation');
         if (bgProfile3D) bgProfile3D.classList.remove('audio-active');
       };
 
-      currentUtterance.onerror = () => {
-        stopSpeech(false);
+      utterance.onerror = () => {
+        stopSpeech();
       };
 
-      // Resume if Chrome paused speech engine
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      }
-
-      window.speechSynthesis.speak(currentUtterance);
+      window.speechSynthesis.speak(utterance);
     };
 
-    // Auto-Play Trigger Logic
-    const triggerAutoPlay = () => {
-      if (hasAutoPlayed || userMuted) return;
-      hasAutoPlayed = true;
-      startSpeech();
-    };
+    // Pre-fetch voices
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
 
-    // Attempt default autoplay after slight delay for voice loading
-    setTimeout(triggerAutoPlay, 600);
-
-    // Fallback for browser autoplay policies: trigger on first user interaction
-    const interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
-    const handleFirstInteraction = () => {
-      triggerAutoPlay();
-      interactionEvents.forEach(evt => document.removeEventListener(evt, handleFirstInteraction));
-    };
-    interactionEvents.forEach(evt => document.addEventListener(evt, handleFirstInteraction, { once: true }));
-
-    // Sound Toggle Button Click
-    soundBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (window.speechSynthesis.speaking || window.speechSynthesis.pending || currentUtterance) {
-        stopSpeech(true);
+    soundBtn.addEventListener('click', () => {
+      if (isSpeaking || window.speechSynthesis.speaking) {
+        stopSpeech();
       } else {
         startSpeech();
       }
     });
   }
-
-  /* --------------------------------------------------------------------------
-     14. UNIQUE MULTI-PAGE TRANSITION NAVIGATION SYSTEM
-     -------------------------------------------------------------------------- */
-  const pageOverlay = document.getElementById('page-transition-overlay');
-
-  // Trigger smooth page entrance on DOM load
-  document.body.classList.add('page-loaded');
-
-  const pageNavLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
-
-  pageNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetUrl = link.getAttribute('href');
-      if (!targetUrl || targetUrl === '#' || link.hostname !== window.location.hostname) return;
-
-      e.preventDefault();
-
-      // Determine unique transition signature based on destination page
-      let transClass = 'trans-home';
-      if (targetUrl.includes('about.html')) transClass = 'trans-about';
-      else if (targetUrl.includes('projects.html')) transClass = 'trans-projects';
-      else if (targetUrl.includes('contact.html')) transClass = 'trans-contact';
-      else if (targetUrl.includes('resume.html')) transClass = 'trans-resume';
-      else if (targetUrl.includes('index.html')) transClass = 'trans-home';
-
-      if (pageOverlay) {
-        pageOverlay.className = `page-transition-overlay ${transClass}`;
-        // Trigger reflow to restart CSS animation
-        void pageOverlay.offsetWidth;
-        pageOverlay.classList.add('active');
-      }
-
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 310);
-    });
-  });
 
 });
