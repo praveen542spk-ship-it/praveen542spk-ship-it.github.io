@@ -569,4 +569,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --------------------------------------------------------------------------
+     14. UNIQUE MULTI-PAGE TRANSITION NAVIGATION SYSTEM
+     -------------------------------------------------------------------------- */
+  const pageOverlay = document.getElementById('page-transition-overlay');
+
+  // Trigger smooth page entrance on DOM load
+  document.body.classList.add('page-loaded');
+
+  const pageNavLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
+
+  pageNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetUrl = link.getAttribute('href');
+      if (!targetUrl || targetUrl === '#' || link.hostname !== window.location.hostname) return;
+
+      e.preventDefault();
+
+      // Determine unique transition signature based on destination page
+      let transClass = 'trans-home';
+      if (targetUrl.includes('about.html')) transClass = 'trans-about';
+      else if (targetUrl.includes('projects.html')) transClass = 'trans-projects';
+      else if (targetUrl.includes('contact.html')) transClass = 'trans-contact';
+      else if (targetUrl.includes('resume.html')) transClass = 'trans-resume';
+      else if (targetUrl.includes('index.html')) transClass = 'trans-home';
+
+      if (pageOverlay) {
+        pageOverlay.className = `page-transition-overlay ${transClass}`;
+        // Trigger reflow to restart CSS animation
+        void pageOverlay.offsetWidth;
+        pageOverlay.classList.add('active');
+      }
+
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 310);
+    });
+  });
+
 });

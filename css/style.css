@@ -1871,6 +1871,87 @@ body.light-theme .form-select option {
 }
 
 /* --------------------------------------------------------------------------
+   17. UNIQUE MULTI-PAGE TRANSITION SYSTEM
+   -------------------------------------------------------------------------- */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--bg-dark);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), clip-path 0.32s cubic-bezier(0.16, 1, 0.3, 1), filter 0.32s ease;
+}
+
+body.light-theme .page-transition-overlay {
+  background: #f8fafc;
+}
+
+.page-transition-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Page Target 1: About Page -> Horizontal Glass Curtain Slide */
+.page-transition-overlay.trans-about {
+  transform: translateX(-100%);
+  background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(17, 21, 38, 0.98) 100%);
+}
+.page-transition-overlay.trans-about.active {
+  transform: translateX(0);
+}
+
+/* Page Target 2: Projects Page -> Staggered Zoom Reveal */
+.page-transition-overlay.trans-projects {
+  transform: scale(1.15);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, var(--bg-dark) 100%);
+}
+.page-transition-overlay.trans-projects.active {
+  transform: scale(1);
+}
+
+/* Page Target 3: Contact Page -> Liquid Circle Radial Wipe */
+.page-transition-overlay.trans-contact {
+  clip-path: circle(0% at 90% 10%);
+  background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(99, 102, 241, 0.18) 100%);
+}
+.page-transition-overlay.trans-contact.active {
+  clip-path: circle(150% at 90% 10%);
+}
+
+/* Page Target 4: Resume Page -> Upward Sheet Slide */
+.page-transition-overlay.trans-resume {
+  transform: translateY(100%);
+}
+.page-transition-overlay.trans-resume.active {
+  transform: translateY(0);
+}
+
+/* Page Target 5: Home Page -> Cinematic Blur Fade Scale */
+.page-transition-overlay.trans-home {
+  transform: scale(0.94);
+  filter: blur(8px);
+}
+.page-transition-overlay.trans-home.active {
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* Smooth Page Load Entry */
+body.page-entering {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.page-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
    16. RESPONSIVE BREAKPOINTS (ZERO HORIZONTAL SCROLL)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
