@@ -522,13 +522,35 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const introText = "Welcome to my portfolio! I am Praveen Kumar S, a Computer Science Engineering student at R.M.D. Engineering College and a Full-Stack Developer. Explore my built projects, skills, and certifications!";
       const utterance = new SpeechSynthesisUtterance(introText);
-      utterance.rate = 0.96;
-      utterance.pitch = 1.0;
+      utterance.rate = 0.95;
+      utterance.pitch = 0.9; // Deeper pitch for crisp male voice signature
 
-      // Select crisp English voice if available
+      // Select MALE English voice strictly
       const voices = window.speechSynthesis.getVoices();
-      const preferredVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Alex')));
-      if (preferredVoice) utterance.voice = preferredVoice;
+      const maleVoice = voices.find(v => 
+        v.lang.startsWith('en') && (
+          v.name.includes('David') || 
+          v.name.includes('Daniel') || 
+          v.name.includes('Alex') || 
+          v.name.includes('Guy') || 
+          v.name.includes('George') || 
+          v.name.includes('James') || 
+          v.name.includes('Mark') || 
+          v.name.includes('Male') ||
+          v.name.includes('Natural (Male)')
+        )
+      ) || voices.find(v => 
+        v.lang.startsWith('en') && 
+        !v.name.toLowerCase().includes('zira') && 
+        !v.name.toLowerCase().includes('samantha') && 
+        !v.name.toLowerCase().includes('hazel') && 
+        !v.name.toLowerCase().includes('susan') && 
+        !v.name.toLowerCase().includes('female') &&
+        !v.name.toLowerCase().includes('victoria') &&
+        !v.name.toLowerCase().includes('karen')
+      );
+
+      if (maleVoice) utterance.voice = maleVoice;
 
       utterance.onstart = () => {
         isSpeaking = true;
