@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgProfile3D = document.querySelector('.bg-profile-3d');
 
   if (soundBtn && 'speechSynthesis' in window) {
-    let isSpeaking = false;
+    let hasAutoPlayed = false;
 
     const stopSpeech = () => {
       window.speechSynthesis.cancel();
@@ -582,13 +582,48 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
-    soundBtn.addEventListener('click', () => {
+    const triggerAutoSpeech = () => {
+      if (hasAutoPlayed || localStorage.getItem('portfolio-sound-muted') === 'true') return;
+      hasAutoPlayed = true;
+      startSpeech();
+
+      document.removeEventListener('click', triggerAutoSpeech);
+      document.removeEventListener('scroll', triggerAutoSpeech);
+      document.removeEventListener('touchstart', triggerAutoSpeech);
+      document.removeEventListener('keydown', triggerAutoSpeech);
+    };
+
+    // 1. Attempt immediate auto-play on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!hasAutoPlayed && localStorage.getItem('portfolio-sound-muted') !== 'true') {
+          try {
+            startSpeech();
+            hasAutoPlayed = true;
+          } catch(e) {
+            // Autoplay blocked by browser policy; will trigger on first interaction gesture
+          }
+        }
+      }, 500);
+    });
+
+    // 2. Guaranteed auto-play on first user interaction gesture (click/scroll/touch/keypress)
+    document.addEventListener('click', triggerAutoSpeech, { once: true });
+    document.addEventListener('scroll', triggerAutoSpeech, { once: true });
+    document.addEventListener('touchstart', triggerAutoSpeech, { once: true });
+    document.addEventListener('keydown', triggerAutoSpeech, { once: true });
+
+    soundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (isSpeaking || window.speechSynthesis.speaking) {
+        localStorage.setItem('portfolio-sound-muted', 'true');
         stopSpeech();
       } else {
+        localStorage.removeItem('portfolio-sound-muted');
         startSpeech();
       }
     });
+  }
   }
 
 });
