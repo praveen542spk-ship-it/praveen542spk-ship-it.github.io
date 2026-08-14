@@ -135,6 +135,50 @@ body.light-theme .bg-grid-pattern {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
 }
 
+/* 3D Interactive Profile Background Visual */
+.bg-profile-3d {
+  position: fixed;
+  top: 10%;
+  right: 4%;
+  width: 480px;
+  height: 480px;
+  perspective: 1200px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  transition: opacity 0.5s ease;
+}
+
+body.light-theme .bg-profile-3d {
+  opacity: 0.05;
+}
+
+.bg-profile-3d-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  mask-image: radial-gradient(circle 240px at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle 240px at center, black 30%, transparent 80%);
+}
+
+.bg-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(40%) contrast(120%) brightness(90%);
+}
+
+.bg-profile-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, transparent 35%, var(--accent-primary) 100%);
+  mix-blend-mode: overlay;
+}
+
 .orb {
   position: absolute;
   border-radius: 50%;

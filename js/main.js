@@ -459,4 +459,44 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', triggerRipple);
   });
 
+  /* --------------------------------------------------------------------------
+     12. 3D INTERACTIVE PROFILE BACKDROP & AVATAR CARD TILT
+     -------------------------------------------------------------------------- */
+  const bg3DInner = document.querySelector('.bg-profile-3d-inner');
+  const heroCard = document.querySelector('.hero-avatar-card');
+
+  if (bg3DInner || heroCard) {
+    let requestAnimId = null;
+
+    document.addEventListener('mousemove', (e) => {
+      if (requestAnimId) cancelAnimationFrame(requestAnimId);
+
+      requestAnimId = requestAnimationFrame(() => {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        const mouseX = (e.clientX / windowWidth) * 2 - 1;
+        const mouseY = (e.clientY / windowHeight) * 2 - 1;
+
+        // Ambient 3D Backdrop Parallax Tilt
+        if (bg3DInner) {
+          bg3DInner.style.transform = `rotateY(${mouseX * 14}deg) rotateX(${-mouseY * 14}deg) translateZ(15px)`;
+        }
+
+        // Hero Profile Card 3D Perspective Tilt
+        if (heroCard) {
+          const rect = heroCard.getBoundingClientRect();
+          if (e.clientX >= rect.left - 150 && e.clientX <= rect.right + 150 &&
+              e.clientY >= rect.top - 150 && e.clientY <= rect.bottom + 150) {
+            const cardX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+            const cardY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+            heroCard.style.transform = `perspective(1000px) rotateY(${cardX * 15}deg) rotateX(${-cardY * 15}deg) scale3d(1.02, 1.02, 1.02)`;
+          } else {
+            heroCard.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+          }
+        }
+      });
+    });
+  }
+
 });
