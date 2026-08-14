@@ -370,4 +370,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* --------------------------------------------------------------------------
+     11. LIQUID BUTTON HOVER & CLICK RIPPLE ANIMATIONS
+     -------------------------------------------------------------------------- */
+  const interactiveButtons = document.querySelectorAll('.btn, .filter-btn');
+
+  interactiveButtons.forEach(button => {
+    // Pointer Position Tracking for Liquid Directional Highlight
+    button.addEventListener('mousemove', (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      button.style.setProperty('--mouse-x', `${x}px`);
+      button.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    // Expanding Liquid Ripple Wave on Click / Tap
+    const triggerRipple = (e) => {
+      const rect = button.getBoundingClientRect();
+      const oldRipples = button.querySelectorAll('.btn-ripple');
+      oldRipples.forEach(r => r.remove());
+
+      const circle = document.createElement('span');
+      const diameter = Math.max(rect.width, rect.height);
+      const radius = diameter / 2;
+
+      const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : rect.left + radius);
+      const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : rect.top + radius);
+
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${clientX - rect.left - radius}px`;
+      circle.style.top = `${clientY - rect.top - radius}px`;
+      circle.classList.add('btn-ripple');
+
+      button.appendChild(circle);
+
+      setTimeout(() => {
+        circle.remove();
+      }, 550);
+    };
+
+    button.addEventListener('click', triggerRipple);
+  });
+
 });

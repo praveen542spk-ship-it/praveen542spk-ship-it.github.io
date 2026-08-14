@@ -317,7 +317,7 @@ section[id] {
 }
 
 /* --------------------------------------------------------------------------
-   3. BUTTONS & INTERACTIVE ELEMENTS
+   3. BUTTONS & INTERACTIVE ELEMENTS — LIQUID ANIMATION SYSTEM
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -333,6 +333,35 @@ section[id] {
   border: 1px solid transparent;
   transition: all var(--transition-normal);
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  isolation: isolate;
+  will-change: transform;
+}
+
+/* Liquid Radial Glow Highlight Layer */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 100px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 45%,
+    transparent 80%
+  );
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  opacity: 1;
+  transform: scale(1.35);
 }
 
 .btn-primary {
@@ -341,9 +370,18 @@ section[id] {
   box-shadow: 0 4px 18px rgba(99, 102, 241, 0.28);
 }
 
+.btn-primary::before {
+  background: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(6, 182, 212, 0.28) 50%,
+    transparent 85%
+  );
+}
+
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 26px rgba(99, 102, 241, 0.42);
   color: #ffffff;
 }
 
@@ -352,6 +390,15 @@ section[id] {
   border-color: var(--border-light);
   color: var(--text-main);
   backdrop-filter: var(--glass-blur);
+}
+
+.btn-outline::before {
+  background: radial-gradient(
+    circle 100px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(99, 102, 241, 0.28) 0%,
+    rgba(99, 102, 241, 0.08) 55%,
+    transparent 85%
+  );
 }
 
 .btn-outline:hover {
@@ -366,6 +413,57 @@ section[id] {
   padding: 0.4rem 0.9rem;
   font-size: 0.82rem;
   border-radius: var(--radius-sm);
+}
+
+/* Liquid Ripple Click Wave */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: scale(0);
+  animation: liquidRipple 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-outline .btn-ripple {
+  background: rgba(99, 102, 241, 0.35);
+}
+
+@keyframes liquidRipple {
+  0% {
+    transform: scale(0);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* Icon Micro-Nudge Animation */
+.btn span,
+.btn svg,
+.btn i {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+}
+
+.btn:hover span:last-child,
+.btn:hover svg:last-child {
+  transform: translateX(3px);
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .btn::before,
+  .btn-ripple {
+    display: none !important;
+  }
+  .btn span,
+  .btn svg {
+    transform: none !important;
+  }
 }
 
 /* --------------------------------------------------------------------------
