@@ -71,41 +71,105 @@
 
         <div class="about-grid">
           <!-- Profile Card -->
-          <div class="glass-card reveal" style="padding:1.5rem;">
-            <div class="avatar-wrapper lightbox-trigger" style="aspect-ratio:4/4.5; margin-bottom:1.5rem;">
+          <div class="glass-card reveal" style="padding:1.5rem; display:flex; flex-direction:column; gap:1.25rem;">
+            <div class="avatar-wrapper lightbox-trigger" style="aspect-ratio:4/4.5; border-radius:var(--radius-md); overflow:hidden;">
               <img src="assets/profile.jpg" alt="PRAVEEN KUMAR S — Profile Photo" class="avatar-img" />
             </div>
             <div style="display:flex; flex-direction:column; gap:0.75rem;">
               <a href="index.html#contact" class="btn btn-primary" style="justify-content:center;">Let's Work Together 🚀</a>
               <a href="resume.html" target="_blank" class="btn btn-outline" style="justify-content:center;">View / Download CV (PDF) 📄</a>
             </div>
+
+            <!-- Highlight Cards Grid inside profile column -->
+            <div class="about-highlights-grid" style="margin-top:0.5rem;">
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🎓</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Education</div>
+                  <div class="highlight-title">B.E. CSE</div>
+                  <div class="highlight-sub">R.M.D. Engg</div>
+                </div>
+              </div>
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">⚡</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Dev Focus</div>
+                  <div class="highlight-title">Full-Stack</div>
+                  <div class="highlight-sub">MERN Stack</div>
+                </div>
+              </div>
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🚀</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Projects</div>
+                  <div class="highlight-title">7+ Apps</div>
+                  <div class="highlight-sub">3 Internships</div>
+                </div>
+              </div>
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🏆</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Badges</div>
+                  <div class="highlight-title">6 Industry</div>
+                  <div class="highlight-sub">Certifications</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- Story -->
-          <div class="about-bio reveal delay-1">
-            <h3 style="font-size:1.8rem; margin-bottom:1rem;" class="gradient-text">My Story &amp; Developer Journey</h3>
-            <p>
-              Hi! I'm <strong>PRAVEEN KUMAR S</strong>, a B.E. Computer Science and Engineering student at 
-              <strong>R.M.D. Engineering College</strong> in Tamil Nadu. I focus on engineering modern, full-stack web applications and software tools that provide scalable solutions.
-            </p>
-            <p>
-              My coding journey started with fundamental languages like C and Python, rapidly evolving into full-stack JavaScript (React, Node.js, Express, MongoDB). I am passionate about crafting applications that excel in speed, visual aesthetics, and accessibility.
-            </p>
+          <!-- Structured Story Blocks -->
+          <div class="about-left-col reveal delay-1">
+            <div class="about-blocks-wrapper">
+              
+              <!-- Block 1: Who I Am -->
+              <div class="glass-card about-block-card">
+                <div class="about-block-header">
+                  <div class="about-block-icon">👋</div>
+                  <h3 class="about-block-title">Who I Am</h3>
+                </div>
+                <p class="about-block-desc">
+                  I'm <strong>PRAVEEN KUMAR S</strong>, a 2nd Year Computer Science &amp; Engineering student at <strong>R.M.D. Engineering College</strong> in Tamil Nadu. I build full-stack web applications and software systems designed to solve real-world problems.
+                </p>
+              </div>
 
-            <h4 style="font-size:1.2rem; margin-top:2rem; margin-bottom:1rem;">Engineering Principles</h4>
-            <div class="value-list">
+              <!-- Block 2: What I Do -->
+              <div class="glass-card about-block-card">
+                <div class="about-block-header">
+                  <div class="about-block-icon">💻</div>
+                  <h3 class="about-block-title">What I Do</h3>
+                </div>
+                <p class="about-block-desc">
+                  I specialize in full-stack web development using the <strong>MERN stack</strong> (React, Node.js, Express, MongoDB) alongside <strong>Python OS automation</strong> and voice AI assistant systems. I engineer scalable web products with end-to-end user workflows.
+                </p>
+              </div>
+
+              <!-- Block 3: What Drives Me -->
+              <div class="glass-card about-block-card">
+                <div class="about-block-header">
+                  <div class="about-block-icon">🎯</div>
+                  <h3 class="about-block-title">What Drives Me</h3>
+                </div>
+                <p class="about-block-desc">
+                  I am deeply committed to <strong>web accessibility (WCAG 2.1)</strong>, clean code standards, and continuous technical growth. I focus on creating polished, accessible interfaces that deliver real value to users.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Engineering Values -->
+            <div class="value-list" style="margin-top:1rem;">
               <div class="glass-card value-item">
                 <div class="value-icon">♿</div>
                 <div class="value-content">
                   <h4>Web Accessibility (WCAG 2.1)</h4>
-                  <p>Building inclusive software designed for all users, supporting screen readers, keyboard navigation, and contrast standards.</p>
+                  <p>Building inclusive software designed for all users, supporting screen readers and keyboard navigation.</p>
                 </div>
               </div>
               <div class="glass-card value-item">
                 <div class="value-icon">⚡</div>
                 <div class="value-content">
                   <h4>High Performance</h4>
-                  <p>Optimized bundle sizes, quick initial page loads, fast REST APIs, and smooth UI animations.</p>
+                  <p>Optimized bundle sizes, fast initial page loads, efficient REST APIs, and responsive rendering.</p>
                 </div>
               </div>
               <div class="glass-card value-item">

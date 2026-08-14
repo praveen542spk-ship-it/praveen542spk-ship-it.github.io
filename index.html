@@ -200,73 +200,152 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="section" aria-label="About Me">
       <div class="container">
+        
+        <!-- Section Header -->
         <div class="section-header reveal">
-          <span class="section-tag">WHO I AM</span>
-          <h2 class="section-title">About Me &amp; Engineering Mindset</h2>
-          <p class="section-subtitle">Combining theoretical computer science with hands-on software development.</p>
+          <span class="section-tag">ABOUT ME</span>
+          <h2 class="section-title">Building Digital Experiences with Code &amp; Creativity</h2>
+          <p class="section-subtitle">Bridging theoretical computer science with hands-on full-stack development.</p>
         </div>
 
         <div class="about-grid">
-          <!-- Story & Bio -->
-          <div class="about-bio reveal">
-            <p>
-              Hello! I'm <strong>PRAVEEN KUMAR S</strong>, a Computer Science &amp; Engineering student at 
-              <strong>R.M.D. Engineering College</strong> in Tamil Nadu. I build full-stack web applications and software systems that solve practical problems.
-            </p>
-            <p>
-              My journey began with a deep curiosity about how computer systems turn lines of code into 
-              intuitive, powerful digital experiences. Over the past two years, I have engineered applications 
-              ranging from custom Kanban tracking dashboards to voice-automated AI assistants and modern e-commerce systems.
-            </p>
+          
+          <!-- Left Column: 3 Story Blocks & Highlight Cards Grid -->
+          <div class="about-left-col">
             
-            <div class="value-list">
+            <!-- 3 Structured Story Content Blocks -->
+            <div class="about-blocks-wrapper">
+              
+              <!-- Block 1: Who I Am -->
+              <div class="glass-card about-block-card reveal">
+                <div class="about-block-header">
+                  <div class="about-block-icon">👋</div>
+                  <h3 class="about-block-title">Who I Am</h3>
+                </div>
+                <p class="about-block-desc">
+                  I'm <strong>PRAVEEN KUMAR S</strong>, a 2nd Year Computer Science &amp; Engineering student at <strong>R.M.D. Engineering College</strong> in Tamil Nadu. I build full-stack web applications and software systems designed to solve real-world problems.
+                </p>
+              </div>
+
+              <!-- Block 2: What I Do -->
+              <div class="glass-card about-block-card reveal delay-1">
+                <div class="about-block-header">
+                  <div class="about-block-icon">💻</div>
+                  <h3 class="about-block-title">What I Do</h3>
+                </div>
+                <p class="about-block-desc">
+                  I specialize in full-stack web development using the <strong>MERN stack</strong> (React, Node.js, Express, MongoDB) alongside <strong>Python OS automation</strong> and voice AI assistant systems. I engineer scalable web products with end-to-end user workflows.
+                </p>
+              </div>
+
+              <!-- Block 3: What Drives Me -->
+              <div class="glass-card about-block-card reveal delay-2">
+                <div class="about-block-header">
+                  <div class="about-block-icon">🎯</div>
+                  <h3 class="about-block-title">What Drives Me</h3>
+                </div>
+                <p class="about-block-desc">
+                  I am deeply committed to <strong>web accessibility (WCAG 2.1)</strong>, clean code standards, and continuous technical growth. I focus on creating polished, accessible interfaces that deliver real value to users.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Developer Highlights Cards Grid (2x2) -->
+            <div class="about-highlights-grid reveal delay-3">
+              
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🎓</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Education</div>
+                  <div class="highlight-title">B.E. Computer Science</div>
+                  <div class="highlight-sub">2nd Year · R.M.D. Engg College</div>
+                </div>
+              </div>
+
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">⚡</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Dev Focus</div>
+                  <div class="highlight-title">Full-Stack &amp; Python</div>
+                  <div class="highlight-sub">MERN Stack &amp; OS Automation</div>
+                </div>
+              </div>
+
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🚀</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Built Work</div>
+                  <div class="highlight-title">7+ Web &amp; AI Projects</div>
+                  <div class="highlight-sub">3 Online Internships Completed</div>
+                </div>
+              </div>
+
+              <div class="glass-card highlight-card">
+                <div class="highlight-icon">🏆</div>
+                <div class="highlight-info">
+                  <div class="highlight-label">Certifications</div>
+                  <div class="highlight-title">6 Industry Badges</div>
+                  <div class="highlight-sub">HP LIFE, MongoDB, Infosys, NPTEL</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Right Column: Terminal Snippet & Mindset Values -->
+          <div class="about-right-col">
+            
+            <!-- Code Editor Snippet -->
+            <div class="reveal delay-2">
+              <div class="code-editor-card">
+                <div class="code-editor-header">
+                  <div class="editor-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <span class="editor-title">developer.json</span>
+                  <button id="copy-code-btn" class="btn btn-outline btn-sm" style="padding:0.2rem 0.6rem; font-size:0.75rem;">Copy JSON</button>
+                </div>
+                <pre class="code-editor-body"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  <span class="code-property">name</span>: <span class="code-string">"PRAVEEN KUMAR S"</span>,
+  <span class="code-property">role</span>: <span class="code-string">"Full-Stack Developer"</span>,
+  <span class="code-property">institution</span>: <span class="code-string">"R.M.D. Engineering College"</span>,
+  <span class="code-property">degree</span>: <span class="code-string">"B.E. CSE (2nd Year)"</span>,
+  <span class="code-property">stack</span>: [<span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express"</span>, <span class="code-string">"MongoDB"</span>],
+  <span class="code-property">skills</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript (ES6+)"</span>, <span class="code-string">"C"</span>],
+  <span class="code-property">status</span>: <span class="code-string">"🟢 Open for Internships"</span>
+};</code></pre>
+              </div>
+            </div>
+
+            <!-- Engineering Mindset Values -->
+            <div class="value-list reveal delay-3">
               <div class="glass-card value-item">
                 <div class="value-icon">♿</div>
                 <div class="value-content">
                   <h4>Web Accessibility (WCAG 2.1)</h4>
-                  <p>Accessibility is fundamental — every user deserves a smooth, inclusive experience.</p>
+                  <p>Accessibility is fundamental — every user deserves an inclusive experience.</p>
                 </div>
               </div>
               <div class="glass-card value-item">
                 <div class="value-icon">⚡</div>
                 <div class="value-content">
-                  <h4>Performance &amp; Optimization</h4>
+                  <h4>Performance &amp; Clean Code</h4>
                   <p>Clean architecture, efficient queries, and fast rendering speeds are non-negotiable.</p>
                 </div>
               </div>
               <div class="glass-card value-item">
                 <div class="value-icon">🛠️</div>
                 <div class="value-content">
-                  <h4>Continuous Learning</h4>
+                  <h4>Continuous Growth</h4>
                   <p>Constantly expanding capabilities across backend frameworks, APIs, and dev tools.</p>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Code Editor Snippet Card -->
-          <div class="reveal delay-2">
-            <div class="code-editor-card">
-              <div class="code-editor-header">
-                <div class="editor-dots">
-                  <span class="dot dot-red"></span>
-                  <span class="dot dot-yellow"></span>
-                  <span class="dot dot-green"></span>
-                </div>
-                <span class="editor-title">praveen.json</span>
-                <button id="copy-code-btn" class="btn btn-outline btn-sm" style="padding:0.2rem 0.6rem; font-size:0.75rem;">Copy JSON</button>
-              </div>
-              <pre class="code-editor-body"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-property">name</span>: <span class="code-string">"PRAVEEN KUMAR S"</span>,
-  <span class="code-property">role</span>: <span class="code-string">"Full-Stack Developer"</span>,
-  <span class="code-property">institution</span>: <span class="code-string">"R.M.D. Engineering College"</span>,
-  <span class="code-property">degree</span>: <span class="code-string">"B.E. Computer Science & Engineering"</span>,
-  <span class="code-property">year</span>: <span class="code-string">"2nd Year"</span>,
-  <span class="code-property">primaryStack</span>: [<span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express"</span>, <span class="code-string">"MongoDB"</span>],
-  <span class="code-property">languages</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript (ES6+)"</span>, <span class="code-string">"C"</span>],
-  <span class="code-property">status</span>: <span class="code-string">"🟢 Open to Internships & Projects"</span>
-};</code></pre>
-            </div>
           </div>
 
         </div>
