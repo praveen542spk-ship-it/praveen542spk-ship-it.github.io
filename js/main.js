@@ -99,18 +99,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const revealElements = document.querySelectorAll('.reveal');
   
-  // Safety Guarantee: Immediately activate all Hero & initial viewport elements
+  // Safety Guarantee: Immediately activate Hero, hash targets, and initial viewport elements
   const activateInitialElements = () => {
     revealElements.forEach(el => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight || el.closest('#home, .hero-section')) {
+      if (rect.top < window.innerHeight + 100 || el.closest('#home, .hero-section')) {
         el.classList.add('active');
       }
     });
+
+    if (window.location.hash) {
+      const targetSec = document.querySelector(window.location.hash);
+      if (targetSec) {
+        targetSec.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+      }
+    }
   };
 
   activateInitialElements();
   window.addEventListener('load', activateInitialElements);
+
+  // Activate section reveal on navigation link clicks
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (href && href.includes('#')) {
+        const hash = href.substring(href.indexOf('#'));
+        const targetSec = document.querySelector(hash);
+        if (targetSec) {
+          targetSec.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        }
+      }
+    });
+  });
 
   if (revealElements.length) {
     const revealObserver = new IntersectionObserver((entries) => {

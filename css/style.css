@@ -1711,10 +1711,10 @@ body.light-theme .form-select option {
 /* --------------------------------------------------------------------------
    15. COHESIVE SECTION SCROLL ANIMATION SYSTEM
    -------------------------------------------------------------------------- */
-.reveal {
-  opacity: 0;
-  will-change: transform, opacity;
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+.reveal.active {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
 }
 
 .delay-1 { transition-delay: 0.08s; }
@@ -1735,20 +1735,10 @@ body.light-theme .form-select option {
   transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#about .reveal.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
 /* Section 2: About -> Skills (Horizontal Flowing Reveal) */
 #skills .reveal {
   transform: translateX(-28px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#skills .reveal.active {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* Section 3: Skills -> Projects (Progressive Grid Reveal) */
@@ -1757,20 +1747,12 @@ body.light-theme .form-select option {
   transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1), transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#projects .reveal.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Section 4: Projects -> Achievements (Timeline / Journey Draw Reveal) */
-#achievements .reveal {
+/* Section 4: Projects -> Achievements & Journey (Timeline / Journey Draw Reveal) */
+#achievements .reveal,
+#journey .reveal,
+#experience .reveal {
   transform: translateY(28px);
   transition: opacity 0.68s cubic-bezier(0.16, 1, 0.3, 1), transform 0.68s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-#achievements .reveal.active {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Section 5: Achievements -> Education (Soft Fade + Depth Reveal) */
