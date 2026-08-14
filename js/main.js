@@ -86,20 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     4. SCROLL REVEAL ANIMATIONS (IntersectionObserver)
+     4. SCROLL REVEAL & DIRECTION-AWARE ANIMATIONS (IntersectionObserver)
      -------------------------------------------------------------------------- */
+  let lastScrollY = window.scrollY;
+  let scrollDirection = 'down';
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+    lastScrollY = currentScrollY;
+  }, { passive: true });
+
   const revealElements = document.querySelectorAll('.reveal');
   if (revealElements.length) {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          revealObserver.unobserve(entry.target);
+          entry.target.classList.toggle('scroll-down', scrollDirection === 'down');
+          entry.target.classList.toggle('scroll-up', scrollDirection === 'up');
+        } else {
+          // Re-trigger smooth entrance when scrolling back into viewport
+          if (entry.boundingClientRect.top > window.innerHeight) {
+            entry.target.classList.remove('active');
+          }
         }
       });
     }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));

@@ -1709,23 +1709,109 @@ body.light-theme .form-select option {
 }
 
 /* --------------------------------------------------------------------------
-   15. ANIMATIONS & REVEAL CLASSES
+   15. COHESIVE SECTION SCROLL ANIMATION SYSTEM
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  will-change: transform, opacity;
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.active {
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+
+/* Section 1: Hero -> About (Cinematic Reveal) */
+#about .reveal {
+  transform: translateY(32px) scale(0.98);
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1), transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#about .reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Section 2: About -> Skills (Horizontal Flowing Reveal) */
+#skills .reveal {
+  transform: translateX(-28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#skills .reveal.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Section 3: Skills -> Projects (Progressive Grid Reveal) */
+#projects .reveal {
+  transform: translateY(24px) scale(0.96);
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1), transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#projects .reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Section 4: Projects -> Achievements (Timeline / Journey Draw Reveal) */
+#achievements .reveal {
+  transform: translateY(28px);
+  transition: opacity 0.68s cubic-bezier(0.16, 1, 0.3, 1), transform 0.68s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#achievements .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }
 
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.18s; }
-.delay-3 { transition-delay: 0.26s; }
-.delay-4 { transition-delay: 0.34s; }
+/* Section 5: Achievements -> Education (Soft Fade + Depth Reveal) */
+#education .reveal {
+  transform: translateY(25px) scale(0.98);
+  filter: blur(3px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#education .reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Section 6: Education -> Contact (Gradient / Liquid Expansion Reveal) */
+#contact .reveal {
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#contact .reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile Distance Scaling */
+@media (max-width: 640px) {
+  #about .reveal,
+  #skills .reveal,
+  #projects .reveal,
+  #achievements .reveal,
+  #education .reveal,
+  #contact .reveal {
+    transform: translateY(14px) !important;
+    filter: none !important;
+    transition-duration: 0.5s !important;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none !important;
+    filter: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+}
 
 /* --------------------------------------------------------------------------
    16. RESPONSIVE BREAKPOINTS (ZERO HORIZONTAL SCROLL)
