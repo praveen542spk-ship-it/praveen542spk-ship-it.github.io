@@ -3,276 +3,284 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Projects by Praveen Kumar S — Full Stack Developer. Browse my portfolio of web applications and projects." />
+  <title>Projects | PRAVEEN KUMAR S</title>
+  <meta name="description" content="Explore full-stack web applications, Python tools, and software projects engineered by PRAVEEN KUMAR S." />
   <meta name="author" content="Praveen Kumar S" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Projects | Praveen Kumar S" />
-  <meta property="og:description" content="Browse my portfolio of web development projects." />
-  <meta property="og:type" content="website" />
-  <title>Projects | Praveen Kumar S</title>
-  <link rel="canonical" href="https://github.com/praveen542spk-ship-it" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="canonical" href="https://praveen542spk-ship-it.github.io/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-</head>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<body>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
   <script>
     if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      document.body.classList.add('light-theme');
+      document.documentElement.classList.add('light-theme');
     }
   </script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-grid-pattern"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
-    <nav class="container nav-inner" aria-label="Primary navigation" role="navigation">
-      <a href="index.html" class="nav-logo" aria-label="Praveen Kumar S - Go to homepage">Praveen<span>.</span></a>
-      <ul class="nav-links" id="nav-menu" role="list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html" aria-current="page">Projects</a></li>
-        <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
-      </ul>
-      <button id="theme-btn" class="theme-btn" aria-label="Switch to light mode">☀️</button>
-      <button class="menu-toggle" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
-    </nav>
+  <!-- NAVBAR -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="nav-logo">Praveen<span>.dev</span></a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="index.html#projects" class="nav-link active">Projects</a></li>
+          <li><a href="index.html#achievements" class="nav-link">Achievements</a></li>
+          <li><a href="index.html#education" class="nav-link">Education</a></li>
+          <li><a href="index.html#experience" class="nav-link">Journey</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-controls">
+        <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
+        <a href="resume.html" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
   </header>
 
-  <!-- MAIN -->
-  <main id="main-content">
-
-    <!-- Page Hero -->
-    <section class="page-hero" aria-labelledby="projects-heading">
+  <main id="main-content" style="padding-top:7rem;">
+    <section class="section">
       <div class="container">
-        <span class="section-label" aria-hidden="true">My Work</span>
-        <h1 id="projects-heading">Projects</h1>
-        <div class="divider" role="presentation" style="margin: 1.5rem auto;"></div>
-        <p class="section-desc" style="margin:0 auto; text-align:center; color:var(--color-text-muted);">
-          A selection of things I've built — from side projects to production apps.
-        </p>
-      </div>
-    </section>
+        <div class="section-header reveal">
+          <span class="section-tag">PORTFOLIO WORK</span>
+          <h2 class="section-title">All Projects</h2>
+          <p class="section-subtitle">A collection of full-stack web applications, software tools, and production apps.</p>
+        </div>
 
-    <!-- Filter (accessible) -->
-    <section class="section" style="padding-top:1rem; padding-bottom:0;" aria-label="Filter projects">
-      <div class="container">
-        <div role="group" aria-label="Filter projects by technology" style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-          <button class="btn btn-primary" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="true" data-filter="all">All</button>
-          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="react">React</button>
-          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="node">Node.js</button>
-          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="python">Python</button>
-          <button class="btn btn-outline" style="padding:0.45rem 1rem; font-size:0.9rem;" aria-pressed="false" data-filter="javascript">JavaScript</button>
+        <!-- Filter Bar -->
+        <div class="project-filter-bar reveal">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="react">React</button>
+          <button class="filter-btn" data-filter="node">Node.js</button>
+          <button class="filter-btn" data-filter="python">Python</button>
+          <button class="filter-btn" data-filter="javascript">JavaScript</button>
+        </div>
+
+        <!-- Featured Showcase Banner -->
+        <div class="glass-card featured-project-card reveal">
+          <div class="featured-project-preview">
+            <div class="featured-project-preview-icon">📱</div>
+          </div>
+          <div class="featured-project-info">
+            <div class="featured-label">⭐ FEATURED HIGHLIGHT PROJECT</div>
+            <h3 class="featured-title">Social Media Platform</h3>
+            <p class="featured-desc">
+              A full-featured social media web application supporting user profiles, dynamic posts, and real-time interactions with a responsive modern UI deployed on Vercel.
+            </p>
+            <div class="featured-problem">
+              <strong>Problem Solved:</strong> Built to provide smooth user interactions, instant feed updates, and scalable cloud deployment without full-page reloads.
+            </div>
+            <div class="skill-pills" style="margin-bottom:1.5rem;">
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express</span>
+              <span class="skill-tag">Vercel</span>
+            </div>
+            <div class="project-links">
+              <a href="https://code-alpha-social-media-platform-self.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Live Demo ↗</a>
+              <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Source Code 🐙</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+
+          <!-- Project 1: Job Tracker -->
+          <div class="project-card-wrapper" data-tags="react node">
+            <div class="glass-card project-card reveal">
+              <div class="project-thumb-box">💼</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">MongoDB</span>
+                </div>
+                <h3 class="project-card-title">Job Application Tracker</h3>
+                <p class="project-card-desc">
+                  Full-stack tracking dashboard featuring a custom Kanban drag-and-drop pipeline board, calendar status filters, and resume management.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Helps job seekers organize active applications and track status updates efficiently.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Jarvis Voice Assistant -->
+          <div class="project-card-wrapper" data-tags="python">
+            <div class="glass-card project-card reveal delay-1">
+              <div class="project-thumb-box">🎙️</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">SpeechRecognition</span>
+                  <span class="skill-tag">NLP</span>
+                  <span class="skill-tag">Automation</span>
+                </div>
+                <h3 class="project-card-title">Jarvis AI Voice Assistant</h3>
+                <p class="project-card-desc">
+                  Intelligent desktop voice assistant that automates OS tasks, opens desktop applications, runs web searches, and handles offline operations.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Streamlines daily desktop operations through hands-free voice automation commands.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: E-Commerce MERN App -->
+          <div class="project-card-wrapper" data-tags="react node">
+            <div class="glass-card project-card reveal delay-2">
+              <div class="project-thumb-box">🛒</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Express</span>
+                  <span class="skill-tag">MongoDB</span>
+                </div>
+                <h3 class="project-card-title">E-Commerce Application</h3>
+                <p class="project-card-desc">
+                  Responsive MERN stack e-commerce web app featuring JWT authentication, dynamic cart management, catalog search, and admin inventory control.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Provides a secure end-to-end shopping workflow and administrative product management.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://github.com/praveen542spk-ship-it/ecom-app" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Community Hub -->
+          <div class="project-card-wrapper" data-tags="javascript node">
+            <div class="glass-card project-card reveal">
+              <div class="project-thumb-box">🌐</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">HTML5</span>
+                  <span class="skill-tag">CSS3</span>
+                </div>
+                <h3 class="project-card-title">Community Hub</h3>
+                <p class="project-card-desc">
+                  Community-driven web platform designed for group discussions, member profiles, and collaborative content sharing.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Connects community members in an accessible digital environment for knowledge exchange.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: To-Do App -->
+          <div class="project-card-wrapper" data-tags="react">
+            <div class="glass-card project-card reveal delay-1">
+              <div class="project-thumb-box">✅</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">CSS3</span>
+                  <span class="skill-tag">LocalStorage</span>
+                </div>
+                <h3 class="project-card-title">To-Do Productivity App</h3>
+                <p class="project-card-desc">
+                  High-performance task management application featuring task grouping, priority levels, status filters, and offline data persistence.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Prevents task oversight with immediate local data retention and status tracking.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://praveen542spk-ship-it.github.io/To-Do/" target="_blank" rel="noopener noreferrer" class="project-link-item">Live Demo ↗</a>
+                  <a href="https://github.com/praveen542spk-ship-it/To-Do" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6: Weather Dashboard -->
+          <div class="project-card-wrapper" data-tags="react">
+            <div class="glass-card project-card reveal delay-2">
+              <div class="project-thumb-box">🌤️</div>
+              <div class="project-card-body">
+                <div class="skill-pills" style="margin-bottom:0.75rem;">
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">OpenWeather API</span>
+                  <span class="skill-tag">Geolocation</span>
+                </div>
+                <h3 class="project-card-title">Weather Forecast Dashboard</h3>
+                <p class="project-card-desc">
+                  Dynamic meteorological reporting application fetching real-time weather data with automatic HTML5 geolocation detection and adaptive themes.
+                </p>
+                <p class="project-problem-text">
+                  <strong>Problem Solved:</strong> Delivers instant weather alerts and regional forecasts with zero latency.
+                </p>
+                <div class="project-card-footer">
+                  <a href="https://praveen542spk-ship-it.github.io/weather-dashboard/weather-dashboard/" target="_blank" rel="noopener noreferrer" class="project-link-item">Live Demo ↗</a>
+                  <a href="https://github.com/praveen542spk-ship-it/weather-dashboard" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub 🐙</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="no-projects-found" style="display:none; text-align:center; padding:3rem; color:var(--text-muted);">
+          No projects found for the selected technology filter.
         </div>
       </div>
     </section>
-
-    <!-- Projects Grid -->
-    <section class="section" style="padding-top:2.5rem;" aria-labelledby="projects-grid-heading">
-      <div class="container">
-        <h2 id="projects-grid-heading" class="sr-only">All Projects</h2>
-
-        <ul class="projects-grid" role="list" id="projects-list" aria-label="Project cards">
-
-          <li data-tags="react node">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="Job Application Tracker project preview">
-                <div class="project-thumb">💼</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">React</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">Express</span>
-                  <span class="tag">MongoDB</span>
-                </div>
-                <h3 class="project-title">Job Application Tracker</h3>
-                <p class="project-desc">
-                  A full-stack tracking application designed to help job seekers manage their applications.
-                  Includes a custom Kanban board, status analytics, calendar tracking, and resume management.
-                </p>
-                <nav class="project-links" aria-label="Job Application Tracker project links">
-                  <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" rel="noopener noreferrer" class="project-link project-link--soon" aria-label="Live demo coming soon — view on GitHub" title="Live demo coming soon">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Job Application Tracker source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="python">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="Jarvis AI Assistant project preview">
-                <div class="project-thumb">🎙️</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">Python</span>
-                  <span class="tag">SpeechRecognition</span>
-                  <span class="tag">NLP</span>
-                  <span class="tag">Automation</span>
-                </div>
-                <h3 class="project-title">Jarvis AI Voice Assistant</h3>
-                <p class="project-desc">
-                  An intelligent desktop voice assistant that automates tasks using speech-to-text.
-                  Enables opening apps, web searches, retrieving info, and performing voice-controlled actions.
-                </p>
-                <nav class="project-links" aria-label="Jarvis AI Assistant project links">
-                  <a href="https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant" target="_blank" rel="noopener noreferrer" class="project-link project-link--soon" aria-label="Live demo coming soon — view on GitHub" title="Live demo coming soon">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Jarvis AI Assistant source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="react node">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="E-Commerce Application project preview">
-                <div class="project-thumb">🛒</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">React</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">Express</span>
-                  <span class="tag">MongoDB</span>
-                </div>
-                <h3 class="project-title">E-Commerce Application</h3>
-                <p class="project-desc">
-                  A modern, fully functional e-commerce web application. Includes secure JWT user authentication,
-                  product catalog search/filters, shopping cart operations, and an integrated admin dashboard.
-                </p>
-                <nav class="project-links" aria-label="E-Commerce Application project links">
-                  <a href="https://github.com/praveen542spk-ship-it/ecom-app" target="_blank" rel="noopener noreferrer" class="project-link project-link--soon" aria-label="Live demo coming soon — view on GitHub" title="Live demo coming soon">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/ecom-app" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View E-Commerce Application source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="react">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="To-Do App project preview">
-                <div class="project-thumb">✅</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">React</span>
-                  <span class="tag">CSS3</span>
-                  <span class="tag">LocalStorage</span>
-                </div>
-                <h3 class="project-title">To-Do Productivity App</h3>
-                <p class="project-desc">
-                  A high-performance task management application featuring task grouping, priority levels,
-                  and completion analytics. Uses browser local storage to persist task states offline.
-                </p>
-                <nav class="project-links" aria-label="To-Do App project links">
-                  <a href="https://praveen542spk-ship-it.github.io/To-Do/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View To-Do App live demo">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/To-Do" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View To-Do App source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="react">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="Weather Application project preview">
-                <div class="project-thumb">🌤️</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">React</span>
-                  <span class="tag">API Integration</span>
-                  <span class="tag">CSS3</span>
-                </div>
-                <h3 class="project-title">Weather Forecast Application</h3>
-                <p class="project-desc">
-                  A dynamic weather reporting dashboard that fetches real-time meteorological data.
-                  Features city search, geolocation detection, and theme backgrounds that shift according to current weather.
-                </p>
-                <nav class="project-links" aria-label="Weather Application project links">
-                  <a href="https://praveen542spk-ship-it.github.io/weather-dashboard/weather-dashboard/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Weather Application live demo">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/weather-dashboard" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Weather Application source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="javascript node">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="Social Media Platform project preview">
-                <div class="project-thumb">📱</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">JavaScript</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">Express</span>
-                  <span class="tag">Vercel</span>
-                </div>
-                <h3 class="project-title">Social Media Platform</h3>
-                <p class="project-desc">
-                  A full-featured social media web application.
-                  Supports user profiles, posts, real-time interactions, and a responsive modern UI deployed on Vercel.
-                </p>
-                <nav class="project-links" aria-label="Social Media Platform project links">
-                  <a href="https://code-alpha-social-media-platform-self.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Social Media Platform live demo">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Social Media Platform source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-          <li data-tags="javascript node">
-            <article class="project-card">
-              <div class="project-thumb-wrapper" role="img" aria-label="Community Hub project preview">
-                <div class="project-thumb">🌐</div>
-              </div>
-              <div class="project-body">
-                <div class="skill-tags" style="margin-bottom:0.75rem;">
-                  <span class="tag">JavaScript</span>
-                  <span class="tag">Node.js</span>
-                  <span class="tag">HTML5</span>
-                  <span class="tag">CSS3</span>
-                </div>
-                <h3 class="project-title">Community Hub</h3>
-                <p class="project-desc">
-                  A community-driven web platform.
-                  Features group discussions, member profiles, and collaborative content sharing in a clean, accessible interface.
-                </p>
-                <nav class="project-links" aria-label="Community Hub project links">
-                  <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub" target="_blank" rel="noopener noreferrer" class="project-link project-link--soon" aria-label="Live demo coming soon — view on GitHub" title="Live demo coming soon">Live Demo →</a>
-                  <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Community Hub source code on GitHub">GitHub →</a>
-                </nav>
-              </div>
-            </article>
-          </li>
-
-        </ul>
-
-        <!-- Empty state (hidden by default) -->
-        <div id="no-results" role="status" aria-live="polite" hidden
-          style="text-align:center; padding:4rem; color:var(--color-text-muted);">
-          No projects found for this filter.
-        </div>
-
-      </div>
-    </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <p class="footer-copy">&copy; <time datetime="2026">2026</time> Praveen Kumar S. Crafted with passion &amp; code 🚀</p>
-      <nav class="footer-social" aria-label="Social media links">
-        <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">GH</a>
-        <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">LI</a>
-      </nav>
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-copy">
+        &copy; <time datetime="2026">2026</time> <strong>PRAVEEN KUMAR S</strong>. Crafted with passion &amp; code 🚀
+      </div>
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <div class="social-pills">
+          <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="GitHub">🐙</a>
+          <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="LinkedIn">💼</a>
+        </div>
+        <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=1.2"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

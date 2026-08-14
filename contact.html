@@ -3,258 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Contact Praveen Kumar S — Full Stack Developer. Send a message, get a reply within 24 hours. Available for opportunities." />
+  <title>Contact | PRAVEEN KUMAR S</title>
+  <meta name="description" content="Get in touch with PRAVEEN KUMAR S — Full-Stack Developer & CSE Student. Available for internships, freelance projects, and full-time opportunities." />
   <meta name="author" content="Praveen Kumar S" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Contact | Praveen Kumar S" />
-  <meta property="og:description" content="Get in touch with Praveen Kumar S for web development work." />
-  <meta property="og:type" content="website" />
-  <title>Contact | Praveen Kumar S</title>
-  <link rel="canonical" href="https://github.com/praveen542spk-ship-it" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="canonical" href="https://praveen542spk-ship-it.github.io/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-</head>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<body>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
   <script>
     if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-      document.body.classList.add('light-theme');
+      document.documentElement.classList.add('light-theme');
     }
   </script>
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-grid-pattern"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- HEADER -->
-  <header class="site-header" role="banner">
-    <nav class="container nav-inner" aria-label="Primary navigation" role="navigation">
-      <a href="index.html" class="nav-logo" aria-label="Praveen Kumar S - Go to homepage">Praveen<span>.</span></a>
-      <ul class="nav-links" id="nav-menu" role="list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html" aria-current="page" class="nav-cta">Hire Me</a></li>
-      </ul>
-      <button id="theme-btn" class="theme-btn" aria-label="Switch to light mode">☀️</button>
-      <button class="menu-toggle" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
-    </nav>
+  <!-- NAVBAR -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="nav-logo">Praveen<span>.dev</span></a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="index.html#achievements" class="nav-link">Achievements</a></li>
+          <li><a href="index.html#education" class="nav-link">Education</a></li>
+          <li><a href="index.html#experience" class="nav-link">Journey</a></li>
+          <li><a href="index.html#contact" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-controls">
+        <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
+        <a href="resume.html" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
   </header>
 
-  <!-- MAIN -->
-  <main id="main-content">
-
-    <!-- Page Hero -->
-    <section class="page-hero" aria-labelledby="contact-heading">
+  <main id="main-content" style="padding-top:7rem;">
+    <section class="section">
       <div class="container">
-        <span class="section-label" aria-hidden="true">Get In Touch</span>
-        <h1 id="contact-heading">Contact Me</h1>
-        <div class="divider" role="presentation" style="margin: 1.5rem auto;"></div>
-        <p class="section-desc" style="margin:0 auto; text-align:center; color:var(--color-text-muted);">
-          Have a project? Let's talk. I reply within 24 hours.
-        </p>
-      </div>
-    </section>
+        <div class="section-header reveal">
+          <span class="section-tag">GET IN TOUCH</span>
+          <h2 class="section-title">Contact Me</h2>
+          <p class="section-subtitle">Let's build something meaningful together. Send me a message and I'll reply within 24 hours.</p>
+        </div>
 
-    <!-- Contact Content -->
-    <section class="section" style="padding-top:2rem;" aria-labelledby="contact-section-heading">
-      <h2 id="contact-section-heading" class="sr-only">Contact information and form</h2>
-      <div class="container">
-        <div class="contact-grid">
+        <div class="contact-grid-wrapper">
 
-          <!-- Contact Info -->
-          <aside aria-labelledby="contact-info-heading">
-
-            <!-- Profile Photo -->
-            <div class="contact-profile" aria-label="Praveen Kumar S profile photo">
-              <div class="contact-profile-img-wrapper">
-                <div class="lightbox-trigger">
-                  <img
-                    src="assets/profile.jpg"
-                    alt="Praveen Kumar S — Full Stack Developer"
-                    class="contact-profile-img"
-                  />
-                </div>
+          <!-- Contact Details Info Cards -->
+          <div class="contact-info-box reveal">
+            <div class="glass-card" style="padding:1.5rem; text-align:center; margin-bottom:1rem;">
+              <div class="lightbox-trigger" style="width:120px; height:120px; border-radius:50%; margin:0 auto 1rem auto; overflow:hidden;">
+                <img src="assets/profile.jpg" alt="PRAVEEN KUMAR S — Contact Profile Photo" style="width:100%; height:100%; object-fit:cover;" />
               </div>
-              <p class="contact-profile-name">Praveen Kumar S</p>
-              <p class="contact-profile-role">Full Stack Developer</p>
+              <h3 style="font-size:1.25rem;">PRAVEEN KUMAR S</h3>
+              <p style="color:var(--accent-primary); font-weight:600; font-size:0.95rem;">Full-Stack Developer &amp; CSE Student</p>
             </div>
 
-            <h2 id="contact-info-heading" style="font-size:1.4rem; margin-bottom:1.5rem;">Let's connect</h2>
-            <p style="color:var(--color-text-muted); margin-bottom:2rem; font-size:0.95rem; line-height:1.8;">
-              Whether you need a full product built from scratch, a performance
-              audit, or just want to say hello — I'd love to hear from you.
-            </p>
+            <div class="glass-card contact-detail-card">
+              <div class="contact-icon-box">✉️</div>
+              <div class="contact-detail-text">
+                <p>Direct Email</p>
+                <h4><a href="mailto:praveen542spk@gmail.com" class="gradient-text">praveen542spk@gmail.com</a></h4>
+              </div>
+            </div>
 
-            <address style="font-style:normal;">
-              <dl>
-                <div class="contact-detail">
-                  <span class="contact-detail-icon" aria-hidden="true">✉</span>
-                  <div>
-                    <dt style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Email</dt>
-                    <dd><a href="mailto:praveen542spk@gmail.com" style="color:var(--color-accent);">praveen542spk@gmail.com</a></dd>
-                  </div>
-                </div>
+            <div class="glass-card contact-detail-card">
+              <div class="contact-icon-box">📞</div>
+              <div class="contact-detail-text">
+                <p>Phone</p>
+                <h4><a href="tel:+916374060801" style="color:var(--text-main);">+91 63740 60801</a></h4>
+              </div>
+            </div>
 
-                <div class="contact-detail">
-                  <span class="contact-detail-icon" aria-hidden="true">📞</span>
-                  <div>
-                    <dt style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Phone</dt>
-                    <dd><a href="tel:+910000000000" style="color:var(--color-accent);">+91 63740 60801</a></dd>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <span class="contact-detail-icon" aria-hidden="true">📍</span>
-                  <div>
-                    <dt style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Location</dt>
-                    <dd>Thiruvallur, Tamil Nadu (Remote-friendly)</dd>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <span class="contact-detail-icon" aria-hidden="true">⏱</span>
-                  <div>
-                    <dt style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Response Time</dt>
-                    <dd>Within 24 hours</dd>
-                  </div>
-                </div>
-                <div class="contact-detail">
-                  <span class="contact-detail-icon" aria-hidden="true">✅</span>
-                  <div>
-                    <dt style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.2rem;">Availability</dt>
-                    <dd style="color:#6ee7b7;">Open to new projects</dd>
-                  </div>
-                </div>
-              </dl>
-            </address>
+            <div class="glass-card contact-detail-card">
+              <div class="contact-icon-box">📍</div>
+              <div class="contact-detail-text">
+                <p>Location</p>
+                <h4>Thiruvallur, Tamil Nadu (Remote-friendly)</h4>
+              </div>
+            </div>
 
-            <!-- Social Links -->
-            <nav aria-label="Social media and professional profiles" style="margin-top:2rem;">
-              <h3 style="font-size:0.8rem; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; font-family:var(--font-body); font-weight:500;">Find me on</h3>
-              <ul role="list" style="display:flex; gap:0.75rem;">
-                <li>
-                  <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer"
-                     aria-label="GitHub profile (opens in new tab)"
-                     class="btn btn-outline" style="padding:0.5rem 1rem; font-size:0.9rem;">GitHub</a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer"
-                     aria-label="LinkedIn profile (opens in new tab)"
-                     class="btn btn-outline" style="padding:0.5rem 1rem; font-size:0.9rem;">LinkedIn</a>
-                </li>
-              </ul>
-            </nav>
-          </aside>
+            <div class="glass-card contact-detail-card">
+              <div class="contact-icon-box">🟢</div>
+              <div class="contact-detail-text">
+                <p>Status</p>
+                <h4 style="color:var(--accent-emerald);">Available for Opportunities</h4>
+              </div>
+            </div>
+          </div>
 
-          <!-- Contact Form -->
-          <div>
-            <div class="contact-form" role="region" aria-labelledby="form-heading">
-              <h2 id="form-heading" style="font-size:1.4rem; margin-bottom:0.25rem;">Send a message</h2>
-              <p class="form-hint" id="form-instructions">
-                Fields marked <abbr title="required" aria-label="required">*</abbr> are required.
-              </p>
+          <!-- Web3Forms Contact Form -->
+          <div class="reveal delay-1">
+            <div class="glass-card contact-form-card">
+              <h3 style="font-size:1.4rem; margin-bottom:0.5rem;">Send Me a Message</h3>
+              <p style="font-size:0.9rem; margin-bottom:1.5rem;">Have a project idea or internship opportunity? Fill in the details below.</p>
 
-              <!-- Success Message -->
-              <div id="form-success" class="form-success" role="alert" aria-live="polite">
-                <p style="font-size:2rem; margin-bottom:0.5rem;" aria-hidden="true">✓</p>
-                <p>Message sent! I'll get back to you within 24 hours.</p>
+              <div id="form-success-box" class="form-success-box">
+                <div style="font-size:3rem; margin-bottom:0.5rem;">✓</div>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out. I'll get back to you within 24 hours.</p>
               </div>
 
-              <!-- Web3Forms Integration for praveen542spk@gmail.com -->
-              <form
-                id="contact-form"
-                action="https://api.web3forms.com/submit"
-                method="POST"
-                novalidate
-                aria-describedby="form-instructions">
+              <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                <input type="hidden" name="access_key" value="6f220816-572b-4d86-8378-944d48b67dc6" />
 
-                <!-- Web3Forms Access Key -->
-                <input type="hidden" name="access_key" value="6f220816-572b-4d86-8378-944d48b67dc6">
-
-                <!-- Name -->
                 <div class="form-group">
-                  <label class="form-label" for="name">
-                    Full Name <abbr title="required" aria-label="required">*</abbr>
-                  </label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="name"
-                    name="name"
-                    autocomplete="name"
-                    required
-                    aria-required="true"
-                    aria-describedby="name-error"
-                    placeholder="Your full name" />
-                  <span id="name-error" class="form-error" role="alert" aria-live="polite"></span>
+                  <label for="name" class="form-label">Full Name <abbr title="required">*</abbr></label>
+                  <input type="text" id="name" name="name" class="form-input" placeholder="Your Name" required />
+                  <span id="name-error" class="form-error"></span>
                 </div>
 
-                <!-- Email -->
                 <div class="form-group">
-                  <label class="form-label" for="email">
-                    Email Address <abbr title="required" aria-label="required">*</abbr>
-                  </label>
-                  <input
-                    class="form-input"
-                    type="email"
-                    id="email"
-                    name="email"
-                    autocomplete="email"
-                    required
-                    aria-required="true"
-                    aria-describedby="email-error"
-                    placeholder="you@example.com" />
-                  <span id="email-error" class="form-error" role="alert" aria-live="polite"></span>
+                  <label for="email" class="form-label">Email Address <abbr title="required">*</abbr></label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required />
+                  <span id="email-error" class="form-error"></span>
                 </div>
 
-                <!-- Project Type -->
                 <div class="form-group">
-                  <label class="form-label" for="project-type">
-                    Project Type
-                  </label>
-                  <select
-                    class="form-select"
-                    id="project-type"
-                    name="project-type"
-                    aria-describedby="project-type-hint">
-                    <option value="" disabled selected hidden>Select a project type</option>
-                    <option value="webapp">Web Application</option>
-                    <option value="mobileapp">Mobile Application</option>
-                    <option value="desktop_automation">Desktop / OS Automation</option>
-                    <option value="website">Website Development</option>
-                    <option value="ui_ux">UI/UX Design</option>
+                  <label for="project-type" class="form-label">Inquiry Type</label>
+                  <select id="project-type" name="project-type" class="form-select">
+                    <option value="" disabled selected hidden>Select inquiry type</option>
+                    <option value="fulltime">Full-Time / Internship Opportunity</option>
+                    <option value="webapp">Full-Stack Web Development</option>
                     <option value="freelance">Freelance Project</option>
-                    <option value="fulltime">Full-time Opportunity</option>
-                    <option value="collab">Collaboration</option>
-                    <option value="other">Other</option>
+                    <option value="other">General Message</option>
                   </select>
-                  <span id="project-type-hint" class="sr-only">Optional field</span>
                 </div>
 
-                <!-- Message -->
                 <div class="form-group">
-                  <label class="form-label" for="message">
-                    Message <abbr title="required" aria-label="required">*</abbr>
-                  </label>
-                  <textarea
-                    class="form-textarea"
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                    aria-required="true"
-                    aria-describedby="message-error message-hint"
-                    placeholder="Tell me about your project, timeline, and budget..."></textarea>
-                  <span id="message-hint" class="form-error" style="color:var(--color-text-muted);">Minimum 20 characters</span>
-                  <span id="message-error" class="form-error" role="alert" aria-live="polite"></span>
+                  <label for="message" class="form-label">Message <abbr title="required">*</abbr></label>
+                  <textarea id="message" name="message" rows="4" class="form-textarea" placeholder="Tell me about your project or opportunity..." required></textarea>
+                  <span id="message-error" class="form-error"></span>
                 </div>
 
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-submit"
-                  aria-label="Submit contact form">
-                  Send Message →
+                <button type="submit" class="btn btn-primary" style="width:100%;">
+                  Send Message <span>🚀</span>
                 </button>
-
               </form>
             </div>
           </div>
@@ -262,20 +167,23 @@
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <p class="footer-copy">&copy; <time datetime="2026">2026</time> Praveen Kumar S. Crafted with passion &amp; code 🚀</p>
-      <nav class="footer-social" aria-label="Social media links">
-        <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">GH</a>
-        <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">LI</a>
-      </nav>
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-copy">
+        &copy; <time datetime="2026">2026</time> <strong>PRAVEEN KUMAR S</strong>. Crafted with passion &amp; code 🚀
+      </div>
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <div class="social-pills">
+          <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="GitHub">🐙</a>
+          <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="LinkedIn">💼</a>
+        </div>
+        <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js?v=1.2"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
