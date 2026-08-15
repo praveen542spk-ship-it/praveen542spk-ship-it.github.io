@@ -500,3 +500,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+/* --------------------------------------------------------------------------
+   14. GLOBAL CERTIFICATE PREVIEW MODAL
+   -------------------------------------------------------------------------- */
+window.openCertModal = (title, desc, issuer, date) => {
+  const modal = document.getElementById('cert-modal');
+  if (!modal) return;
+
+  const titleEl = document.getElementById('cert-modal-title');
+  const descEl = document.getElementById('cert-modal-desc');
+  const issuerEl = document.getElementById('cert-modal-issuer');
+  const dateEl = document.getElementById('cert-modal-date');
+
+  if (titleEl) titleEl.textContent = title;
+  if (descEl) descEl.textContent = desc;
+  if (issuerEl) issuerEl.textContent = issuer || 'Verified Issuer';
+  if (dateEl) dateEl.textContent = date || '';
+
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeCertModal = () => {
+  const modal = document.getElementById('cert-modal');
+  if (modal) {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    window.closeCertModal();
+  }
+});
