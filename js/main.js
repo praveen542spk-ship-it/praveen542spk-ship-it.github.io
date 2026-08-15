@@ -504,19 +504,29 @@ document.addEventListener('DOMContentLoaded', () => {
 /* --------------------------------------------------------------------------
    14. GLOBAL CERTIFICATE PREVIEW MODAL
    -------------------------------------------------------------------------- */
-window.openCertModal = (title, desc, issuer, date) => {
+window.openCertModal = (title, desc, issuer, date, docUrl) => {
   const modal = document.getElementById('cert-modal');
   if (!modal) return;
 
-  const titleEl = document.getElementById('cert-modal-title');
-  const descEl = document.getElementById('cert-modal-desc');
-  const issuerEl = document.getElementById('cert-modal-issuer');
-  const dateEl = document.getElementById('cert-modal-date');
+  const titleEl = document.getElementById('cert-doc-program');
+  const descEl = document.getElementById('cert-doc-text');
+  const issuerEl = document.getElementById('cert-doc-issuer');
+  const dateEl = document.getElementById('cert-doc-date');
+  const pdfBtn = document.getElementById('cert-pdf-link');
 
   if (titleEl) titleEl.textContent = title;
   if (descEl) descEl.textContent = desc;
-  if (issuerEl) issuerEl.textContent = issuer || 'Verified Issuer';
-  if (dateEl) dateEl.textContent = date || '';
+  if (issuerEl) issuerEl.textContent = issuer || 'Verified Organization';
+  if (dateEl) dateEl.textContent = date || 'Verified';
+
+  if (pdfBtn) {
+    if (docUrl) {
+      pdfBtn.href = docUrl;
+      pdfBtn.style.display = 'inline-flex';
+    } else {
+      pdfBtn.style.display = 'none';
+    }
+  }
 
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';

@@ -1083,20 +1083,44 @@
   <div id="cert-modal" class="cert-modal-overlay" aria-hidden="true">
     <div class="glass-card cert-modal-content">
       <button class="cert-modal-close" onclick="closeCertModal()" aria-label="Close modal">✕</button>
-      <div class="cert-modal-header">
-        <div class="cert-modal-badge">📜</div>
-        <div>
-          <span class="cert-modal-issuer" id="cert-modal-issuer">Official Record</span>
-          <h3 class="cert-modal-title" id="cert-modal-title">Certificate Record</h3>
+      
+      <!-- Visual Certificate Document Frame -->
+      <div class="cert-document-frame">
+        <div class="cert-doc-header">
+          <div class="cert-doc-logo" id="cert-doc-logo">📜</div>
+          <div class="cert-doc-watermark">VERIFIED CREDENTIAL</div>
+        </div>
+        <div class="cert-doc-title">CERTIFICATE OF COMPLETION</div>
+        <div class="cert-doc-subtitle">PROUDLY PRESENTED TO</div>
+        <div class="cert-recipient-name">PRAVEEN KUMAR S</div>
+        <div class="cert-doc-text" id="cert-doc-text">
+          For successfully demonstrating engineering proficiency and completing the official program requirements.
+        </div>
+        <div class="cert-doc-program" id="cert-doc-program">Course / Internship Program Name</div>
+        
+        <div class="cert-doc-footer">
+          <div class="cert-doc-issuer-box">
+            <span class="cert-doc-label">ISSUED BY</span>
+            <strong id="cert-doc-issuer">Organization Name</strong>
+          </div>
+          <div class="cert-doc-seal">
+            <span class="seal-icon">🏆</span>
+            <span class="seal-text">VERIFIED</span>
+          </div>
+          <div class="cert-doc-date-box">
+            <span class="cert-doc-label">DATE / ID</span>
+            <strong id="cert-doc-date">Date</strong>
+          </div>
         </div>
       </div>
-      <div class="cert-modal-body">
-        <p id="cert-modal-desc"></p>
-        <div class="cert-modal-meta">
-          <span class="cert-status-tag">✓ Verified Record</span>
-          <span id="cert-modal-date" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-subtle);"></span>
-        </div>
+
+      <!-- Certificate Document Actions -->
+      <div class="cert-modal-actions">
+        <a id="cert-pdf-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="display:none; width:100%; justify-content:center;">
+          Open Original PDF / Credly Badge ↗
+        </a>
       </div>
+
     </div>
   </div>
 
