@@ -504,27 +504,35 @@ document.addEventListener('DOMContentLoaded', () => {
 /* --------------------------------------------------------------------------
    14. GLOBAL CERTIFICATE PREVIEW MODAL
    -------------------------------------------------------------------------- */
-window.openCertModal = (title, desc, issuer, date, docUrl) => {
+window.openCertModal = (title, issuer, imgSrc, pdfUrl, credlyUrl) => {
   const modal = document.getElementById('cert-modal');
   if (!modal) return;
 
-  const titleEl = document.getElementById('cert-doc-program');
-  const descEl = document.getElementById('cert-doc-text');
-  const issuerEl = document.getElementById('cert-doc-issuer');
-  const dateEl = document.getElementById('cert-doc-date');
-  const pdfBtn = document.getElementById('cert-pdf-link');
+  const titleEl = document.getElementById('cert-modal-title');
+  const issuerEl = document.getElementById('cert-modal-issuer');
+  const imgEl = document.getElementById('cert-modal-img');
+  const pdfBtn = document.getElementById('cert-pdf-download-btn');
+  const credlyBtn = document.getElementById('cert-credly-btn');
 
   if (titleEl) titleEl.textContent = title;
-  if (descEl) descEl.textContent = desc;
-  if (issuerEl) issuerEl.textContent = issuer || 'Verified Organization';
-  if (dateEl) dateEl.textContent = date || 'Verified';
+  if (issuerEl) issuerEl.textContent = issuer || 'Verified Certificate';
+  if (imgEl && imgSrc) imgEl.src = imgSrc;
 
   if (pdfBtn) {
-    if (docUrl) {
-      pdfBtn.href = docUrl;
+    if (pdfUrl) {
+      pdfBtn.href = pdfUrl;
       pdfBtn.style.display = 'inline-flex';
     } else {
       pdfBtn.style.display = 'none';
+    }
+  }
+
+  if (credlyBtn) {
+    if (credlyUrl) {
+      credlyBtn.href = credlyUrl;
+      credlyBtn.style.display = 'inline-flex';
+    } else {
+      credlyBtn.style.display = 'none';
     }
   }
 

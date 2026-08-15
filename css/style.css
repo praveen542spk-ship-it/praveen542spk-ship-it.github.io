@@ -2027,140 +2027,53 @@ body.light-theme .form-select option {
   transform: rotate(90deg);
 }
 
-/* Realistic Digital Certificate Document Frame */
-.cert-document-frame {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(8, 9, 17, 0.98));
-  border: 2px solid rgba(99, 102, 241, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem 1.65rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 30px rgba(99, 102, 241, 0.1), 0 15px 40px rgba(0, 0, 0, 0.6);
-  margin-bottom: 1.25rem;
-}
-
-body.light-theme .cert-document-frame {
-  background: linear-gradient(135deg, #ffffff, #f1f5f9);
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.05), 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.cert-doc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* Certificate Modal Image Preview Styling */
+.cert-modal-header-bar {
   margin-bottom: 1rem;
+  padding-right: 2rem;
 }
 
-.cert-doc-logo {
-  font-size: 1.8rem;
-}
-
-.cert-doc-watermark {
+.cert-modal-issuer-tag {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  color: var(--accent-cyan);
-  background: rgba(6, 182, 212, 0.1);
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(6, 182, 212, 0.25);
-}
-
-.cert-doc-title {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  margin-bottom: 0.2rem;
-}
-
-.cert-doc-subtitle {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  color: var(--text-subtle);
-  text-transform: uppercase;
-  margin-bottom: 0.6rem;
-}
-
-.cert-recipient-name {
-  font-family: var(--font-heading);
-  font-size: 1.55rem;
-  font-weight: 800;
-  color: var(--text-main);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-  background: var(--gradient-brand);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.cert-doc-text {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.cert-doc-program {
-  font-size: 1.05rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 1.5rem;
-}
-
-.cert-doc-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--border-light);
-}
-
-.cert-doc-issuer-box,
-.cert-doc-date-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.cert-doc-date-box {
-  align-items: flex-end;
-  text-align: right;
-}
-
-.cert-doc-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-subtle);
-  letter-spacing: 0.05em;
-}
-
-.cert-doc-issuer-box strong,
-.cert-doc-date-box strong {
-  font-size: 0.85rem;
   color: var(--accent-cyan);
-}
-
-.cert-doc-seal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
-}
-
-.seal-icon {
-  font-size: 1.5rem;
-}
-
-.seal-text {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--accent-emerald);
+  text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.cert-modal-title-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-top: 0.15rem;
+}
+
+.cert-image-wrapper {
+  width: 100%;
+  max-height: 68vh;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: #07080f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.cert-image-preview {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.cert-modal-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
