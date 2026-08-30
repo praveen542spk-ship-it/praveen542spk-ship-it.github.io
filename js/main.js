@@ -732,4 +732,304 @@ function initCertCardDeck() {
 
   // Initial render
   updateCardPositions();
+
+  /* --------------------------------------------------------------------------
+     14. HERO TYPEWRITER ANIMATION
+     -------------------------------------------------------------------------- */
+  const typewriterTarget = document.getElementById('typewriter-text');
+  if (typewriterTarget) {
+    const roles = [
+      'Computer Science Student',
+      'Full-Stack MERN Developer',
+      'Python & Voice AI Engineer',
+      'B.E. CSE Undergrad @ R.M.D.'
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typeSpeed = 80;
+
+    const typeRole = () => {
+      const currentRole = roles[roleIdx];
+      
+      if (isDeleting) {
+        typewriterTarget.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+        typeSpeed = 40;
+      } else {
+        typewriterTarget.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+        typeSpeed = 90;
+      }
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        isDeleting = true;
+        typeSpeed = 2200; // Pause at end
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        typeSpeed = 400; // Pause before typing next
+      }
+
+      setTimeout(typeRole, typeSpeed);
+    };
+
+    setTimeout(typeRole, 600);
+  }
+
+  /* --------------------------------------------------------------------------
+     15. ANIMATED STAT COUNTER (0 -> 7+, 0 -> 3, 0 -> 6, 0.0 -> 8.47)
+     -------------------------------------------------------------------------- */
+  const statNumbers = document.querySelectorAll('.stat-number');
+  if (statNumbers.length > 0) {
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.getAttribute('data-target') || '0');
+          const isDecimal = el.getAttribute('data-decimal') === 'true';
+          const suffix = el.getAttribute('data-suffix') || '';
+          const duration = 1800; // ms
+          const startTime = performance.now();
+
+          const animateCount = (currentTime) => {
+            const elapsedTime = currentTime - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentVal = easeProgress * target;
+
+            if (isDecimal) {
+              el.textContent = currentVal.toFixed(2) + suffix;
+            } else {
+              el.textContent = Math.floor(currentVal) + suffix;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(animateCount);
+            } else {
+              el.textContent = (isDecimal ? target.toFixed(2) : target) + suffix;
+            }
+          };
+
+          requestAnimationFrame(animateCount);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(stat => counterObserver.observe(stat));
+  }
+
+  /* --------------------------------------------------------------------------
+     16. ANIMATED SKILL PROGRESS BARS
+     -------------------------------------------------------------------------- */
+  const skillFills = document.querySelectorAll('.skill-bar-fill');
+  if (skillFills.length > 0) {
+    const skillObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target;
+          const progress = fill.getAttribute('data-progress') || '85%';
+          fill.style.width = progress;
+          obs.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    skillFills.forEach(fill => skillObserver.observe(fill));
+  }
+
+  /* --------------------------------------------------------------------------
+     17. PROJECT CATEGORY FILTER
+     -------------------------------------------------------------------------- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  if (filterBtns.length > 0 && projectCards.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        projectCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter || card.classList.contains(filter)) {
+            card.classList.remove('is-filtered-out');
+          } else {
+            card.classList.add('is-filtered-out');
+          }
+        });
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     18. 3D CARD HOVER TILT EFFECT
+     -------------------------------------------------------------------------- */
+  const tiltCards = document.querySelectorAll('.tilt-card, .project-card, .skill-card');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     19. TOAST NOTIFICATION & COPY-TO-CLIPBOARD
+     -------------------------------------------------------------------------- */
+  window.showToast = (message) => {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast-notification';
+      toast.className = 'toast-notification';
+      document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `<span>✨</span> <span>${message}</span>`;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2800);
+  };
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const textToCopy = btn.getAttribute('data-copy');
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        window.showToast(`Copied to clipboard: ${textToCopy}`);
+      }).catch(() => {
+        window.showToast('Failed to copy');
+      });
+    });
+  });
+
+  /* --------------------------------------------------------------------------
+     20. COMMAND PALETTE (Ctrl + K / Cmd + K)
+     -------------------------------------------------------------------------- */
+  const cmdOverlay = document.getElementById('cmd-palette');
+  const cmdInput = document.getElementById('cmd-input');
+  const cmdList = document.getElementById('cmd-list');
+
+  const navItems = [
+    { title: 'Home / Hero', icon: '🏠', action: () => window.location.href = 'index.html#home', tag: 'Navigation' },
+    { title: 'About Me', icon: '👨‍💻', action: () => window.location.href = 'about.html', tag: 'Page' },
+    { title: 'Tech Stack & Skills', icon: '⚡', action: () => window.location.href = 'index.html#skills', tag: 'Navigation' },
+    { title: 'Projects Showcase', icon: '🚀', action: () => window.location.href = 'projects.html', tag: 'Page' },
+    { title: 'Certifications & Achievements', icon: '📜', action: () => window.location.href = 'index.html#achievements', tag: 'Navigation' },
+    { title: 'Education & Marksheets', icon: '🎓', action: () => window.location.href = 'index.html#education', tag: 'Navigation' },
+    { title: 'Developer Journey', icon: '⏳', action: () => window.location.href = 'index.html#journey', tag: 'Navigation' },
+    { title: 'Contact Me', icon: '📬', action: () => window.location.href = 'contact.html', tag: 'Page' },
+    { title: 'Formal Printable Resume', icon: '📄', action: () => window.location.href = 'resume.html?v=2.0', tag: 'Document' },
+    { title: 'Copy Email (praveen542spk@gmail.com)', icon: '📧', action: () => { navigator.clipboard.writeText('praveen542spk@gmail.com'); window.showToast('Copied email to clipboard!'); }, tag: 'Action' }
+  ];
+
+  if (cmdOverlay && cmdInput && cmdList) {
+    let selectedIndex = 0;
+
+    const renderCmdItems = (filter = '') => {
+      const query = filter.toLowerCase().trim();
+      const filtered = navItems.filter(item => item.title.toLowerCase().includes(query) || item.tag.toLowerCase().includes(query));
+      
+      cmdList.innerHTML = '';
+      if (filtered.length === 0) {
+        cmdList.innerHTML = `<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.9rem;">No matching commands found</div>`;
+        return;
+      }
+
+      filtered.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = `cmd-item ${idx === selectedIndex ? 'selected' : ''}`;
+        div.innerHTML = `
+          <div class="cmd-item-left">
+            <span style="font-size:1.1rem;">${item.icon}</span>
+            <span>${item.title}</span>
+          </div>
+          <span class="cmd-shortcut">${item.tag}</span>
+        `;
+
+        div.addEventListener('click', () => {
+          closeCmdPalette();
+          item.action();
+        });
+
+        cmdList.appendChild(div);
+      });
+    };
+
+    const openCmdPalette = () => {
+      cmdOverlay.classList.add('open');
+      cmdInput.value = '';
+      selectedIndex = 0;
+      renderCmdItems();
+      setTimeout(() => cmdInput.focus(), 50);
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeCmdPalette = () => {
+      cmdOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (cmdOverlay.classList.contains('open')) {
+          closeCmdPalette();
+        } else {
+          openCmdPalette();
+        }
+      } else if (e.key === 'Escape' && cmdOverlay.classList.contains('open')) {
+        closeCmdPalette();
+      }
+    });
+
+    cmdOverlay.addEventListener('click', (e) => {
+      if (e.target === cmdOverlay) closeCmdPalette();
+    });
+
+    cmdInput.addEventListener('input', () => {
+      selectedIndex = 0;
+      renderCmdItems(cmdInput.value);
+    });
+
+    const cmdTrigger = document.getElementById('cmd-trigger-btn');
+    if (cmdTrigger) {
+      cmdTrigger.addEventListener('click', openCmdPalette);
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     21. FLOATING BACK TO TOP BUTTON
+     -------------------------------------------------------------------------- */
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 450) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 }

@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=11.0" />
+  <link rel="stylesheet" href="css/style.css?v=12.0" />
 
   <script>
     if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
@@ -59,6 +59,7 @@
         </ul>
       </nav>
       <div class="nav-controls">
+        <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
         <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
         <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
@@ -199,6 +200,23 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <!-- Command Palette Modal (Ctrl + K / Cmd + K) -->
+  <div id="cmd-palette" class="cmd-palette-overlay" aria-hidden="true">
+    <div class="cmd-palette-dialog">
+      <div class="cmd-input-wrapper">
+        <span class="cmd-input-icon">🔍</span>
+        <input type="text" id="cmd-input" class="cmd-input" placeholder="Type a command or search sections... (ESC to exit)" autocomplete="off" />
+      </div>
+      <div id="cmd-list" class="cmd-list">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+      <div class="cmd-footer">
+        <span>Press <kbd style="font-family:var(--font-mono); background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">ESC</kbd> to close</span>
+        <span>Keyboard Shortcut: <kbd style="font-family:var(--font-mono); background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">Ctrl + K</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=12.0"></script>
 </body>
 </html>
