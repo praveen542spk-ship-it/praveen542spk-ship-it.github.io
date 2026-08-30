@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.0" />
+  <link rel="stylesheet" href="css/style.css?v=4.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -644,194 +644,216 @@
       </div>
     </section>
 
-    <!-- ACHIEVEMENTS & CERTIFICATIONS SECTION -->
-    <section id="achievements" class="section" aria-label="Achievements and Certifications">
+    <!-- ACHIEVEMENTS & CERTIFICATIONS SECTION (STACKED 3D CARD DECK) -->
+    <section id="achievements" class="section achievements-section">
       <div class="container">
+        
         <div class="section-header reveal">
-          <span class="section-tag">RECOGNITION</span>
+          <span class="section-tag">RECOGNITION &amp; CERTIFICATIONS</span>
           <h2 class="section-title">Internships &amp; Industry Certifications</h2>
-          <p class="section-subtitle">Practical industry experience and certified coursework.</p>
+          <p class="section-subtitle">Tap or click any certificate card to cycle through my verified credentials, or use the navigation controls below.</p>
         </div>
 
-        <div class="achievements-grid">
+        <div class="cert-deck-wrapper reveal">
+          <div class="cert-deck-stage" id="cert-deck-stage">
+            <div class="cert-deck-cards" id="cert-deck-cards">
 
-          <!-- CodeAlpha Internship -->
-          <div class="glass-card achievement-card reveal">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">💼</div>
-              <span class="achievement-date">2026</span>
-            </div>
-            <h3 class="achievement-title">CodeAlpha</h3>
-            <div class="achievement-issuer">Full Stack Development Intern · Online Internship</div>
-            <ul class="achievement-details">
-              <li>Completed two full-stack web development projects — Social Media Platform &amp; Community Hub.</li>
-              <li>Engineered and deployed real-world JavaScript/Node.js applications demonstrating full product development lifecycle.</li>
-              <li>Earned official Internship Completion Certificate.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/codealpha-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
+              <!-- Card 1: CodeAlpha -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="0">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">💼</div>
+                  <span class="achievement-date">2026</span>
+                </div>
+                <h3 class="achievement-title">CodeAlpha</h3>
+                <div class="achievement-issuer">Full Stack Development Intern · Online Internship</div>
+                <ul class="achievement-details">
+                  <li>Completed two full-stack web development projects — Social Media Platform &amp; Community Hub.</li>
+                  <li>Engineered and deployed real-world JavaScript/Node.js applications demonstrating full product development lifecycle.</li>
+                  <li>Earned official Internship Completion Certificate.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/codealpha-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 2: CodSoft -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="1">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">💻</div>
+                  <span class="achievement-date">2025</span>
+                </div>
+                <h3 class="achievement-title">CodSoft</h3>
+                <div class="achievement-issuer">Web Developer Intern · Online Internship</div>
+                <ul class="achievement-details">
+                  <li>Developed and delivered responsive web development projects during the internship.</li>
+                  <li>Strengthened core capabilities in HTML5, CSS3, JavaScript, and user experience design.</li>
+                  <li>Earned official Internship Completion Certificate.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/codsoft-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 3: Thiranex -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="2">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">🚀</div>
+                  <span class="achievement-date">Jun 2026</span>
+                </div>
+                <h3 class="achievement-title">Thiranex</h3>
+                <div class="achievement-issuer">Web Developer Intern · Online Internship</div>
+                <ul class="achievement-details">
+                  <li>Delivered front-end and web engineering tasks in a remote team environment.</li>
+                  <li>Applied core web development practices to build accessible interface components.</li>
+                  <li>Earned official Internship Completion Certificate.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/thiranex-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 4: Infosys CSS3 -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="3">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">📜</div>
+                  <span class="achievement-date">Nov 2025</span>
+                </div>
+                <h3 class="achievement-title">Infosys Springboard — CSS3</h3>
+                <div class="achievement-issuer">Infosys Ltd. · Certification</div>
+                <ul class="achievement-details">
+                  <li>Mastered CSS3 layout models, Flexbox, CSS Grid, keyframe animations, and media query responsiveness.</li>
+                  <li>Passed official assessment on modern UI styling principles.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/infosys-css3.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 5: Infosys Java -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="4">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">☕</div>
+                  <span class="achievement-date">Feb 2026</span>
+                </div>
+                <h3 class="achievement-title">Infosys Springboard — Java Programming</h3>
+                <div class="achievement-issuer">Infosys Ltd. · Certification</div>
+                <ul class="achievement-details">
+                  <li>Certified in Java fundamentals, Object-Oriented Programming (OOP), exception handling, and collections.</li>
+                  <li>Demonstrated proficiency in algorithmic problem solving and class architecture.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/infosys-java.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 6: NPTEL Soft Skills -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="5">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">🎓</div>
+                  <span class="achievement-date">2025</span>
+                </div>
+                <h3 class="achievement-title">NPTEL — Soft Skills Development</h3>
+                <div class="achievement-issuer">IIT / NPTEL · Certification</div>
+                <ul class="achievement-details">
+                  <li>Completed coursework on professional workplace communication, leadership, and technical presentation skills.</li>
+                  <li>Certified by National Programme on Technology Enhanced Learning (NPTEL).</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/nptel-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 7: HP LIFE AI -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="6">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">🤖</div>
+                  <span class="achievement-date">Aug 2026</span>
+                </div>
+                <h3 class="achievement-title">HP LIFE — AI for Beginners</h3>
+                <div class="achievement-issuer">HP Foundation · Online Certification</div>
+                <ul class="achievement-details">
+                  <li>Studied artificial intelligence fundamentals, business data applications, and technological implications.</li>
+                  <li>Explored ethical considerations and AI implementations across modern enterprises.</li>
+                  <li style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-subtle);">Serial: fa62729a-7e94-4dd9-94ca-d200efa4099f</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 8: MongoDB Basics -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="7">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">🍃</div>
+                  <span class="achievement-date">Jul 2026</span>
+                </div>
+                <h3 class="achievement-title">MongoDB — Basics for Students</h3>
+                <div class="achievement-issuer">MongoDB Inc. · Credly Certification</div>
+                <ul class="achievement-details">
+                  <li>Certified in MongoDB NoSQL document database architecture, CRUD operations, indexing, and data modeling.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/mongodb-basics.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                  <a href="https://www.credly.com/badges/b2bb85c0-ebb3-4523-b217-8527dd15af56" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm cert-btn">
+                    Credly Badge ↗
+                  </a>
+                </div>
+              </div>
+
+              <!-- Card 9: MongoDB AI Strategy -->
+              <div class="glass-card achievement-card cert-deck-card" data-index="8">
+                <div class="achievement-header">
+                  <div class="achievement-badge-icon">💡</div>
+                  <span class="achievement-date">Jul 2026</span>
+                </div>
+                <h3 class="achievement-title">MongoDB — AI &amp; Resilient AI Strategy</h3>
+                <div class="achievement-issuer">MongoDB Inc. · Credly Certification</div>
+                <ul class="achievement-details">
+                  <li>Certified in leveraging MongoDB for resilient AI data strategies, vector search, and AI integration architectures.</li>
+                </ul>
+                <div class="cert-card-footer">
+                  <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
+                    View Certificate PDF 📜
+                  </a>
+                  <a href="https://www.credly.com/go/PxnAZG7R" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm cert-btn">
+                    Credly Badge ↗
+                  </a>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- CodSoft Internship -->
-          <div class="glass-card achievement-card reveal delay-1">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">💻</div>
-              <span class="achievement-date">2025</span>
+          <!-- Controls & Pagination -->
+          <div class="cert-deck-controls">
+            <button id="cert-prev-btn" class="cert-control-btn" aria-label="Previous certificate" title="Previous Certificate">← Prev</button>
+            
+            <div class="cert-deck-dots" id="cert-deck-dots">
+              <!-- Rendered via JS -->
             </div>
-            <h3 class="achievement-title">CodSoft</h3>
-            <div class="achievement-issuer">Web Developer Intern · Online Internship</div>
-            <ul class="achievement-details">
-              <li>Developed and delivered responsive web development projects during the internship.</li>
-              <li>Strengthened core capabilities in HTML5, CSS3, JavaScript, and user experience design.</li>
-              <li>Earned official Internship Completion Certificate.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/codsoft-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
+            
+            <span class="cert-deck-counter" id="cert-deck-counter">1 / 9</span>
+            
+            <button id="cert-next-btn" class="cert-control-btn cert-control-next" aria-label="Next certificate" title="Next Certificate">Next →</button>
           </div>
-
-          <!-- Thiranex Internship -->
-          <div class="glass-card achievement-card reveal">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">🚀</div>
-              <span class="achievement-date">Jun 2026</span>
-            </div>
-            <h3 class="achievement-title">Thiranex</h3>
-            <div class="achievement-issuer">Web Developer Intern · Online Internship</div>
-            <ul class="achievement-details">
-              <li>Delivered front-end and web engineering tasks in a remote team environment.</li>
-              <li>Applied core web development practices to build accessible interface components.</li>
-              <li>Earned official Internship Completion Certificate.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/thiranex-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
-          </div>
-
-          <!-- Infosys CSS3 -->
-          <div class="glass-card achievement-card reveal delay-1">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">📜</div>
-              <span class="achievement-date">Nov 2025</span>
-            </div>
-            <h3 class="achievement-title">Infosys Springboard — CSS3</h3>
-            <div class="achievement-issuer">Infosys Ltd. · Certification</div>
-            <ul class="achievement-details">
-              <li>Mastered CSS3 layout models, Flexbox, CSS Grid, keyframe animations, and media query responsiveness.</li>
-              <li>Passed official assessment on modern UI styling principles.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/infosys-css3.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
-          </div>
-
-          <!-- Infosys Java -->
-          <div class="glass-card achievement-card reveal">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">☕</div>
-              <span class="achievement-date">Feb 2026</span>
-            </div>
-            <h3 class="achievement-title">Infosys Springboard — Java Programming</h3>
-            <div class="achievement-issuer">Infosys Ltd. · Certification</div>
-            <ul class="achievement-details">
-              <li>Certified in Java fundamentals, Object-Oriented Programming (OOP), exception handling, and collections.</li>
-              <li>Demonstrated proficiency in algorithmic problem solving and class architecture.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/infosys-java.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
-          </div>
-
-          <!-- NPTEL Soft Skills -->
-          <div class="glass-card achievement-card reveal delay-1">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">🎓</div>
-              <span class="achievement-date">2025</span>
-            </div>
-            <h3 class="achievement-title">NPTEL — Soft Skills Development</h3>
-            <div class="achievement-issuer">IIT / NPTEL · Certification</div>
-            <ul class="achievement-details">
-              <li>Completed coursework on professional workplace communication, leadership, and technical presentation skills.</li>
-              <li>Certified by National Programme on Technology Enhanced Learning (NPTEL).</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/nptel-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
-          </div>
-
-          <!-- HP LIFE AI for Beginners -->
-          <div class="glass-card achievement-card reveal">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">🤖</div>
-              <span class="achievement-date">Aug 2026</span>
-            </div>
-            <h3 class="achievement-title">HP LIFE — AI for Beginners</h3>
-            <div class="achievement-issuer">HP Foundation · Online Certification</div>
-            <ul class="achievement-details">
-              <li>Studied artificial intelligence fundamentals, business data applications, and technological implications.</li>
-              <li>Explored ethical considerations and AI implementations across modern enterprises.</li>
-              <li style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-subtle);">Serial: fa62729a-7e94-4dd9-94ca-d200efa4099f</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-            </div>
-          </div>
-
-          <!-- MongoDB Basics for Students -->
-          <div class="glass-card achievement-card reveal delay-1">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">🍃</div>
-              <span class="achievement-date">Jul 2026</span>
-            </div>
-            <h3 class="achievement-title">MongoDB — Basics for Students</h3>
-            <div class="achievement-issuer">MongoDB Inc. · Credly Certification</div>
-            <ul class="achievement-details">
-              <li>Certified in MongoDB NoSQL document database architecture, CRUD operations, indexing, and data modeling.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/mongodb-basics.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-              <a href="https://www.credly.com/badges/b2bb85c0-ebb3-4523-b217-8527dd15af56" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm cert-btn">
-                Credly Badge ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- MongoDB AI & Innovation -->
-          <div class="glass-card achievement-card reveal">
-            <div class="achievement-header">
-              <div class="achievement-badge-icon">💡</div>
-              <span class="achievement-date">Jul 2026</span>
-            </div>
-            <h3 class="achievement-title">MongoDB — AI &amp; Resilient AI Strategy</h3>
-            <div class="achievement-issuer">MongoDB Inc. · Credly Certification</div>
-            <ul class="achievement-details">
-              <li>Certified in leveraging MongoDB for resilient AI data strategies, vector search, and AI integration architectures.</li>
-            </ul>
-            <div class="cert-card-footer">
-              <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm cert-btn">
-                View Certificate PDF 📜
-              </a>
-              <a href="https://www.credly.com/go/PxnAZG7R" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm cert-btn">
-                Credly Badge ↗
-              </a>
-            </div>
+          <div class="cert-deck-hint">
+            <span>💡 Click card to flip stack · Swipe on mobile · Arrow keys</span>
           </div>
 
         </div>
@@ -1109,6 +1131,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=3.0"></script>
+  <script src="js/main.js?v=4.0"></script>
 </body>
 </html>

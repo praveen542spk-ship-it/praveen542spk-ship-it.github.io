@@ -2077,3 +2077,217 @@ body.light-theme .form-select option {
   align-items: center;
   gap: 0.75rem;
 }
+
+/* --------------------------------------------------------------------------
+   STACKED CERTIFICATE CARD DECK (OVERLAPPING 3D SLIDER)
+   -------------------------------------------------------------------------- */
+.cert-deck-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.cert-deck-stage {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  perspective: 1200px;
+  margin-bottom: 1.5rem;
+  padding-top: 10px;
+}
+
+.cert-deck-cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cert-deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 330px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: pan-y;
+  transform-origin: 50% 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* Hover effect on active top card */
+.cert-deck-card.is-active:hover {
+  transform: translate3d(0, -6px, 10px) scale(1.01) !important;
+  box-shadow: 0 25px 60px rgba(99, 102, 241, 0.35), 0 0 35px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Card Stacked Positions */
+.cert-deck-card.is-active {
+  z-index: 10;
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.cert-deck-card.is-stack-1 {
+  z-index: 9;
+  opacity: 0.92;
+  pointer-events: auto;
+  transform: translate3d(0, 18px, -40px) scale(0.96) rotate(1.2deg);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.cert-deck-card.is-stack-2 {
+  z-index: 8;
+  opacity: 0.78;
+  pointer-events: auto;
+  transform: translate3d(0, 36px, -80px) scale(0.91) rotate(-1.5deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.cert-deck-card.is-stack-3 {
+  z-index: 7;
+  opacity: 0.55;
+  pointer-events: auto;
+  transform: translate3d(0, 52px, -120px) scale(0.86) rotate(0.8deg);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cert-deck-card.is-hidden-back {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 68px, -160px) scale(0.8) rotate(0deg);
+}
+
+/* Swipe-out animation keyframe classes */
+.cert-deck-card.anim-swipe-next {
+  animation: certSwipeNext 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.cert-deck-card.anim-swipe-prev {
+  animation: certSwipePrev 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes certSwipeNext {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(120%, -30px, 40px) rotate(14deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(0, 68px, -160px) scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes certSwipePrev {
+  0% {
+    transform: translate3d(-120%, -30px, 40px) rotate(-14deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Controls & Pagination Bar */
+.cert-deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  background: var(--bg-card);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cert-control-btn {
+  background: var(--gradient-glow);
+  border: 1px solid var(--border-hover);
+  color: var(--text-main);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cert-control-btn:hover {
+  background: var(--accent-primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.cert-deck-counter {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  min-width: 45px;
+  text-align: center;
+}
+
+.cert-deck-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cert-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+body.light-theme .cert-dot {
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.cert-dot.active {
+  width: 22px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.cert-deck-hint {
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--text-subtle);
+}
+
+@media (max-width: 640px) {
+  .cert-deck-stage {
+    min-height: 410px;
+  }
+  .cert-deck-controls {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0.85rem;
+  }
+}

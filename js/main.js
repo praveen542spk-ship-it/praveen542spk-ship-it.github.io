@@ -499,6 +499,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Initialize Stacked 3D Certificate Card Deck
+  initCertCardDeck();
+
 });
 
 /* --------------------------------------------------------------------------
@@ -553,3 +556,180 @@ document.addEventListener('keydown', (e) => {
     window.closeCertModal();
   }
 });
+
+/* --------------------------------------------------------------------------
+   15. INTERACTIVE STACKED CERTIFICATE CARD DECK ENGINE
+   -------------------------------------------------------------------------- */
+function initCertCardDeck() {
+  const cards = document.querySelectorAll('.cert-deck-card');
+  const prevBtn = document.getElementById('cert-prev-btn');
+  const nextBtn = document.getElementById('cert-next-btn');
+  const dotsContainer = document.getElementById('cert-deck-dots');
+  const counterEl = document.getElementById('cert-deck-counter');
+
+  if (!cards.length) return;
+
+  let currentIndex = 0;
+  const totalCards = cards.length;
+  let isAnimating = false;
+
+  // Render navigation dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalCards; i++) {
+      const dot = document.createElement('button');
+      dot.className = `cert-dot ${i === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Go to certificate ${i + 1}`);
+      dot.addEventListener('click', () => {
+        if (!isAnimating && currentIndex !== i) {
+          goToCard(i);
+        }
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  const updateCardPositions = () => {
+    cards.forEach((card, i) => {
+      // Remove position & animation classes
+      card.classList.remove(
+        'is-active', 
+        'is-stack-1', 
+        'is-stack-2', 
+        'is-stack-3', 
+        'is-hidden-back',
+        'anim-swipe-next',
+        'anim-swipe-prev'
+      );
+
+      // Relative index from active top card
+      const relIndex = (i - currentIndex + totalCards) % totalCards;
+
+      if (relIndex === 0) {
+        card.classList.add('is-active');
+      } else if (relIndex === 1) {
+        card.classList.add('is-stack-1');
+      } else if (relIndex === 2) {
+        card.classList.add('is-stack-2');
+      } else if (relIndex === 3) {
+        card.classList.add('is-stack-3');
+      } else {
+        card.classList.add('is-hidden-back');
+      }
+    });
+
+    // Update Counter & Dots
+    if (counterEl) {
+      counterEl.textContent = `${currentIndex + 1} / ${totalCards}`;
+    }
+
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('.cert-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+    }
+  };
+
+  const nextCard = () => {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const currentCard = cards[currentIndex];
+    currentCard.classList.add('anim-swipe-next');
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateCardPositions();
+      isAnimating = false;
+    }, 450);
+  };
+
+  const prevCard = () => {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    updateCardPositions();
+
+    const activeCard = cards[currentIndex];
+    activeCard.classList.add('anim-swipe-prev');
+
+    setTimeout(() => {
+      activeCard.classList.remove('anim-swipe-prev');
+      isAnimating = false;
+    }, 550);
+  };
+
+  const goToCard = (targetIndex) => {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex = targetIndex;
+    updateCardPositions();
+    setTimeout(() => {
+      isAnimating = false;
+    }, 500);
+  };
+
+  // Card Click Handler
+  cards.forEach((card, i) => {
+    card.addEventListener('click', (e) => {
+      // Don't flip deck if user clicked inside PDF or Credly action link
+      if (e.target.closest('a') || e.target.closest('button')) return;
+
+      const relIndex = (i - currentIndex + totalCards) % totalCards;
+      if (relIndex === 0) {
+        nextCard();
+      } else {
+        goToCard(i);
+      }
+    });
+  });
+
+  // Control Buttons
+  if (nextBtn) nextBtn.addEventListener('click', nextCard);
+  if (prevBtn) prevBtn.addEventListener('click', prevCard);
+
+  // Touch Swipe Gesture Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const stage = document.getElementById('cert-deck-stage');
+
+  if (stage) {
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 45) {
+        if (diff < 0) {
+          nextCard();
+        } else {
+          prevCard();
+        }
+      }
+    }, { passive: true });
+  }
+
+  // Keyboard arrow keys
+  document.addEventListener('keydown', (e) => {
+    const achievementsSection = document.getElementById('achievements');
+    if (!achievementsSection) return;
+
+    const rect = achievementsSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (isVisible) {
+      if (e.key === 'ArrowRight') {
+        nextCard();
+      } else if (e.key === 'ArrowLeft') {
+        prevCard();
+      }
+    }
+  });
+
+  // Initial render
+  updateCardPositions();
+}
