@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=12.0" />
+  <link rel="stylesheet" href="css/style.css?v=13.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -63,6 +63,10 @@
 </head>
 
 <body>
+  <!-- Custom Glowing Cursor Follower -->
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
+
   <!-- Scroll Progress Indicator -->
   <div id="scroll-progress"></div>
 
@@ -120,8 +124,9 @@
   <main id="main-content">
 
     <!-- HERO SECTION -->
-    <section id="home" class="hero-section" aria-label="Hero Introduction">
-      <div class="container hero-grid">
+    <section id="home" class="hero-section" aria-label="Hero Introduction" style="position:relative; overflow:hidden;">
+      <canvas id="hero-particle-canvas"></canvas>
+      <div class="container hero-grid" style="position:relative; z-index:2;">
         
         <!-- Hero Text -->
         <div class="hero-text">
@@ -130,7 +135,7 @@
             Available for Internships &amp; Opportunities
           </div>
 
-          <h1 class="hero-name reveal delay-1">
+          <h1 class="hero-name glitch-hover reveal delay-1">
             PRAVEEN <span class="gradient-text">KUMAR S</span>
           </h1>
 
@@ -290,17 +295,20 @@
                     <span class="dot dot-green"></span>
                   </div>
                   <span class="editor-title">developer.json</span>
-                  <button id="copy-code-btn" class="btn btn-outline btn-sm" style="padding:0.2rem 0.6rem; font-size:0.75rem;">Copy JSON</button>
+                  <div style="display:flex; gap:0.4rem;">
+                    <button id="run-code-btn" class="btn btn-primary btn-sm" style="padding:0.2rem 0.65rem; font-size:0.75rem;">Run Code ▶</button>
+                    <button id="copy-code-btn" data-copy='{"name": "PRAVEEN KUMAR S", "role": "Full-Stack Developer", "institution": "R.M.D. Engineering College", "cgpa": 8.47}' class="btn btn-outline btn-sm" style="padding:0.2rem 0.65rem; font-size:0.75rem;">Copy JSON</button>
+                  </div>
                 </div>
                 <pre class="code-editor-body"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
   <span class="code-property">name</span>: <span class="code-string">"PRAVEEN KUMAR S"</span>,
   <span class="code-property">role</span>: <span class="code-string">"Full-Stack Developer"</span>,
   <span class="code-property">institution</span>: <span class="code-string">"R.M.D. Engineering College"</span>,
-  <span class="code-property">degree</span>: <span class="code-string">"B.E. CSE (2nd Year)"</span>,
+  <span class="code-property">cgpa</span>: <span class="code-number">8.47</span>,
   <span class="code-property">stack</span>: [<span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express"</span>, <span class="code-string">"MongoDB"</span>],
-  <span class="code-property">skills</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript (ES6+)"</span>, <span class="code-string">"C"</span>],
   <span class="code-property">status</span>: <span class="code-string">"🟢 Open for Internships"</span>
 };</code></pre>
+                <div id="terminal-console-output" class="terminal-console-output"></div>
               </div>
             </div>
 
@@ -344,6 +352,17 @@
           <p class="section-subtitle">Tools, languages, and frameworks I use to bring ideas to life.</p>
         </div>
 
+        <!-- SVG Gradient Definition for Skill Rings -->
+        <svg width="0" height="0" style="position:absolute;">
+          <defs>
+            <linearGradient id="skill-ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6366f1" />
+              <stop offset="50%" stop-color="#8b5cf6" />
+              <stop offset="100%" stop-color="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+
         <div class="skills-categories-grid">
 
           <!-- Frontend -->
@@ -361,8 +380,17 @@
               <span class="skill-tag">Flexbox &amp; Grid</span>
               <span class="skill-tag">Glassmorphism</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="92%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="92"></circle>
+                </svg>
+                <div class="skill-ring-percent">92%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="92%"></div>
+              </div>
             </div>
           </div>
 
@@ -380,8 +408,17 @@
               <span class="skill-tag">Vercel Deployment</span>
               <span class="skill-tag">Middleware Architecture</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="88%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="88"></circle>
+                </svg>
+                <div class="skill-ring-percent">88%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="88%"></div>
+              </div>
             </div>
           </div>
 
@@ -397,8 +434,17 @@
               <span class="skill-tag">JavaScript</span>
               <span class="skill-tag">Java (Fundamentals)</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="90%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="90"></circle>
+                </svg>
+                <div class="skill-ring-percent">90%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="90%"></div>
+              </div>
             </div>
           </div>
 
@@ -413,8 +459,17 @@
               <span class="skill-tag">Browser LocalStorage</span>
               <span class="skill-tag">JSON Schema</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="85%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="85"></circle>
+                </svg>
+                <div class="skill-ring-percent">85%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="85%"></div>
+              </div>
             </div>
           </div>
 
@@ -432,8 +487,17 @@
               <span class="skill-tag">Postman</span>
               <span class="skill-tag">Windows OS</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="94%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="94"></circle>
+                </svg>
+                <div class="skill-ring-percent">94%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="94%"></div>
+              </div>
             </div>
           </div>
 
@@ -450,8 +514,17 @@
               <span class="skill-tag">SEO Best Practices</span>
               <span class="skill-tag">Clean Code</span>
             </div>
-            <div class="skill-bar-track">
-              <div class="skill-bar-fill" data-progress="89%"></div>
+            <div class="skill-ring-container">
+              <div class="skill-ring-wrapper">
+                <svg class="skill-ring-svg" viewBox="0 0 48 48">
+                  <circle class="skill-ring-circle-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="skill-ring-circle-val" cx="24" cy="24" r="20" data-percent="89"></circle>
+                </svg>
+                <div class="skill-ring-percent">89%</div>
+              </div>
+              <div class="skill-bar-track" style="flex:1;">
+                <div class="skill-bar-fill" data-progress="89%"></div>
+              </div>
             </div>
           </div>
 
@@ -1245,6 +1318,6 @@
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script src="js/main.js?v=12.0"></script>
+  <script src="js/main.js?v=13.0"></script>
 </body>
 </html>

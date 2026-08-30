@@ -1032,4 +1032,161 @@ function initCertCardDeck() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  /* --------------------------------------------------------------------------
+     22. HTML5 CANVAS WEBGL PARTICLE CONSTELLATION ENGINE
+     -------------------------------------------------------------------------- */
+  const canvas = document.getElementById('hero-particle-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.parentElement.offsetWidth;
+    let height = canvas.height = canvas.parentElement.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      if (!canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    });
+
+    const particles = [];
+    const particleCount = Math.min(50, Math.floor(width / 25));
+    let mouse = { x: -1000, y: -1000 };
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        radius: Math.random() * 2 + 1,
+        color: i % 2 === 0 ? 'rgba(99, 102, 241, ' : 'rgba(6, 182, 212, '
+      });
+    }
+
+    const drawParticles = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          p.x -= (dx / dist) * 0.6;
+          p.y -= (dy / dist) * 0.6;
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + '0.7)';
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (distance < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(99, 102, 241, ${0.25 * (1 - distance / 130)})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    };
+
+    drawParticles();
+  }
+
+  /* --------------------------------------------------------------------------
+     23. CUSTOM GLOWING CURSOR FOLLOWER
+     -------------------------------------------------------------------------- */
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+
+  if (cursorDot && cursorRing && window.innerWidth > 768) {
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    });
+
+    const animateRing = () => {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
+      requestAnimationFrame(animateRing);
+    };
+    animateRing();
+
+    const interactiveEls = document.querySelectorAll('a, button, .glass-card, .tilt-card, .lightbox-trigger');
+    interactiveEls.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('active'));
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     24. LIVE TERMINAL CONSOLE EXECUTION
+     -------------------------------------------------------------------------- */
+  const runCodeBtn = document.getElementById('run-code-btn');
+  const consoleOutput = document.getElementById('terminal-console-output');
+
+  if (runCodeBtn && consoleOutput) {
+    runCodeBtn.addEventListener('click', () => {
+      consoleOutput.classList.toggle('show');
+      if (consoleOutput.classList.contains('show')) {
+        consoleOutput.innerHTML = `
+          <div><span style="color:#10b981;">[SUCCESS]</span> Compiled developer.json successfully.</div>
+          <div>&gt; Name: <span style="color:#f8fafc;">PRAVEEN KUMAR S</span></div>
+          <div>&gt; Degree: <span style="color:#06b6d4;">B.E. Computer Science & Engineering (2nd Year)</span></div>
+          <div>&gt; Academic CGPA: <span style="color:#8b5cf6;">8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)</span></div>
+          <div>&gt; Stack: <span style="color:#6366f1;">["React", "Node.js", "Python", "MongoDB"]</span></div>
+          <div>&gt; Status: <span style="color:#10b981;">🟢 Ready for Full-Stack Internships</span></div>
+        `;
+        window.showToast('Ran developer.json script');
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     25. SVG CIRCULAR SKILL PROGRESS RING ANIMATION
+     -------------------------------------------------------------------------- */
+  const skillRings = document.querySelectorAll('.skill-ring-circle-val');
+  if (skillRings.length > 0) {
+    const ringObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const circle = entry.target;
+          const pct = parseFloat(circle.getAttribute('data-percent') || '85');
+          const maxOffset = 126;
+          const targetOffset = maxOffset - (maxOffset * pct / 100);
+          circle.style.strokeDashoffset = targetOffset;
+          obs.unobserve(circle);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    skillRings.forEach(ring => ringObserver.observe(ring));
+  }
 }
