@@ -1114,40 +1114,7 @@ function initCertCardDeck() {
   }
 
   /* --------------------------------------------------------------------------
-     23. CUSTOM GLOWING CURSOR FOLLOWER
-     -------------------------------------------------------------------------- */
-  const cursorDot = document.getElementById('cursor-dot');
-  const cursorRing = document.getElementById('cursor-ring');
-
-  if (cursorDot && cursorRing && window.innerWidth > 768) {
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
-    });
-
-    const animateRing = () => {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-      requestAnimationFrame(animateRing);
-    };
-    animateRing();
-
-    const interactiveEls = document.querySelectorAll('a, button, .glass-card, .tilt-card, .lightbox-trigger');
-    interactiveEls.forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('active'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('active'));
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     24. LIVE TERMINAL CONSOLE EXECUTION
+     23. LIVE TERMINAL CONSOLE EXECUTION
      -------------------------------------------------------------------------- */
   const runCodeBtn = document.getElementById('run-code-btn');
   const consoleOutput = document.getElementById('terminal-console-output');
@@ -1167,26 +1134,5 @@ function initCertCardDeck() {
         window.showToast('Ran developer.json script');
       }
     });
-  }
-
-  /* --------------------------------------------------------------------------
-     25. SVG CIRCULAR SKILL PROGRESS RING ANIMATION
-     -------------------------------------------------------------------------- */
-  const skillRings = document.querySelectorAll('.skill-ring-circle-val');
-  if (skillRings.length > 0) {
-    const ringObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const circle = entry.target;
-          const pct = parseFloat(circle.getAttribute('data-percent') || '85');
-          const maxOffset = 126;
-          const targetOffset = maxOffset - (maxOffset * pct / 100);
-          circle.style.strokeDashoffset = targetOffset;
-          obs.unobserve(circle);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    skillRings.forEach(ring => ringObserver.observe(ring));
   }
 }
