@@ -1135,4 +1135,354 @@ function initCertCardDeck() {
       }
     });
   }
+
+  /* --------------------------------------------------------------------------
+     24. FEATURE 1: EMBEDDED JARVIS AI ASSISTANT WIDGET
+     -------------------------------------------------------------------------- */
+  const jarvisTrigger = document.getElementById('jarvis-trigger-btn');
+  const jarvisDialog = document.getElementById('jarvis-chat-dialog');
+  const jarvisClose = document.getElementById('jarvis-close-btn');
+  const jarvisBody = document.getElementById('jarvis-chat-body');
+  const jarvisInput = document.getElementById('jarvis-input');
+  const jarvisSend = document.getElementById('jarvis-send-btn');
+  const jarvisSpeechToggle = document.getElementById('jarvis-speech-toggle');
+  let isSpeechEnabled = false;
+
+  if (jarvisTrigger && jarvisDialog) {
+    jarvisTrigger.addEventListener('click', () => {
+      jarvisDialog.classList.toggle('open');
+      if (jarvisDialog.classList.contains('open') && jarvisInput) {
+        setTimeout(() => jarvisInput.focus(), 100);
+      }
+    });
+
+    if (jarvisClose) {
+      jarvisClose.addEventListener('click', () => jarvisDialog.classList.remove('open'));
+    }
+
+    if (jarvisSpeechToggle) {
+      jarvisSpeechToggle.addEventListener('click', () => {
+        isSpeechEnabled = !isSpeechEnabled;
+        jarvisSpeechToggle.classList.toggle('active', isSpeechEnabled);
+        jarvisSpeechToggle.textContent = isSpeechEnabled ? '🔊 Audio ON' : '🔇 Audio OFF';
+        window.showToast(isSpeechEnabled ? 'Jarvis Voice Output Enabled' : 'Voice Output Muted');
+      });
+    }
+
+    const speakText = (text) => {
+      if (!isSpeechEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    };
+
+    const addJarvisMsg = (text, sender = 'bot') => {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `jarvis-msg ${sender}`;
+      msgDiv.innerHTML = text;
+      jarvisBody.appendChild(msgDiv);
+      jarvisBody.scrollTop = jarvisBody.scrollHeight;
+      if (sender === 'bot') speakText(text);
+    };
+
+    const getJarvisResponse = (query) => {
+      const q = query.toLowerCase();
+      if (q.includes('cgpa') || q.includes('mark') || q.includes('score') || q.includes('education')) {
+        return `Praveen's College CGPA is <strong>8.47 / 10</strong> (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA).<br>12th HSC: <strong>532/600 (88.67%)</strong><br>10th SSLC: <strong>442/500 (88.40%)</strong>. You can view all 4 official PDF marksheets under the Education section!`;
+      } else if (q.includes('project') || q.includes('work') || q.includes('built')) {
+        return `Praveen has built <strong>7+ production projects</strong> including:<br>• <strong>Social Media Platform</strong> (Vercel)<br>• <strong>Job Application Tracker</strong> (MERN + Drag&Drop)<br>• <strong>Jarvis AI Voice Assistant</strong> (Python + Speech NLP)<br>• <strong>E-Commerce MERN App</strong>`;
+      } else if (q.includes('stack') || q.includes('skill') || q.includes('tech') || q.includes('react')) {
+        return `Praveen specializes in full-stack development:<br>• <strong>Frontend</strong>: React.js, HTML5, CSS3, JavaScript (ES6+)<br>• <strong>Backend</strong>: Node.js, Express.js, REST APIs<br>• <strong>Databases</strong>: MongoDB, LocalStorage<br>• <strong>Languages</strong>: Python, C, JavaScript`;
+      } else if (q.includes('contact') || q.includes('hire') || q.includes('email') || q.includes('linkedin')) {
+        return `You can reach Praveen directly at:<br>📧 <strong>praveenkumar.s.dev@gmail.com</strong><br>💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a><br>🐙 <a href="https://github.com/praveen542spk-ship-it" target="_blank" style="color:var(--accent-cyan);">GitHub Profile ↗</a>`;
+      } else {
+        return `Greetings! I am Praveen's Jarvis Assistant. Praveen is a 2nd Year Computer Science student at R.M.D. Engineering College (8.47 CGPA) and Full-Stack Developer. How may I assist your review?`;
+      }
+    };
+
+    const handleJarvisSend = () => {
+      const query = jarvisInput.value.trim();
+      if (!query) return;
+      addJarvisMsg(query, 'user');
+      jarvisInput.value = '';
+      setTimeout(() => {
+        const resp = getJarvisResponse(query);
+        addJarvisMsg(resp, 'bot');
+      }, 400);
+    };
+
+    if (jarvisSend) jarvisSend.addEventListener('click', handleJarvisSend);
+    if (jarvisInput) {
+      jarvisInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleJarvisSend();
+      });
+    }
+
+    document.querySelectorAll('.jarvis-prompt-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const text = chip.textContent;
+        addJarvisMsg(text, 'user');
+        setTimeout(() => {
+          const resp = getJarvisResponse(text);
+          addJarvisMsg(resp, 'bot');
+        }, 300);
+      });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     25. FEATURE 2: CYBERPUNK TERMINAL / CLI MODE
+     -------------------------------------------------------------------------- */
+  const cliTrigger = document.getElementById('cli-trigger-btn');
+  const terminalOverlay = document.getElementById('terminal-overlay');
+  const terminalClose = document.getElementById('terminal-close-btn');
+  const terminalBody = document.getElementById('terminal-body');
+  const terminalInput = document.getElementById('terminal-cli-input');
+
+  if (terminalOverlay) {
+    const openTerminal = () => {
+      terminalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (terminalInput) setTimeout(() => terminalInput.focus(), 100);
+    };
+
+    const closeTerminal = () => {
+      terminalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (cliTrigger) cliTrigger.addEventListener('click', openTerminal);
+    if (terminalClose) terminalClose.addEventListener('click', closeTerminal);
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 't') {
+        e.preventDefault();
+        if (terminalOverlay.classList.contains('open')) closeTerminal();
+        else openTerminal();
+      } else if (e.key === 'Escape' && terminalOverlay.classList.contains('open')) {
+        closeTerminal();
+      }
+    });
+
+    if (terminalInput) {
+      terminalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = terminalInput.value.trim();
+          terminalInput.value = '';
+          if (!cmd) return;
+
+          const line = document.createElement('div');
+          line.innerHTML = `<span style="color:var(--accent-cyan);">praveen@dev:~$</span> ${cmd}`;
+          terminalBody.appendChild(line);
+
+          const res = document.createElement('div');
+          res.style.marginBottom = '0.75rem';
+          const c = cmd.toLowerCase();
+
+          if (c === 'help') {
+            res.innerHTML = `Available CLI Commands:<br>
+  • <span style="color:#f59e0b;">cat resume.json</span> - View JSON candidate profile<br>
+  • <span style="color:#f59e0b;">projects</span> - List portfolio projects &amp; repository URLs<br>
+  • <span style="color:#f59e0b;">cgpa</span> / <span style="color:#f59e0b;">marks</span> - Print verified academic scores<br>
+  • <span style="color:#f59e0b;">skills</span> - Display tech stack overview<br>
+  • <span style="color:#f59e0b;">contact</span> - Print contact channels<br>
+  • <span style="color:#f59e0b;">clear</span> - Clear terminal window<br>
+  • <span style="color:#f59e0b;">exit</span> - Close CLI mode`;
+          } else if (c === 'cat resume.json') {
+            res.innerHTML = `<pre style="color:#38bdf8;">{
+  "name": "PRAVEEN KUMAR S",
+  "degree": "B.E. Computer Science & Engineering (2nd Year)",
+  "institution": "R.M.D. Engineering College",
+  "cgpa": 8.47,
+  "status": "🟢 Available for Full-Stack Internships",
+  "email": "praveenkumar.s.dev@gmail.com"
+}</pre>`;
+          } else if (c === 'projects') {
+            res.innerHTML = `1. Social Media Platform (Live Demo: code-alpha-social-media-platform-self.vercel.app)<br>
+2. Job Application Tracker (GitHub: github.com/praveen542spk-ship-it/job-app)<br>
+3. Jarvis AI Voice Assistant (GitHub: github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant)<br>
+4. E-Commerce MERN Application (GitHub: github.com/praveen542spk-ship-it/ecom-app)`;
+          } else if (c === 'cgpa' || c === 'marks') {
+            res.innerHTML = `🎓 B.E. CSE College CGPA: <strong>8.47 / 10</strong> (Sem 1: 8.21 | Sem 2: 8.73)<br>
+📜 12th HSC State Board: <strong>532 / 600 (88.67%)</strong><br>
+📜 10th SSLC State Board: <strong>442 / 500 (88.40%)</strong>`;
+          } else if (c === 'skills') {
+            res.innerHTML = `Frontend: React.js, HTML5, CSS3, JavaScript (ES6+), Glassmorphism<br>Backend: Node.js, Express.js, REST APIs, JWT Auth, Vercel<br>Databases: MongoDB, LocalStorage<br>Languages: Python, C, JavaScript`;
+          } else if (c === 'contact') {
+            res.innerHTML = `Email: praveenkumar.s.dev@gmail.com<br>GitHub: github.com/praveen542spk-ship-it<br>LinkedIn: linkedin.com/in/praveen-kumar-s-0bab05411`;
+          } else if (c === 'clear') {
+            terminalBody.innerHTML = '';
+            return;
+          } else if (c === 'exit' || c === 'quit') {
+            closeTerminal();
+            return;
+          } else {
+            res.innerHTML = `<span style="color:#ef4444;">command not found: ${cmd}</span>. Type <span style="color:#f59e0b;">help</span> for available commands.`;
+          }
+          terminalBody.appendChild(res);
+          terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+      });
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     26. FEATURE 3: LIVE GITHUB ACTIVITY FETCH
+     -------------------------------------------------------------------------- */
+  const githubFeed = document.getElementById('github-commit-feed');
+  if (githubFeed) {
+    fetch('https://api.github.com/users/praveen542spk-ship-it/events')
+      .then(res => res.json())
+      .then(events => {
+        const pushEvents = Array.isArray(events) ? events.filter(e => e.type === 'PushEvent').slice(0, 4) : [];
+        if (pushEvents.length === 0) {
+          githubFeed.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem;">Active Repository Highlights: Job Application Tracker, Jarvis Voice AI, Social Media Platform.</div>';
+          return;
+        }
+        githubFeed.innerHTML = pushEvents.map(e => {
+          const repoName = e.repo.name.replace('praveen542spk-ship-it/', '');
+          const commitMsg = e.payload.commits && e.payload.commits[0] ? e.payload.commits[0].message : 'Pushed updates';
+          const dateStr = new Date(e.created_at).toLocaleDateString();
+          return `
+            <div class="github-commit-item">
+              <div>
+                <strong style="color:var(--accent-primary);">${repoName}</strong>
+                <div style="color:var(--text-main); font-size:0.82rem; margin-top:2px;">"${commitMsg}"</div>
+              </div>
+              <span style="color:var(--text-muted); font-size:0.75rem;">${dateStr}</span>
+            </div>
+          `;
+        }).join('');
+      })
+      .catch(() => {
+        githubFeed.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem;">Active Repository Highlights: Job Application Tracker, Jarvis Voice AI, Social Media Platform.</div>';
+      });
+  }
+
+  /* --------------------------------------------------------------------------
+     27. FEATURE 4: RECRUITER VERIFICATION INSPECTOR MODAL
+     -------------------------------------------------------------------------- */
+  const recruiterOverlay = document.getElementById('recruiter-overlay');
+  const recruiterTrigger = document.getElementById('recruiter-trigger-btn');
+  const recruiterClose = document.getElementById('recruiter-close-btn');
+  const copyRecruiterBtn = document.getElementById('copy-recruiter-summary-btn');
+
+  if (recruiterOverlay) {
+    const openRecruiterModal = () => {
+      recruiterOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeRecruiterModal = () => {
+      recruiterOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (recruiterTrigger) recruiterTrigger.addEventListener('click', openRecruiterModal);
+    if (recruiterClose) recruiterClose.addEventListener('click', closeRecruiterModal);
+
+    recruiterOverlay.addEventListener('click', (e) => {
+      if (e.target === recruiterOverlay) closeRecruiterModal();
+    });
+
+    if (copyRecruiterBtn) {
+      copyRecruiterBtn.addEventListener('click', () => {
+        const text = `EXECUTIVE CANDIDATE SUMMARY: PRAVEEN KUMAR S
+------------------------------------------------
+Role: Computer Science Student & Full-Stack Developer
+Institution: R.M.D. Engineering College (B.E. CSE, 2nd Year)
+Cumulative CGPA: 8.47 / 10 (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA)
+12th Standard HSC: 532 / 600 (88.67%)
+10th Standard SSLC: 442 / 500 (88.40%)
+Core Stack: React.js, Node.js, Express, MongoDB, Python, Voice AI, C
+GitHub: https://github.com/praveen542spk-ship-it
+Portfolio: https://praveen542spk-ship-it.github.io/
+Status: Available for Internships & Full-Stack Roles`;
+
+        navigator.clipboard.writeText(text).then(() => {
+          window.showToast('Copied Recruiter Summary to Clipboard!');
+        });
+      });
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     28. FEATURE 5: INTERACTIVE SKILL GALAXY CANVAS NODE VISUALIZER
+     -------------------------------------------------------------------------- */
+  const galaxyCanvas = document.getElementById('skill-galaxy-canvas');
+  if (galaxyCanvas) {
+    const ctx = galaxyCanvas.getContext('2d');
+    let width = galaxyCanvas.width = galaxyCanvas.parentElement.offsetWidth;
+    let height = galaxyCanvas.height = galaxyCanvas.parentElement.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      if (!galaxyCanvas.parentElement) return;
+      width = galaxyCanvas.width = galaxyCanvas.parentElement.offsetWidth;
+      height = galaxyCanvas.height = galaxyCanvas.parentElement.offsetHeight;
+    });
+
+    const nodes = [
+      { label: 'React.js', x: width * 0.22, y: height * 0.35, r: 24, cat: 'react', color: '#06b6d4' },
+      { label: 'Node.js', x: width * 0.45, y: height * 0.3, r: 24, cat: 'node', color: '#10b981' },
+      { label: 'Python', x: width * 0.75, y: height * 0.35, r: 26, cat: 'python', color: '#8b5cf6' },
+      { label: 'MongoDB', x: width * 0.32, y: height * 0.7, r: 22, cat: 'node', color: '#10b981' },
+      { label: 'Express', x: width * 0.58, y: height * 0.65, r: 22, cat: 'node', color: '#6366f1' },
+      { label: 'JavaScript', x: width * 0.12, y: height * 0.65, r: 24, cat: 'javascript', color: '#f59e0b' },
+      { label: 'Voice AI', x: width * 0.88, y: height * 0.7, r: 22, cat: 'python', color: '#ec4899' }
+    ];
+
+    const links = [
+      [0, 1], [1, 3], [1, 4], [0, 5], [2, 6], [4, 2]
+    ];
+
+    const drawGalaxy = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      links.forEach(([i, j]) => {
+        const n1 = nodes[i];
+        const n2 = nodes[j];
+        ctx.beginPath();
+        ctx.moveTo(n1.x, n1.y);
+        ctx.lineTo(n2.x, n2.y);
+        ctx.strokeStyle = 'rgba(99, 102, 241, 0.25)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      });
+
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(15, 17, 32, 0.9)';
+        ctx.fill();
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 11px var(--font-heading), sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(n.label, n.x, n.y);
+      });
+    };
+
+    drawGalaxy();
+
+    galaxyCanvas.addEventListener('click', (e) => {
+      const rect = galaxyCanvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      nodes.forEach(n => {
+        const dist = Math.hypot(clickX - n.x, clickY - n.y);
+        if (dist <= n.r) {
+          window.showToast(`Selected ${n.label} node filter!`);
+          const filterBtn = document.querySelector(`.filter-btn[data-filter="${n.cat}"]`);
+          if (filterBtn) filterBtn.click();
+        }
+      });
+    });
+  }
 }

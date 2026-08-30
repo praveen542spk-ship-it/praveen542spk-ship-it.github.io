@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=14.0" />
+  <link rel="stylesheet" href="css/style.css?v=15.0" />
 
   <script>
     if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
@@ -59,6 +59,7 @@
         </ul>
       </nav>
       <div class="nav-controls">
+        <button id="cli-trigger-btn" class="theme-toggle" aria-label="Terminal CLI Mode (Ctrl+Shift+T)" title="Terminal CLI Mode (Ctrl+Shift+T)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16, 185, 129, 0.4);">&gt;_ CLI</button>
         <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
         <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
         <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
@@ -219,8 +220,67 @@
         <span>Keyboard Shortcut: <kbd style="font-family:var(--font-mono); background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">Ctrl + K</kbd></span>
       </div>
     </div>
+  <!-- Feature 1: Embedded Jarvis AI Assistant Widget Launcher & Chat Dialog -->
+  <div class="jarvis-widget-launcher">
+    <button id="jarvis-trigger-btn" class="jarvis-trigger-btn" aria-label="Open Jarvis AI Assistant">
+      <span class="jarvis-pulse-dot"></span>
+      <span>🤖 Jarvis AI</span>
+    </button>
   </div>
 
-  <script src="js/main.js?v=14.0"></script>
+  <div id="jarvis-chat-dialog" class="jarvis-chat-dialog" aria-hidden="true">
+    <div class="jarvis-chat-header">
+      <div class="jarvis-chat-title">
+        <span>🤖</span> Jarvis AI Assistant
+      </div>
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button id="jarvis-speech-toggle" class="jarvis-speech-toggle">🔇 Audio OFF</button>
+        <button id="jarvis-close-btn" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.1rem;">✕</button>
+      </div>
+    </div>
+    <div id="jarvis-chat-body" class="jarvis-chat-body">
+      <div class="jarvis-msg bot">
+        Greetings! I am Praveen's AI Assistant. How can I assist your candidate review today?
+      </div>
+    </div>
+    <div class="jarvis-quick-prompts">
+      <button class="jarvis-prompt-chip">Academic Scores</button>
+      <button class="jarvis-prompt-chip">Top Projects</button>
+      <button class="jarvis-prompt-chip">Tech Stack</button>
+      <button class="jarvis-prompt-chip">Contact Praveen</button>
+    </div>
+    <div class="jarvis-chat-input-row">
+      <input type="text" id="jarvis-input" class="jarvis-input" placeholder="Ask Jarvis anything about Praveen..." autocomplete="off" />
+      <button id="jarvis-send-btn" class="jarvis-send-btn" aria-label="Send message">➔</button>
+    </div>
+  </div>
+
+  <!-- Feature 2: Cyberpunk Developer Terminal / CLI Mode Overlay -->
+  <div id="terminal-overlay" class="terminal-overlay" aria-hidden="true">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+          <span style="margin-left:0.5rem;">praveen@dev:~ (zsh)</span>
+        </div>
+        <button id="terminal-close-btn" style="background:transparent; border:none; color:var(--accent-emerald); cursor:pointer; font-size:1rem;">[ESC Close]</button>
+      </div>
+      <div id="terminal-body" class="terminal-body">
+        <div>Welcome to Praveen's Portfolio Interactive CLI System v2.0</div>
+        <div>Type <span style="color:#f59e0b;">help</span> for available commands or <span style="color:#f59e0b;">cat resume.json</span> to inspect candidate profile.</div>
+        <div style="margin-bottom:0.75rem;">----------------------------------------------------------------------</div>
+      </div>
+      <div style="padding:0.75rem 1.25rem; background:rgba(0,0,0,0.8); border-top:1px solid rgba(16,185,129,0.2);">
+        <div class="terminal-input-row">
+          <span class="terminal-prompt-text">praveen@dev:~$</span>
+          <input type="text" id="terminal-cli-input" class="terminal-cli-input" placeholder="Type a command (e.g. help, projects, cgpa)..." autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=15.0"></script>
 </body>
 </html>

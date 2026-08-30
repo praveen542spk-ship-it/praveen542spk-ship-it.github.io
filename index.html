@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=14.0" />
+  <link rel="stylesheet" href="css/style.css?v=15.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -106,6 +106,7 @@
       </nav>
 
       <div class="nav-controls">
+        <button id="cli-trigger-btn" class="theme-toggle" aria-label="Terminal CLI Mode (Ctrl+Shift+T)" title="Terminal CLI Mode (Ctrl+Shift+T)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16, 185, 129, 0.4);">&gt;_ CLI</button>
         <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
         <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
         <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
@@ -144,10 +145,13 @@
             MERN stack systems, and intelligent automation tools with an obsessive focus on clean code and accessibility.
           </p>
 
-          <div class="hero-actions reveal delay-4">
+          <div class="hero-actions reveal delay-4" style="flex-wrap:wrap;">
             <a href="#projects" class="btn btn-primary">
               View My Work <span>→</span>
             </a>
+            <button id="recruiter-trigger-btn" class="btn btn-outline" style="border-color:var(--accent-primary); color:#ffffff; background:rgba(99, 102, 241, 0.15);">
+              📋 Recruiter Summary
+            </button>
             <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline">
               Download Resume <span>📄</span>
             </a>
@@ -345,7 +349,12 @@
         <div class="section-header reveal">
           <span class="section-tag">TECHNICAL CAPABILITIES</span>
           <h2 class="section-title">Skills &amp; Technology Stack</h2>
-          <p class="section-subtitle">Tools, languages, and frameworks I use to bring ideas to life.</p>
+          <p class="section-subtitle">Tools, languages, and frameworks I use to bring ideas to life. Click any skill node to filter projects below!</p>
+        </div>
+
+        <!-- Interactive Skill Galaxy Canvas -->
+        <div class="skill-galaxy-box reveal">
+          <canvas id="skill-galaxy-canvas"></canvas>
         </div>
 
         <div class="skills-categories-grid">
@@ -665,6 +674,39 @@
 
         <div id="no-projects-found" style="display:none; text-align:center; padding:3rem; color:var(--text-muted);">
           No projects found for the selected technology filter.
+        </div>
+
+        <!-- Live GitHub Activity Showcase -->
+        <div class="glass-card github-activity-card reveal">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+            <div>
+              <span class="section-tag" style="font-size:0.75rem;">LIVE REPOSITORY METRICS</span>
+              <h3 style="font-size:1.2rem; font-family:var(--font-heading);">GitHub Open-Source Activity</h3>
+            </div>
+            <a href="https://github.com/praveen542spk-ship-it" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="font-size:0.8rem; padding:0.3rem 0.8rem;">
+              @praveen542spk-ship-it ↗
+            </a>
+          </div>
+
+          <div class="github-grid-stats">
+            <div class="github-stat-box">
+              <div class="github-stat-num">7+</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Public Repositories</div>
+            </div>
+            <div class="github-stat-box">
+              <div class="github-stat-num">350+</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Total Commits</div>
+            </div>
+            <div class="github-stat-box">
+              <div class="github-stat-num">100%</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Clean Code Ratio</div>
+            </div>
+          </div>
+
+          <div style="font-weight:600; font-size:0.88rem; margin-bottom:0.75rem; color:var(--accent-primary);">⚡ Recent Live Commits:</div>
+          <div id="github-commit-feed" class="github-feed-list">
+            <div style="color:var(--text-muted); font-size:0.85rem;">Loading live commits from GitHub API...</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1246,9 +1288,105 @@
     </div>
   </div>
 
+  <!-- Feature 1: Embedded Jarvis AI Assistant Widget Launcher & Chat Dialog -->
+  <div class="jarvis-widget-launcher">
+    <button id="jarvis-trigger-btn" class="jarvis-trigger-btn" aria-label="Open Jarvis AI Assistant">
+      <span class="jarvis-pulse-dot"></span>
+      <span>🤖 Jarvis AI</span>
+    </button>
+  </div>
+
+  <div id="jarvis-chat-dialog" class="jarvis-chat-dialog" aria-hidden="true">
+    <div class="jarvis-chat-header">
+      <div class="jarvis-chat-title">
+        <span>🤖</span> Jarvis AI Assistant
+      </div>
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button id="jarvis-speech-toggle" class="jarvis-speech-toggle">🔇 Audio OFF</button>
+        <button id="jarvis-close-btn" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.1rem;">✕</button>
+      </div>
+    </div>
+    <div id="jarvis-chat-body" class="jarvis-chat-body">
+      <div class="jarvis-msg bot">
+        Greetings! I am Praveen's AI Assistant. How can I assist your candidate review today?
+      </div>
+    </div>
+    <div class="jarvis-quick-prompts">
+      <button class="jarvis-prompt-chip">Academic Scores</button>
+      <button class="jarvis-prompt-chip">Top Projects</button>
+      <button class="jarvis-prompt-chip">Tech Stack</button>
+      <button class="jarvis-prompt-chip">Contact Praveen</button>
+    </div>
+    <div class="jarvis-chat-input-row">
+      <input type="text" id="jarvis-input" class="jarvis-input" placeholder="Ask Jarvis anything about Praveen..." autocomplete="off" />
+      <button id="jarvis-send-btn" class="jarvis-send-btn" aria-label="Send message">➔</button>
+    </div>
+  </div>
+
+  <!-- Feature 2: Cyberpunk Developer Terminal / CLI Mode Overlay -->
+  <div id="terminal-overlay" class="terminal-overlay" aria-hidden="true">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+          <span style="margin-left:0.5rem;">praveen@dev:~ (zsh)</span>
+        </div>
+        <button id="terminal-close-btn" style="background:transparent; border:none; color:var(--accent-emerald); cursor:pointer; font-size:1rem;">[ESC Close]</button>
+      </div>
+      <div id="terminal-body" class="terminal-body">
+        <div>Welcome to Praveen's Portfolio Interactive CLI System v2.0</div>
+        <div>Type <span style="color:#f59e0b;">help</span> for available commands or <span style="color:#f59e0b;">cat resume.json</span> to inspect candidate profile.</div>
+        <div style="margin-bottom:0.75rem;">----------------------------------------------------------------------</div>
+      </div>
+      <div style="padding:0.75rem 1.25rem; background:rgba(0,0,0,0.8); border-top:1px solid rgba(16,185,129,0.2);">
+        <div class="terminal-input-row">
+          <span class="terminal-prompt-text">praveen@dev:~$</span>
+          <input type="text" id="terminal-cli-input" class="terminal-cli-input" placeholder="Type a command (e.g. help, projects, cgpa)..." autocomplete="off" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 4: Recruiter Fast-Track Verification Inspector Modal -->
+  <div id="recruiter-overlay" class="recruiter-overlay" aria-hidden="true">
+    <div class="recruiter-dialog">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+        <div>
+          <span class="section-tag" style="font-size:0.75rem;">VERIFIED CANDIDATE PROFILE</span>
+          <h3 style="font-size:1.3rem; font-family:var(--font-heading);">Executive Recruiter Inspector</h3>
+        </div>
+        <button id="recruiter-close-btn" style="background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:1.2rem;">✕</button>
+      </div>
+
+      <div class="recruiter-summary-box">
+        <div><strong>CANDIDATE:</strong> PRAVEEN KUMAR S</div>
+        <div><strong>ROLE:</strong> Full-Stack Developer &amp; B.E. CSE Student (2nd Year)</div>
+        <div><strong>INSTITUTION:</strong> R.M.D. Engineering College (2025–Present)</div>
+        <div><strong>CUMULATIVE CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA)</div>
+        <div><strong>ACADEMIC SCORES:</strong> 12th HSC: 532/600 (88.67%) | 10th SSLC: 442/500 (88.40%)</div>
+        <div><strong>CORE STACK:</strong> React.js, Node.js, Express, MongoDB, Python, Voice AI, C</div>
+      </div>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <a href="assets/marksheets/college-sem2-marksheet.pdf" target="_blank" class="btn btn-outline btn-sm">Sem 2 Marksheet PDF 📄</a>
+        <a href="assets/marksheets/college-sem1-marksheet.pdf" target="_blank" class="btn btn-outline btn-sm">Sem 1 Marksheet PDF 📄</a>
+        <a href="assets/marksheets/hsc-12th-marksheet.pdf" target="_blank" class="btn btn-outline btn-sm">12th Marksheet PDF 📄</a>
+        <a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" class="btn btn-outline btn-sm">10th Marksheet PDF 📄</a>
+      </div>
+
+      <div style="display:flex; gap:1rem;">
+        <button id="copy-recruiter-summary-btn" class="btn btn-primary" style="flex:1;">
+          📋 Copy Executive Summary to Clipboard
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script src="js/main.js?v=14.0"></script>
+  <script src="js/main.js?v=15.0"></script>
 </body>
 </html>
