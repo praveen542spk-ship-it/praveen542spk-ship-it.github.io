@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=16.0" />
+  <link rel="stylesheet" href="css/style.css?v=17.0" />
 
   <script>
     if (localStorage.getItem('portfolio-theme') === 'light' || (!localStorage.getItem('portfolio-theme') && window.matchMedia('(prefers-color-scheme: light)').matches)) {
@@ -314,18 +314,18 @@
         <span>Keyboard Shortcut: <kbd style="font-family:var(--font-mono); background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">Ctrl + K</kbd></span>
       </div>
     </div>
-  <!-- Feature 1: Embedded Jarvis AI Assistant Widget Launcher & Chat Dialog -->
+  <!-- Feature 1: Embedded SPK AI Assistant Widget Launcher & Chat Dialog -->
   <div class="jarvis-widget-launcher">
-    <button id="jarvis-trigger-btn" class="jarvis-trigger-btn" aria-label="Open Jarvis AI Assistant">
+    <button id="jarvis-trigger-btn" class="jarvis-trigger-btn" aria-label="Open SPK AI Assistant">
       <span class="jarvis-pulse-dot"></span>
-      <span>🤖 Jarvis AI</span>
+      <span>🤖 SPK AI</span>
     </button>
   </div>
 
   <div id="jarvis-chat-dialog" class="jarvis-chat-dialog" aria-hidden="true">
     <div class="jarvis-chat-header">
       <div class="jarvis-chat-title">
-        <span>🤖</span> Jarvis AI Assistant
+        <span>🤖</span> SPK AI Assistant
       </div>
       <div style="display:flex; align-items:center; gap:0.5rem;">
         <button id="jarvis-speech-toggle" class="jarvis-speech-toggle">🔇 Audio OFF</button>
@@ -334,17 +334,17 @@
     </div>
     <div id="jarvis-chat-body" class="jarvis-chat-body">
       <div class="jarvis-msg bot">
-        Greetings! I am Praveen's AI Assistant. How can I assist your candidate review today?
+        Greetings! I am SPK AI, Praveen's personal assistant. How can I help you today?
       </div>
     </div>
     <div class="jarvis-quick-prompts">
-      <button class="jarvis-prompt-chip">Academic Scores</button>
+      <button class="jarvis-prompt-chip">10th Mark</button>
+      <button class="jarvis-prompt-chip">12th Mark</button>
+      <button class="jarvis-prompt-chip">College CGPA</button>
       <button class="jarvis-prompt-chip">Top Projects</button>
-      <button class="jarvis-prompt-chip">Tech Stack</button>
-      <button class="jarvis-prompt-chip">Contact Praveen</button>
     </div>
     <div class="jarvis-chat-input-row">
-      <input type="text" id="jarvis-input" class="jarvis-input" placeholder="Ask Jarvis anything about Praveen..." autocomplete="off" />
+      <input type="text" id="jarvis-input" class="jarvis-input" placeholder="Ask SPK AI anything (e.g. 10th mark, CGPA)..." autocomplete="off" />
       <button id="jarvis-send-btn" class="jarvis-send-btn" aria-label="Send message">➔</button>
     </div>
   </div>
@@ -375,6 +375,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=16.0"></script>
+  <script src="js/main.js?v=17.0"></script>
 </body>
 </html>
