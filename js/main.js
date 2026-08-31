@@ -2973,15 +2973,7 @@ function initTraceAnySkillModalEngine() {
 
 // 9. Self-Adapting Data UI Engine
 function initSelfAdaptingDataUIEngine() {
-  document.querySelectorAll('.project-card').forEach(card => {
-    if (!card.querySelector('.data-type-pill')) {
-      const pill = document.createElement('span');
-      pill.className = 'data-type-pill';
-      pill.style.cssText = 'font-size:0.65rem; font-family:var(--font-mono); color:var(--accent-cyan); background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:var(--radius-sm); margin-bottom:0.5rem; display:inline-block;';
-      pill.textContent = 'TYPE: INTERACTIVE WORKSPACE';
-      card.querySelector('.project-card-body')?.prepend(pill);
-    }
-  });
+  // No-op: Pill creation disabled as requested
 }
 
 // 10. "Break The Website" Experimental Mode Engine
