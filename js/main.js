@@ -1190,100 +1190,118 @@ function initCertCardDeck() {
     const getJarvisResponse = (query) => {
       const q = query.toLowerCase().trim();
 
-      // --- INDIVIDUAL SUBJECT MARKS & COLLEGE GRADES ---
+      // --- ACADEMIC QUERY VALIDATION ENGINE ---
 
-      // Physics
+      // Check for unavailable semesters (3rd, 4th, 5th, 6th, 7th, 8th, etc.)
+      const semMatch = q.match(/(\d+)(?:st|nd|rd|th)?\s*(?:sem|semester)/i) || q.match(/(?:sem|semester)\s*(\d+)/i);
+      if (semMatch) {
+        const semNum = parseInt(semMatch[1], 10);
+        if (semNum > 2) {
+          const suffix = semNum === 3 ? 'rd' : 'th';
+          return `Invalid academic record. ${semNum}${suffix} semester marks are not available in the student's records.`;
+        }
+      }
+
+      // Check specific 12th subject queries (12th Subjects: Tamil:92, English:78, Physics:88, Chemistry:98, Biology:85, Maths:91)
+      if (q.includes('12th') || q.includes('12 th') || q.includes('hsc') || q.includes('twelfth') || q.includes('plus two')) {
+        if (q.includes('computer') || q.includes('cs') || q.includes('commerce') || q.includes('account') || q.includes('economic') || q.includes('french') || q.includes('hindi')) {
+          const subjName = (q.includes('computer') || q.includes('cs')) ? 'Computer Science' : 'The requested subject';
+          return `Invalid subject. ${subjName} is not available in the student's 12th-standard academic records.`;
+        }
+        if (q.includes('tamil')) return `Praveen's 12th Tamil Mark is <strong>92 / 100</strong>.`;
+        if (q.includes('english')) return `Praveen's 12th English Mark is <strong>78 / 100</strong>.`;
+        if (q.includes('physic')) return `Praveen's 12th Physics Mark is <strong>88 / 100</strong>.`;
+        if (q.includes('chem')) return `Praveen's 12th Chemistry Mark is <strong>98 / 100</strong>.`;
+        if (q.includes('bio')) return `Praveen's 12th Biology Mark is <strong>85 / 100</strong>.`;
+        if (q.includes('math') || q.includes('calculus')) return `Praveen's 12th Mathematics Mark is <strong>91 / 100</strong>.`;
+        if (q.includes('mark') || q.includes('score') || q.includes('total')) return `Praveen's 12th HSC Total Mark is <strong>532 / 600 (88.67%)</strong>.`;
+      }
+
+      // Check specific 10th subject queries (10th Subjects: Tamil:83, English:87, Maths:90, Science:94, Social Science:88)
+      if (q.includes('10th') || q.includes('10 th') || q.includes('sslc') || q.includes('tenth')) {
+        if (q.includes('computer') || q.includes('cs') || q.includes('hindi') || q.includes('french') || q.includes('biology') || q.includes('chemistry') || q.includes('physics')) {
+          const subjName = (q.includes('computer') || q.includes('cs')) ? 'Computer Science' : 'The requested subject';
+          return `Invalid subject. ${subjName} is not available in the student's 10th-standard academic records.`;
+        }
+        if (q.includes('tamil')) return `Praveen's 10th Tamil Mark is <strong>83 / 100</strong>.`;
+        if (q.includes('english')) return `Praveen's 10th English Mark is <strong>87 / 100</strong>.`;
+        if (q.includes('math')) return `Praveen's 10th Mathematics Mark is <strong>90 / 100</strong>.`;
+        if (q.includes('social')) return `Praveen's 10th Social Science Mark is <strong>88 / 100</strong>.`;
+        if (q.includes('science')) return `Praveen's 10th Science Mark is <strong>94 / 100</strong>.`;
+        if (q.includes('mark') || q.includes('score') || q.includes('total')) return `Praveen's 10th SSLC Total Mark is <strong>442 / 500 (88.40%)</strong>.`;
+      }
+
+      // Check specific 1st Semester subject queries (Heritage of Tamils: A, Matrices & Calculus: A+, Eng Chem: A, C++: A, SDP: A, DPSD: A, Idea Lab I: A, Interpersonal: A+)
+      if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
+        if (q.includes('heritage') || q.includes('tamil')) return `Praveen's 1st Semester Heritage of Tamils Grade is <strong>A</strong>.`;
+        if (q.includes('math') || q.includes('calculus') || q.includes('matrices')) return `Praveen's 1st Semester Matrices and Calculus Grade is <strong>A+</strong>.`;
+        if (q.includes('chem')) return `Praveen's 1st Semester Engineering Chemistry Grade is <strong>A</strong>.`;
+        if (q.includes('c++') || q.includes('cpp')) return `Praveen's 1st Semester Programming in C++ Grade is <strong>A</strong>.`;
+        if (q.includes('software') || q.includes('sdp')) return `Praveen's 1st Semester Software Development Practices Grade is <strong>A</strong>.`;
+        if (q.includes('digital') || q.includes('dpsd')) return `Praveen's 1st Semester Digital Principles and System Design Grade is <strong>A</strong>.`;
+        if (q.includes('idea')) return `Praveen's 1st Semester Idea Lab - I Grade is <strong>A</strong>.`;
+        if (q.includes('interpersonal') || q.includes('skill') || q.includes('career')) return `Praveen's 1st Semester Interpersonal Skills Grade is <strong>A+</strong>.`;
+        if (q.includes('c ') || q.includes('c language')) return `Praveen's 1st Semester Programming in C (Non-Credit) Status is <strong>Completed</strong>.`;
+        if (q.includes('mark') || q.includes('gpa') || q.includes('grade')) return `Praveen's 1st Semester College GPA is <strong>8.21 / 10</strong>.`;
+      }
+
+      // Check specific 2nd Semester subject queries (Tamils & Tech: A, AI: A, Data Structures: S, Java: A+, Linear Algebra: A+, Physics for IS: A, Idea Lab II: B+, Innovation Skills: S)
+      if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
+        if (q.includes('tamil') || q.includes('technology')) return `Praveen's 2nd Semester Tamils and Technology Grade is <strong>A</strong>.`;
+        if (q.includes('ai') || q.includes('artificial intelligence')) return `Praveen's 2nd Semester Introduction to Artificial Intelligence Grade is <strong>A</strong>.`;
+        if (q.includes('data structure') || q.includes('ds')) return `Praveen's 2nd Semester Data Structures Grade is <strong>S (Outstanding)</strong>.`;
+        if (q.includes('java')) return `Praveen's 2nd Semester Java Programming Grade is <strong>A+</strong>.`;
+        if (q.includes('math') || q.includes('linear algebra')) return `Praveen's 2nd Semester Linear Algebra and Applications Grade is <strong>A+</strong>.`;
+        if (q.includes('physic')) return `Praveen's 2nd Semester Physics for Information Science Grade is <strong>A</strong>.`;
+        if (q.includes('idea')) return `Praveen's 2nd Semester Idea Lab - II Grade is <strong>B+</strong>.`;
+        if (q.includes('innovation') || q.includes('creativity')) return `Praveen's 2nd Semester Innovation and Creativity Skills Grade is <strong>S (Outstanding)</strong>.`;
+        if (q.includes('mark') || q.includes('gpa') || q.includes('grade')) return `Praveen's 2nd Semester College GPA is <strong>8.73 / 10</strong>.`;
+      }
+
+      // Direct Subject Lookup without specifying semester/school level
       if (q.includes('physic')) {
-        return `Praveen's 12th Physics Mark is <strong>88 / 100</strong>.`;
+        return `Praveen's Physics Scores:<br>• <strong>12th Physics:</strong> 88 / 100<br>• <strong>2nd Sem College Physics:</strong> Grade A`;
       }
-
-      // Chemistry
       if (q.includes('chem')) {
-        return `Praveen's 12th Chemistry Mark is <strong>98 / 100</strong>.`;
+        return `Praveen's Chemistry Scores:<br>• <strong>12th Chemistry:</strong> 98 / 100<br>• <strong>1st Sem Engineering Chemistry:</strong> Grade A`;
       }
-
-      // Mathematics / Maths / Calculus
-      if (q.includes('math') || q.includes('calculus')) {
-        if (q.includes('1st sem') || q.includes('sem 1') || q.includes('first sem') || q.includes('college') || q.includes('grade')) {
-          return `Praveen's 1st Semester Maths (Calculus & Linear Algebra) Grade is <strong>A+</strong>.`;
-        }
-        if (q.includes('10th') || q.includes('sslc')) {
-          return `Praveen's 10th Maths Mark is <strong>92 / 100</strong>.`;
-        }
-        if (q.includes('12th') || q.includes('hsc')) {
-          return `Praveen's 12th Maths Mark is <strong>91 / 100</strong>.`;
-        }
-        return `Praveen's Maths Scores:<br>• <strong>1st Sem College Maths:</strong> Grade A+<br>• <strong>12th Maths:</strong> 91 / 100<br>• <strong>10th Maths:</strong> 92 / 100`;
+      if (q.includes('bio')) {
+        return `Praveen's 12th Biology Mark is <strong>85 / 100</strong>.`;
       }
-
-      // Data Structures
-      if (q.includes('data structure') || q.includes('ds grade') || q.includes('ds mark')) {
+      if (q.includes('math') || q.includes('calculus') || q.includes('algebra')) {
+        return `Praveen's Mathematics Scores:<br>• <strong>2nd Sem Linear Algebra:</strong> Grade A+<br>• <strong>1st Sem Calculus:</strong> Grade A+<br>• <strong>12th Maths:</strong> 91 / 100<br>• <strong>10th Maths:</strong> 90 / 100`;
+      }
+      if (q.includes('data structure') || q.includes('ds grade')) {
         return `Praveen's 2nd Semester Data Structures Grade is <strong>S (Outstanding)</strong>.`;
       }
-
-      // Java
       if (q.includes('java')) {
-        return `Praveen's Java Programming Grade is <strong>A+</strong>.`;
+        return `Praveen's 2nd Semester Java Programming Grade is <strong>A+</strong>.`;
       }
-
-      // Python / Problem Solving
-      if (q.includes('python')) {
-        return `Praveen's Problem Solving & Python Programming Grade is <strong>A+</strong>.`;
+      if (q.includes('c++') || q.includes('cpp')) {
+        return `Praveen's 1st Semester Programming in C++ Grade is <strong>A</strong>.`;
       }
-
-      // Computer Science / CS (12th)
-      if ((q.includes('cs') || q.includes('computer science')) && (q.includes('12th') || q.includes('mark') || q.includes('hsc'))) {
-        return `Praveen's 12th Computer Science Mark is <strong>83 / 100</strong>.`;
+      if (q.includes('c ') || q.includes('c language')) {
+        return `Praveen's 1st Semester Programming in C (Non-Credit) Status is <strong>Completed</strong>.`;
       }
-
-      // Science (10th)
+      if (q.includes('ai') || q.includes('artificial intelligence')) {
+        return `Praveen's 2nd Semester Introduction to Artificial Intelligence Grade is <strong>A</strong>.`;
+      }
+      if (q.includes('tamil')) {
+        return `Praveen's Tamil Scores:<br>• <strong>2nd Sem Tamils & Technology:</strong> Grade A<br>• <strong>1st Sem Heritage of Tamils:</strong> Grade A<br>• <strong>12th Tamil:</strong> 92 / 100<br>• <strong>10th Tamil:</strong> 83 / 100`;
+      }
+      if (q.includes('english')) {
+        return `Praveen's English Marks:<br>• <strong>10th English:</strong> 87 / 100<br>• <strong>12th English:</strong> 78 / 100`;
+      }
       if (q.includes('science') && !q.includes('computer') && !q.includes('social')) {
         return `Praveen's 10th Science Mark is <strong>94 / 100</strong>.`;
       }
-
-      // Social Science (10th)
       if (q.includes('social')) {
-        return `Praveen's 10th Social Science Mark is <strong>90 / 100</strong>.`;
+        return `Praveen's 10th Social Science Mark is <strong>88 / 100</strong>.`;
       }
 
-      // Tamil
-      if (q.includes('tamil')) {
-        if (q.includes('10th') || q.includes('sslc')) {
-          return `Praveen's 10th Tamil Mark is <strong>86 / 100</strong>.`;
-        }
-        return `Praveen's 12th Tamil Mark is <strong>92 / 100</strong> (10th Tamil: <strong>86/100</strong>).`;
-      }
-
-      // English
-      if (q.includes('english')) {
-        return `Praveen's English Marks: 12th English is <strong>80 / 100</strong> and 10th English is <strong>80 / 100</strong>.`;
-      }
-
-      // --- GENERAL SEMESTER / LEVEL MARKS ---
-
-      // 1st Sem
-      if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
-        return `Praveen's 1st Semester College GPA is <strong>8.21 / 10</strong>.`;
-      }
-      // 2nd Sem
-      if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
-        return `Praveen's 2nd Semester College GPA is <strong>8.73 / 10</strong>.`;
-      }
-      // 10th Mark
-      if (q.includes('10th') || q.includes('10 th') || q.includes('sslc') || q.includes('tenth')) {
-        return `Praveen's 10th SSLC Mark is <strong>442 / 500 (88.40%)</strong>.`;
-      }
-      // 12th Mark
-      if (q.includes('12th') || q.includes('12 th') || q.includes('hsc') || q.includes('twelfth') || q.includes('plus two')) {
-        return `Praveen's 12th HSC Mark is <strong>532 / 600 (88.67%)</strong>.`;
-      }
-      // College CGPA / GPA
-      if (q.includes('cgpa') || q.includes('gpa')) {
-        return `Praveen's Cumulative College CGPA is <strong>8.47 / 10</strong> (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA).`;
-      }
-      // General Education / Marks / Academic Summary
-      if (q.includes('mark') || q.includes('score') || q.includes('education') || q.includes('academic') || q.includes('grade')) {
-        return `Praveen's Academic Summary:<br>• <strong>College CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)<br>• <strong>12th HSC:</strong> 532 / 600 (88.67%)<br>• <strong>10th SSLC:</strong> 442 / 500 (88.40%)`;
+      // Explicit Invalid Subject Fallback for queries asking for non-existent subjects (e.g., French, Hindi, Commerce, Economics)
+      if (q.includes('french') || q.includes('hindi') || q.includes('commerce') || q.includes('account') || q.includes('economic') || q.includes('history') || q.includes('geography')) {
+        return `Invalid subject. The requested subject is not available in the student's academic records.`;
       }
 
       // College / Department / Year / Degree
@@ -1339,17 +1357,25 @@ function initCertCardDeck() {
         return `Praveen's Tech Stack:<br>• <strong>Frontend:</strong> React.js, HTML5, CSS3, JavaScript<br>• <strong>Backend:</strong> Node.js, Express.js, REST APIs<br>• <strong>Databases:</strong> MongoDB, LocalStorage<br>• <strong>Languages:</strong> Python, C, JavaScript`;
       }
 
+      // Overall CGPA / GPA / Marks Summary
+      if (q.includes('cgpa') || q.includes('gpa')) {
+        return `Praveen's Cumulative College CGPA is <strong>8.47 / 10</strong> (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA).`;
+      }
+      if (q.includes('mark') || q.includes('score') || q.includes('education') || q.includes('academic') || q.includes('record')) {
+        return `Praveen's Academic Summary:<br>• <strong>College CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)<br>• <strong>12th HSC:</strong> 532 / 600 (88.67%)<br>• <strong>10th SSLC:</strong> 442 / 500 (88.40%)`;
+      }
+
       // Name / Who is Praveen
       if (q.includes('who') || q.includes('name') || q.includes('praveen')) {
         return `Praveen Kumar S is a 2nd Year Computer Science student at R.M.D. Engineering College and a Full-Stack Developer.`;
       }
       // Greetings
       if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('greetings')) {
-        return `Hello! I am SPK AI, Praveen's personal portfolio assistant. Ask me any subject mark or grade (e.g. "Physics mark", "Maths 1st sem grade", "Chemistry mark", "10th mark")!`;
+        return `Hello! I am SPK AI, Praveen's personal portfolio assistant. Ask me any subject mark or grade (e.g. "Physics mark", "10th Maths mark", "1st sem GPA", "12th Biology mark")!`;
       }
 
       // Default fallback
-      return `I am SPK AI. Ask me specific subject marks (e.g. "Physics mark", "Chemistry mark", "Maths 1st sem grade", "10th mark", "12th mark", or "CGPA").`;
+      return `I am SPK AI. Ask me specific subject marks (e.g. "12th Physics mark", "10th Maths mark", "1st sem GPA", "2nd sem Data Structures grade").`;
     };
 
     const handleJarvisSend = () => {
