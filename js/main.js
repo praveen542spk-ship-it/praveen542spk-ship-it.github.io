@@ -1290,9 +1290,13 @@ function initCertCardDeck() {
       if (q.includes('college') || q.includes('degree') || q.includes('dept') || q.includes('department') || q.includes('rmd') || q.includes('cse') || q.includes('year') || q.includes('school')) {
         return `Praveen is studying <strong>B.E. Computer Science & Engineering (2nd Year)</strong> at <strong>R.M.D. Engineering College</strong>.`;
       }
+      // Phone / Mobile number
+      if (q.includes('phone') || q.includes('mobile') || q.includes('number') || q.includes('call')) {
+        return `Praveen's Mobile Number is 📞 <strong>+91 6374060801</strong>.`;
+      }
       // Email
       if (q.includes('email') || q.includes('mail')) {
-        return `Praveen's Email ID is 📧 <strong>praveenkumar.s.dev@gmail.com</strong>.`;
+        return `Praveen's Email ID is 📧 <strong>praveen542spk@gmail.com</strong>.`;
       }
       // LinkedIn
       if (q.includes('linkedin')) {
@@ -1303,8 +1307,8 @@ function initCertCardDeck() {
         return `Praveen's GitHub profile: 🐙 <a href="https://github.com/praveen542spk-ship-it" target="_blank" style="color:var(--accent-cyan);">github.com/praveen542spk-ship-it ↗</a>`;
       }
       // Contact / Hire
-      if (q.includes('contact') || q.includes('hire') || q.includes('phone') || q.includes('reach')) {
-        return `Reach Praveen via Email: 📧 <strong>praveenkumar.s.dev@gmail.com</strong> or LinkedIn: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a>.`;
+      if (q.includes('contact') || q.includes('hire') || q.includes('reach')) {
+        return `Reach Praveen via Phone: 📞 <strong>+91 6374060801</strong> | Email: 📧 <strong>praveen542spk@gmail.com</strong> | LinkedIn: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a>.`;
       }
 
       // Specific Projects
@@ -1443,7 +1447,8 @@ function initCertCardDeck() {
   "institution": "R.M.D. Engineering College",
   "cgpa": 8.47,
   "status": "🟢 Available for Full-Stack Internships",
-  "email": "praveenkumar.s.dev@gmail.com"
+  "mobile": "+91 6374060801",
+  "email": "praveen542spk@gmail.com"
 }</pre>`;
           } else if (c === 'projects') {
             res.innerHTML = `1. Social Media Platform (Live Demo: code-alpha-social-media-platform-self.vercel.app)<br>
@@ -1457,7 +1462,7 @@ function initCertCardDeck() {
           } else if (c === 'skills') {
             res.innerHTML = `Frontend: React.js, HTML5, CSS3, JavaScript (ES6+), Glassmorphism<br>Backend: Node.js, Express.js, REST APIs, JWT Auth, Vercel<br>Databases: MongoDB, LocalStorage<br>Languages: Python, C, JavaScript`;
           } else if (c === 'contact') {
-            res.innerHTML = `Email: praveenkumar.s.dev@gmail.com<br>GitHub: github.com/praveen542spk-ship-it<br>LinkedIn: linkedin.com/in/praveen-kumar-s-0bab05411`;
+            res.innerHTML = `Mobile: +91 6374060801<br>Email: praveen542spk@gmail.com<br>GitHub: github.com/praveen542spk-ship-it<br>LinkedIn: linkedin.com/in/praveen-kumar-s-0bab05411`;
           } else if (c === 'clear') {
             terminalBody.innerHTML = '';
             return;
@@ -1539,6 +1544,7 @@ function initCertCardDeck() {
 ------------------------------------------------
 Role: Computer Science Student & Full-Stack Developer
 Institution: R.M.D. Engineering College (B.E. CSE, 2nd Year)
+Mobile: +91 6374060801 | Email: praveen542spk@gmail.com
 Cumulative CGPA: 8.47 / 10 (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA)
 12th Standard HSC: 532 / 600 (88.67%)
 10th Standard SSLC: 442 / 500 (88.40%)
