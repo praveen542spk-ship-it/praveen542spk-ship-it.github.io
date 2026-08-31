@@ -1190,43 +1190,124 @@ function initCertCardDeck() {
     const getJarvisResponse = (query) => {
       const q = query.toLowerCase().trim();
 
-      // 1. Specific 10th mark
+      // --- INDIVIDUAL SUBJECT MARKS & COLLEGE GRADES ---
+
+      // Physics
+      if (q.includes('physic')) {
+        return `Praveen's 12th Physics Mark is <strong>88 / 100</strong>.`;
+      }
+
+      // Chemistry
+      if (q.includes('chem')) {
+        return `Praveen's 12th Chemistry Mark is <strong>98 / 100</strong>.`;
+      }
+
+      // Mathematics / Maths / Calculus
+      if (q.includes('math') || q.includes('calculus')) {
+        if (q.includes('1st sem') || q.includes('sem 1') || q.includes('first sem') || q.includes('college') || q.includes('grade')) {
+          return `Praveen's 1st Semester Maths (Calculus & Linear Algebra) Grade is <strong>A+</strong>.`;
+        }
+        if (q.includes('10th') || q.includes('sslc')) {
+          return `Praveen's 10th Maths Mark is <strong>92 / 100</strong>.`;
+        }
+        if (q.includes('12th') || q.includes('hsc')) {
+          return `Praveen's 12th Maths Mark is <strong>91 / 100</strong>.`;
+        }
+        return `Praveen's Maths Scores:<br>• <strong>1st Sem College Maths:</strong> Grade A+<br>• <strong>12th Maths:</strong> 91 / 100<br>• <strong>10th Maths:</strong> 92 / 100`;
+      }
+
+      // Data Structures
+      if (q.includes('data structure') || q.includes('ds grade') || q.includes('ds mark')) {
+        return `Praveen's 2nd Semester Data Structures Grade is <strong>S (Outstanding)</strong>.`;
+      }
+
+      // Java
+      if (q.includes('java')) {
+        return `Praveen's Java Programming Grade is <strong>A+</strong>.`;
+      }
+
+      // Python / Problem Solving
+      if (q.includes('python')) {
+        return `Praveen's Problem Solving & Python Programming Grade is <strong>A+</strong>.`;
+      }
+
+      // Computer Science / CS (12th)
+      if ((q.includes('cs') || q.includes('computer science')) && (q.includes('12th') || q.includes('mark') || q.includes('hsc'))) {
+        return `Praveen's 12th Computer Science Mark is <strong>83 / 100</strong>.`;
+      }
+
+      // Science (10th)
+      if (q.includes('science') && !q.includes('computer') && !q.includes('social')) {
+        return `Praveen's 10th Science Mark is <strong>94 / 100</strong>.`;
+      }
+
+      // Social Science (10th)
+      if (q.includes('social')) {
+        return `Praveen's 10th Social Science Mark is <strong>90 / 100</strong>.`;
+      }
+
+      // Tamil
+      if (q.includes('tamil')) {
+        if (q.includes('10th') || q.includes('sslc')) {
+          return `Praveen's 10th Tamil Mark is <strong>86 / 100</strong>.`;
+        }
+        return `Praveen's 12th Tamil Mark is <strong>92 / 100</strong> (10th Tamil: <strong>86/100</strong>).`;
+      }
+
+      // English
+      if (q.includes('english')) {
+        return `Praveen's English Marks: 12th English is <strong>80 / 100</strong> and 10th English is <strong>80 / 100</strong>.`;
+      }
+
+      // --- GENERAL SEMESTER / LEVEL MARKS ---
+
+      // 1st Sem
+      if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
+        return `Praveen's 1st Semester College GPA is <strong>8.21 / 10</strong>.`;
+      }
+      // 2nd Sem
+      if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
+        return `Praveen's 2nd Semester College GPA is <strong>8.73 / 10</strong>.`;
+      }
+      // 10th Mark
       if (q.includes('10th') || q.includes('10 th') || q.includes('sslc') || q.includes('tenth')) {
         return `Praveen's 10th SSLC Mark is <strong>442 / 500 (88.40%)</strong>.`;
       }
-      // 2. Specific 12th mark
+      // 12th Mark
       if (q.includes('12th') || q.includes('12 th') || q.includes('hsc') || q.includes('twelfth') || q.includes('plus two')) {
         return `Praveen's 12th HSC Mark is <strong>532 / 600 (88.67%)</strong>.`;
       }
-      // 3. Specific College CGPA / GPA / Semester marks
-      if (q.includes('cgpa') || q.includes('gpa') || q.includes('sem 1') || q.includes('sem 2') || q.includes('semester')) {
-        return `Praveen's College CGPA is <strong>8.47 / 10</strong> (Semester 1: 8.21 GPA | Semester 2: 8.73 GPA).`;
+      // College CGPA / GPA
+      if (q.includes('cgpa') || q.includes('gpa')) {
+        return `Praveen's Cumulative College CGPA is <strong>8.47 / 10</strong> (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA).`;
       }
-      // 4. General Education / Marks / Academic Summary
-      if (q.includes('mark') || q.includes('score') || q.includes('education') || q.includes('academic')) {
-        return `Praveen's Academic Marks:<br>• <strong>College CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)<br>• <strong>12th HSC:</strong> 532 / 600 (88.67%)<br>• <strong>10th SSLC:</strong> 442 / 500 (88.40%)`;
+      // General Education / Marks / Academic Summary
+      if (q.includes('mark') || q.includes('score') || q.includes('education') || q.includes('academic') || q.includes('grade')) {
+        return `Praveen's Academic Summary:<br>• <strong>College CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)<br>• <strong>12th HSC:</strong> 532 / 600 (88.67%)<br>• <strong>10th SSLC:</strong> 442 / 500 (88.40%)`;
       }
-      // 5. College / Department / Year / Degree
+
+      // College / Department / Year / Degree
       if (q.includes('college') || q.includes('degree') || q.includes('dept') || q.includes('department') || q.includes('rmd') || q.includes('cse') || q.includes('year') || q.includes('school')) {
         return `Praveen is studying <strong>B.E. Computer Science & Engineering (2nd Year)</strong> at <strong>R.M.D. Engineering College</strong>.`;
       }
-      // 6. Email
+      // Email
       if (q.includes('email') || q.includes('mail')) {
         return `Praveen's Email ID is 📧 <strong>praveenkumar.s.dev@gmail.com</strong>.`;
       }
-      // 7. LinkedIn
+      // LinkedIn
       if (q.includes('linkedin')) {
         return `Praveen's LinkedIn profile: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">linkedin.com/in/praveen-kumar-s-0bab05411 ↗</a>`;
       }
-      // 8. GitHub
+      // GitHub
       if (q.includes('github')) {
         return `Praveen's GitHub profile: 🐙 <a href="https://github.com/praveen542spk-ship-it" target="_blank" style="color:var(--accent-cyan);">github.com/praveen542spk-ship-it ↗</a>`;
       }
-      // 9. Contact / Hire / Phone
+      // Contact / Hire
       if (q.includes('contact') || q.includes('hire') || q.includes('phone') || q.includes('reach')) {
         return `Reach Praveen via Email: 📧 <strong>praveenkumar.s.dev@gmail.com</strong> or LinkedIn: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a>.`;
       }
-      // 10. Specific Projects
+
+      // Specific Projects
       if (q.includes('job') || q.includes('tracker')) {
         return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.`;
       }
@@ -1245,25 +1326,26 @@ function initCertCardDeck() {
       if (q.includes('weather')) {
         return `<strong>Weather Dashboard:</strong> Dynamic weather application using HTML5 Geolocation and OpenWeather API.`;
       }
-      // 11. General Projects
       if (q.includes('project') || q.includes('work') || q.includes('built')) {
         return `Praveen has built 7+ projects including Social Media Platform, Job Application Tracker, Jarvis AI Voice Assistant, and E-Commerce MERN App.`;
       }
-      // 12. Tech Stack / Skills
-      if (q.includes('skill') || q.includes('stack') || q.includes('tech') || q.includes('react') || q.includes('node') || q.includes('python') || q.includes('mongo') || q.includes('c ')) {
+
+      // Tech Stack / Skills
+      if (q.includes('skill') || q.includes('stack') || q.includes('tech')) {
         return `Praveen's Tech Stack:<br>• <strong>Frontend:</strong> React.js, HTML5, CSS3, JavaScript<br>• <strong>Backend:</strong> Node.js, Express.js, REST APIs<br>• <strong>Databases:</strong> MongoDB, LocalStorage<br>• <strong>Languages:</strong> Python, C, JavaScript`;
       }
-      // 13. Name / Who is Praveen
+
+      // Name / Who is Praveen
       if (q.includes('who') || q.includes('name') || q.includes('praveen')) {
         return `Praveen Kumar S is a 2nd Year Computer Science student at R.M.D. Engineering College and a Full-Stack Developer.`;
       }
-      // 14. Greetings
+      // Greetings
       if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('greetings')) {
-        return `Hello! I am SPK AI, Praveen's personal portfolio assistant. Ask me specific questions like "What is 10th mark?", "What is 12th mark?", "What is CGPA?", or "Contact info".`;
+        return `Hello! I am SPK AI, Praveen's personal portfolio assistant. Ask me any subject mark or grade (e.g. "Physics mark", "Maths 1st sem grade", "Chemistry mark", "10th mark")!`;
       }
 
       // Default fallback
-      return `I am SPK AI. Ask me specific questions like "What is 10th mark?", "What is 12th mark?", "What is CGPA?", "What are his projects?", or "Contact info".`;
+      return `I am SPK AI. Ask me specific subject marks (e.g. "Physics mark", "Chemistry mark", "Maths 1st sem grade", "10th mark", "12th mark", or "CGPA").`;
     };
 
     const handleJarvisSend = () => {
