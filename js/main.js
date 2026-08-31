@@ -1315,8 +1315,136 @@ function initCertCardDeck() {
       return null;
     };
 
+    const handleDocumentLinkQuery = (q) => {
+      const isAskingLinkOrDoc = q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('document') || q.includes('certificate') || q.includes('marksheet') || q.includes('resume') || q.includes('cv');
+
+      if (!isAskingLinkOrDoc) return null;
+
+      // CodeAlpha Certificate
+      if (q.includes('codealpha') || q.includes('code alpha')) {
+        return `📄 <strong>CodeAlpha Internship Certificate Link:</strong><br><a href="assets/certificates/codealpha-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeAlpha Certificate (PDF) ↗</a>`;
+      }
+
+      // CodSoft Certificate
+      if (q.includes('codsoft') || q.includes('cod soft')) {
+        return `📄 <strong>CodSoft Internship Certificate Link:</strong><br><a href="assets/certificates/codsoft-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodSoft Certificate (PDF) ↗</a>`;
+      }
+
+      // Thiranex Certificate
+      if (q.includes('thiranex')) {
+        return `📄 <strong>Thiranex Web Development Certificate Link:</strong><br><a href="assets/certificates/thiranex-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Thiranex Certificate (PDF) ↗</a>`;
+      }
+
+      // Infosys Springboard Certificates
+      if (q.includes('infosys css') || q.includes('css3 cert')) {
+        return `📄 <strong>Infosys Springboard CSS3 Certificate Link:</strong><br><a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys CSS3 Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('infosys java') || (q.includes('infosys') && q.includes('java'))) {
+        return `📄 <strong>Infosys Springboard Java Certificate Link:</strong><br><a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys Java Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('infosys')) {
+        return `📄 <strong>Infosys Springboard Certificate Links:</strong><br>• <a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys CSS3 Certificate (PDF) ↗</a><br>• <a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys Java Certificate (PDF) ↗</a>`;
+      }
+
+      // NPTEL / Swayam Certificate
+      if (q.includes('nptel') || q.includes('swayam')) {
+        return `📄 <strong>NPTEL Course Certificate Link:</strong><br><a href="assets/certificates/nptel-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View NPTEL Certificate (PDF) ↗</a>`;
+      }
+
+      // HP LIFE AI Certificate
+      if (q.includes('hp life') || q.includes('hp ai') || (q.includes('hp') && q.includes('ai'))) {
+        return `📄 <strong>HP LIFE AI for Beginners Certificate Link:</strong><br><a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View HP LIFE AI Certificate (PDF) ↗</a>`;
+      }
+
+      // MongoDB Certificates
+      if (q.includes('mongodb basics')) {
+        return `📄 <strong>MongoDB Basics Certificate Link:</strong><br><a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB Basics Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('mongodb ai') || q.includes('mongodb strategy')) {
+        return `📄 <strong>MongoDB AI Strategy Certificate Link:</strong><br><a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB AI Strategy Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('mongodb')) {
+        return `📄 <strong>MongoDB Certificate Links:</strong><br>• <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics Certificate (PDF) ↗</a><br>• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy Certificate (PDF) ↗</a>`;
+      }
+
+      // Marksheets
+      if (q.includes('10th') || q.includes('10 th') || q.includes('sslc')) {
+        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
+          return `📄 <strong>10th Standard SSLC Marksheet Link:</strong><br><a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 10th Marksheet (PDF) ↗</a>`;
+        }
+      }
+      if (q.includes('12th') || q.includes('12 th') || q.includes('hsc')) {
+        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
+          return `📄 <strong>12th Standard HSC Marksheet Link:</strong><br><a href="assets/marksheets/hsc-12th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 12th Marksheet (PDF) ↗</a>`;
+        }
+      }
+      if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
+        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
+          return `📄 <strong>1st Semester Marksheet Link:</strong><br><a href="assets/marksheets/college-sem1-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 1st Sem Marksheet (PDF) ↗</a>`;
+        }
+      }
+      if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
+        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
+          return `📄 <strong>2nd Semester Marksheet Link:</strong><br><a href="assets/marksheets/college-sem2-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 2nd Sem Marksheet (PDF) ↗</a>`;
+        }
+      }
+
+      // Check for unavailable semester marksheet link requests (e.g. "3rd sem marksheet link")
+      const semMatch = q.match(/(\d+)(?:st|nd|rd|th)?\s*(?:sem|semester)/i) || q.match(/(?:sem|semester)\s*(\d+)/i);
+      if (semMatch) {
+        const semNum = parseInt(semMatch[1], 10);
+        if (semNum > 2) {
+          return `Sorry, the requested document or certificate link is not available in the student's records.`;
+        }
+      }
+
+      // Resume / CV
+      if (q.includes('resume') || q.includes('cv')) {
+        return `📄 <strong>Praveen's Live Printable CV / Resume Link:</strong><br><a href="resume.html?v=2.0" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View / Download Formal Resume (PDF Page) ↗</a>`;
+      }
+
+      // All Certificates List
+      if (q.includes('certificates') || q.includes('all cert')) {
+        return `📄 <strong>Praveen's Verified Certificate Links:</strong><br>
+• <a href="assets/certificates/codealpha-certificate.pdf" target="_blank" style="color:var(--accent-cyan);">CodeAlpha Full-Stack Internship ↗</a><br>
+• <a href="assets/certificates/codsoft-certificate.pdf" target="_blank" style="color:var(--accent-cyan);">CodSoft Web Internship ↗</a><br>
+• <a href="assets/certificates/thiranex-certificate.pdf" target="_blank" style="color:var(--accent-cyan);">Thiranex Web Development ↗</a><br>
+• <a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys Springboard CSS3 ↗</a><br>
+• <a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys Springboard Java ↗</a><br>
+• <a href="assets/certificates/nptel-certificate.pdf" target="_blank" style="color:var(--accent-cyan);">NPTEL Course Certificate ↗</a><br>
+• <a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" style="color:var(--accent-cyan);">HP LIFE AI for Beginners ↗</a><br>
+• <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics ↗</a><br>
+• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy ↗</a>`;
+      }
+
+      // All Marksheets List
+      if (q.includes('marksheets') || q.includes('all marksheets')) {
+        return `📄 <strong>Praveen's Verified Marksheet Links:</strong><br>
+• <a href="assets/marksheets/college-sem2-marksheet.pdf" target="_blank" style="color:var(--accent-cyan);">2nd Sem Marksheet (8.73 GPA) ↗</a><br>
+• <a href="assets/marksheets/college-sem1-marksheet.pdf" target="_blank" style="color:var(--accent-cyan);">1st Sem Marksheet (8.21 GPA) ↗</a><br>
+• <a href="assets/marksheets/hsc-12th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan);">12th HSC Marksheet (532/600) ↗</a><br>
+• <a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan);">10th SSLC Marksheet (442/500) ↗</a>`;
+      }
+
+      // Check if user is asking for an unavailable certificate (e.g. Google, AWS, Microsoft, Coursera, etc.)
+      if (q.includes('google') || q.includes('aws') || q.includes('microsoft') || q.includes('coursera') || q.includes('udemy') || q.includes('oracle')) {
+        return `Sorry, the requested document or certificate link is not available in the student's records.`;
+      }
+
+      // Fallback for unspecified document/certificate link requests
+      if (q.includes('certificate') || q.includes('marksheet link') || q.includes('document link')) {
+        return `Sorry, the requested document or certificate link is not available in the student's records.`;
+      }
+
+      return null;
+    };
+
     const getJarvisResponse = (query) => {
       const q = query.toLowerCase().trim();
+
+      // --- 0. DOCUMENT & CERTIFICATE LINK PROVIDER (Priority Check) ---
+      const docLinkRes = handleDocumentLinkQuery(q);
+      if (docLinkRes) return docLinkRes;
 
       // --- 1. GENERAL & CONTACT QUERIES (Priority Check) ---
       if (q.includes('email') || q.includes('mail')) {
