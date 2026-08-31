@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=27.0" />
+  <link rel="stylesheet" href="css/style.css?v=28.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -257,29 +257,6 @@
 
           <div style="position: relative; width: 100%; height: 420px; overflow: hidden; border-radius: var(--radius-md); background: rgba(0,0,0,0.3); border: 1px solid var(--border-color);">
             <canvas id="knowledge-graph-canvas" width="1000" height="420" style="width: 100%; height: 100%; display: block; cursor: pointer;"></canvas>
-          </div>
-        </div>
-
-        <!-- 2. "Trace My Skill" Interactive Journey Bar -->
-        <div class="trace-skill-wrapper glass-card reveal delay-3" style="margin-top: 2rem; padding: 1.5rem;">
-          <div style="margin-bottom: 1rem;">
-            <h3 style="font-size: 1.25rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 0.5rem;">
-              📍 Trace My Skill Journey
-            </h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Click a skill to trace its journey from Learning to Projects, Certifications, and Internships.</p>
-          </div>
-
-          <div class="skill-trace-buttons" style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
-            <button class="btn btn-outline btn-sm skill-trace-btn active" data-skill="python">🐍 Python &amp; Automation</button>
-            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="react">⚛️ React &amp; MERN</button>
-            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="java">☕ Java &amp; OOP</button>
-            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="sql">🗄️ SQL &amp; MongoDB</button>
-            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="ai">🤖 Voice AI &amp; NLP</button>
-          </div>
-
-          <!-- Skill Trace Stepper Timeline -->
-          <div id="skill-trace-stepper" class="skill-trace-stepper">
-            <!-- Dynamically populated via JS -->
           </div>
         </div>
 
@@ -1530,20 +1507,9 @@
     <div id="explore-node-card-preview" class="explore-node-preview glass-card" style="display:none;"></div>
   </div>
 
-  <!-- Feature 11: Session Memory Floating Explorer Badge -->
-  <div id="session-explorer-badge" class="session-explorer-badge glass-card">
-    <span style="font-size:1.1rem;">⚡</span>
-    <div>
-      <div style="font-weight:600; font-size:0.78rem; color:var(--accent-primary);">SESSION EXPLORER</div>
-      <div style="font-size:0.72rem; color:var(--text-muted);">
-        <span id="sess-proj-count">0</span> Projects • <span id="sess-cert-count">0</span> Certs • <span id="sess-skill-count">0</span> Skills viewed
-      </div>
-    </div>
-  </div>
-
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script src="js/main.js?v=27.0"></script>
+  <script src="js/main.js?v=28.0"></script>
 </body>
 </html>
