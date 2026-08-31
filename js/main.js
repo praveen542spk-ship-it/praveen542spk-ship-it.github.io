@@ -1316,76 +1316,83 @@ function initCertCardDeck() {
     };
 
     const handleDocumentLinkQuery = (q) => {
-      const isAskingLinkOrDoc = q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('document') || q.includes('certificate') || q.includes('marksheet') || q.includes('resume') || q.includes('cv');
-
-      if (!isAskingLinkOrDoc) return null;
-
       // CodeAlpha Certificate
       if (q.includes('codealpha') || q.includes('code alpha')) {
-        return `📄 <strong>CodeAlpha Internship Certificate Link:</strong><br><a href="assets/certificates/codealpha-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeAlpha Certificate (PDF) ↗</a>`;
+        return `📄 <strong>CodeAlpha Internship Certificate:</strong><br><a href="assets/certificates/codealpha-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeAlpha Certificate (PDF) ↗</a>`;
       }
 
       // CodSoft Certificate
       if (q.includes('codsoft') || q.includes('cod soft')) {
-        return `📄 <strong>CodSoft Internship Certificate Link:</strong><br><a href="assets/certificates/codsoft-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodSoft Certificate (PDF) ↗</a>`;
+        return `📄 <strong>CodSoft Internship Certificate:</strong><br><a href="assets/certificates/codsoft-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodSoft Certificate (PDF) ↗</a>`;
       }
 
       // Thiranex Certificate
       if (q.includes('thiranex')) {
-        return `📄 <strong>Thiranex Web Development Certificate Link:</strong><br><a href="assets/certificates/thiranex-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Thiranex Certificate (PDF) ↗</a>`;
+        return `📄 <strong>Thiranex Web Development Certificate:</strong><br><a href="assets/certificates/thiranex-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Thiranex Certificate (PDF) ↗</a>`;
       }
 
       // Infosys Springboard Certificates
       if (q.includes('infosys css') || q.includes('css3 cert')) {
-        return `📄 <strong>Infosys Springboard CSS3 Certificate Link:</strong><br><a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys CSS3 Certificate (PDF) ↗</a>`;
+        return `📄 <strong>Infosys Springboard CSS3 Certificate:</strong><br><a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys CSS3 Certificate (PDF) ↗</a>`;
       }
       if (q.includes('infosys java') || (q.includes('infosys') && q.includes('java'))) {
-        return `📄 <strong>Infosys Springboard Java Certificate Link:</strong><br><a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys Java Certificate (PDF) ↗</a>`;
+        return `📄 <strong>Infosys Springboard Java Certificate:</strong><br><a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Infosys Java Certificate (PDF) ↗</a>`;
       }
       if (q.includes('infosys')) {
-        return `📄 <strong>Infosys Springboard Certificate Links:</strong><br>• <a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys CSS3 Certificate (PDF) ↗</a><br>• <a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys Java Certificate (PDF) ↗</a>`;
+        return `📄 <strong>Infosys Springboard Certificates:</strong><br>• <a href="assets/certificates/infosys-css3.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys CSS3 Certificate (PDF) ↗</a><br>• <a href="assets/certificates/infosys-java.pdf" target="_blank" style="color:var(--accent-cyan);">Infosys Java Certificate (PDF) ↗</a>`;
       }
 
       // NPTEL / Swayam Certificate
       if (q.includes('nptel') || q.includes('swayam')) {
-        return `📄 <strong>NPTEL Course Certificate Link:</strong><br><a href="assets/certificates/nptel-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View NPTEL Certificate (PDF) ↗</a>`;
+        return `📄 <strong>NPTEL Course Certificate:</strong><br><a href="assets/certificates/nptel-certificate.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View NPTEL Certificate (PDF) ↗</a>`;
       }
 
       // HP LIFE AI Certificate
       if (q.includes('hp life') || q.includes('hp ai') || (q.includes('hp') && q.includes('ai'))) {
-        return `📄 <strong>HP LIFE AI for Beginners Certificate Link:</strong><br><a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View HP LIFE AI Certificate (PDF) ↗</a>`;
+        return `📄 <strong>HP LIFE AI for Beginners Certificate:</strong><br><a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View HP LIFE AI Certificate (PDF) ↗</a>`;
       }
 
       // MongoDB Certificates
       if (q.includes('mongodb basics')) {
-        return `📄 <strong>MongoDB Basics Certificate Link:</strong><br><a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB Basics Certificate (PDF) ↗</a>`;
+        return `📄 <strong>MongoDB Basics Certificate:</strong><br><a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB Basics Certificate (PDF) ↗</a>`;
       }
       if (q.includes('mongodb ai') || q.includes('mongodb strategy')) {
-        return `📄 <strong>MongoDB AI Strategy Certificate Link:</strong><br><a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB AI Strategy Certificate (PDF) ↗</a>`;
+        return `📄 <strong>MongoDB AI Strategy Certificate:</strong><br><a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View MongoDB AI Strategy Certificate (PDF) ↗</a>`;
       }
       if (q.includes('mongodb')) {
-        return `📄 <strong>MongoDB Certificate Links:</strong><br>• <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics Certificate (PDF) ↗</a><br>• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy Certificate (PDF) ↗</a>`;
+        return `📄 <strong>MongoDB Certificates:</strong><br>• <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics Certificate (PDF) ↗</a><br>• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy Certificate (PDF) ↗</a>`;
       }
 
-      // Marksheets
-      if (q.includes('10th') || q.includes('10 th') || q.includes('sslc')) {
-        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
-          return `📄 <strong>10th Standard SSLC Marksheet Link:</strong><br><a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 10th Marksheet (PDF) ↗</a>`;
+      // Resume / CV
+      if (q.includes('resume') || q.includes('cv')) {
+        return `📄 <strong>Praveen's Live Printable CV / Resume:</strong><br><a href="resume.html?v=2.0" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View / Download Formal Resume ↗</a>`;
+      }
+
+      // 10th Standard Marksheet / Score query
+      if ((q.includes('10th') || q.includes('10 th') || q.includes('sslc')) && (q.includes('sheet') || q.includes('mark') || q.includes('score') || q.includes('pdf') || q.includes('link') || q.includes('doc') || q.includes('total'))) {
+        if (!q.includes('math') && !q.includes('science') && !q.includes('tamil') && !q.includes('english') && !q.includes('social') && !q.includes('highest') && !q.includes('lowest')) {
+          return `🎓 Praveen's 10th SSLC Mark is <strong>442 / 500 (88.40%)</strong>.<br>📄 <a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Official 10th Marksheet (PDF) ↗</a>`;
         }
       }
-      if (q.includes('12th') || q.includes('12 th') || q.includes('hsc')) {
-        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
-          return `📄 <strong>12th Standard HSC Marksheet Link:</strong><br><a href="assets/marksheets/hsc-12th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 12th Marksheet (PDF) ↗</a>`;
+
+      // 12th Standard Marksheet / Score query
+      if ((q.includes('12th') || q.includes('12 th') || q.includes('hsc')) && (q.includes('sheet') || q.includes('mark') || q.includes('score') || q.includes('pdf') || q.includes('link') || q.includes('doc') || q.includes('total'))) {
+        if (!q.includes('math') && !q.includes('physic') && !q.includes('chem') && !q.includes('bio') && !q.includes('tamil') && !q.includes('english') && !q.includes('highest') && !q.includes('lowest')) {
+          return `🎓 Praveen's 12th HSC Mark is <strong>532 / 600 (88.67%)</strong>.<br>📄 <a href="assets/marksheets/hsc-12th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View Official 12th Marksheet (PDF) ↗</a>`;
         }
       }
-      if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
-        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
-          return `📄 <strong>1st Semester Marksheet Link:</strong><br><a href="assets/marksheets/college-sem1-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 1st Sem Marksheet (PDF) ↗</a>`;
+
+      // 1st Sem Marksheet / GPA query
+      if ((q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) && (q.includes('sheet') || q.includes('mark') || q.includes('gpa') || q.includes('pdf') || q.includes('link') || q.includes('doc'))) {
+        if (!q.includes('highest') && !q.includes('lowest') && !q.includes('grade') && !q.includes('math') && !q.includes('chem') && !q.includes('c++') && !q.includes('tamil')) {
+          return `🎓 Praveen's 1st Semester College GPA is <strong>8.21 / 10</strong>.<br>📄 <a href="assets/marksheets/college-sem1-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 1st Sem Marksheet (PDF) ↗</a>`;
         }
       }
-      if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
-        if (q.includes('link') || q.includes('pdf') || q.includes('download') || q.includes('certificate') || q.includes('marksheet')) {
-          return `📄 <strong>2nd Semester Marksheet Link:</strong><br><a href="assets/marksheets/college-sem2-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 2nd Sem Marksheet (PDF) ↗</a>`;
+
+      // 2nd Sem Marksheet / GPA query
+      if ((q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) && (q.includes('sheet') || q.includes('mark') || q.includes('gpa') || q.includes('pdf') || q.includes('link') || q.includes('doc'))) {
+        if (!q.includes('highest') && !q.includes('lowest') && !q.includes('grade') && !q.includes('math') && !q.includes('data') && !q.includes('java') && !q.includes('ai') && !q.includes('physic')) {
+          return `🎓 Praveen's 2nd Semester College GPA is <strong>8.73 / 10</strong>.<br>📄 <a href="assets/marksheets/college-sem2-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 2nd Sem Marksheet (PDF) ↗</a>`;
         }
       }
 
@@ -1396,11 +1403,6 @@ function initCertCardDeck() {
         if (semNum > 2) {
           return `Sorry, the requested document or certificate link is not available in the student's records.`;
         }
-      }
-
-      // Resume / CV
-      if (q.includes('resume') || q.includes('cv')) {
-        return `📄 <strong>Praveen's Live Printable CV / Resume Link:</strong><br><a href="resume.html?v=2.0" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View / Download Formal Resume (PDF Page) ↗</a>`;
       }
 
       // All Certificates List
