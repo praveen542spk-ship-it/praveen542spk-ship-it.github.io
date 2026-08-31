@@ -1951,4 +1951,683 @@ Status: Available for Internships & Full-Stack Roles`;
       });
     });
   }
+
+  // --- INITIALIZE MASTER PROMPT ENGINES ---
+  initKnowledgeGraphEngine();
+  initSkillTracerEngine();
+  initDigitalTwinEngine();
+  initAdaptiveResumeEngine();
+  initProjectLaboratoryEngine();
+  initExploreModeEngine();
+  initSessionExplorerEngine();
+  initMicroInteractionsEngine();
+}
+
+/* ==========================================================================
+   MASTER PROMPT INTERACTIVE MODULES & ENGINES DEFINITIONS
+   ========================================================================== */
+
+// 1.1. Interactive Personal Knowledge Graph Canvas Engine
+function initKnowledgeGraphEngine() {
+  const canvas = document.getElementById('knowledge-graph-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = canvas.parentElement.offsetWidth;
+  let height = canvas.height = canvas.parentElement.offsetHeight;
+
+  window.addEventListener('resize', () => {
+    if (!canvas.parentElement) return;
+    width = canvas.width = canvas.parentElement.offsetWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight;
+    repositionNodes();
+    drawGraph();
+  });
+
+  const nodes = [
+    { id: 'edu_rmd', label: 'R.M.D. Engg College', type: 'education', x: 0.15, y: 0.25, color: '#3b82f6', desc: 'B.E. CSE Student (CGPA 8.47)' },
+    { id: 'skill_py', label: 'Python', type: 'skill', x: 0.35, y: 0.2, color: '#8b5cf6', desc: 'Automation & NLP Voice AI' },
+    { id: 'skill_react', label: 'React.js', type: 'skill', x: 0.35, y: 0.5, color: '#06b6d4', desc: 'Frontend UI & MERN Stack' },
+    { id: 'skill_node', label: 'Node.js & Express', type: 'skill', x: 0.35, y: 0.8, color: '#10b981', desc: 'Backend APIs & Databases' },
+    { id: 'proj_social', label: 'Social Platform', type: 'project', x: 0.6, y: 0.25, color: '#ef4444', desc: 'Full-Stack Vercel App' },
+    { id: 'proj_jobapp', label: 'Job Tracker', type: 'project', x: 0.6, y: 0.55, color: '#f59e0b', desc: 'MERN Kanban Pipeline' },
+    { id: 'proj_jarvis', label: 'Jarvis Voice AI', type: 'project', x: 0.6, y: 0.82, color: '#a855f7', desc: 'Python NLP Assistant' },
+    { id: 'cert_codealpha', label: 'CodeAlpha Cert', type: 'cert', x: 0.82, y: 0.3, color: '#ec4899', desc: 'Full-Stack Internship' },
+    { id: 'cert_infosys', label: 'Infosys CSS/Java', type: 'cert', x: 0.82, y: 0.6, color: '#10b981', desc: 'Verified Tech Certs' },
+    { id: 'achieve_hack', label: 'Hackathon Finalist', type: 'achieve', x: 0.85, y: 0.85, color: '#f59e0b', desc: 'National Coding Contest' }
+  ];
+
+  const edges = [
+    { from: 'edu_rmd', to: 'skill_py' },
+    { from: 'edu_rmd', to: 'skill_react' },
+    { from: 'edu_rmd', to: 'skill_node' },
+    { from: 'skill_py', to: 'proj_jarvis' },
+    { from: 'skill_react', to: 'proj_social' },
+    { from: 'skill_react', to: 'proj_jobapp' },
+    { from: 'skill_node', to: 'proj_jobapp' },
+    { from: 'proj_social', to: 'cert_codealpha' },
+    { from: 'skill_react', to: 'cert_infosys' },
+    { from: 'proj_jarvis', to: 'achieve_hack' }
+  ];
+
+  let selectedNodeId = null;
+
+  function repositionNodes() {
+    nodes.forEach(n => {
+      n.px = n.x * width;
+      n.py = n.y * height;
+    });
+  }
+
+  repositionNodes();
+
+  function drawGraph() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw glowing connections
+    edges.forEach(e => {
+      const n1 = nodes.find(n => n.id === e.from);
+      const n2 = nodes.find(n => n.id === e.to);
+      if (!n1 || !n2) return;
+
+      const isConnectedToSelected = selectedNodeId && (e.from === selectedNodeId || e.to === selectedNodeId);
+
+      ctx.beginPath();
+      ctx.moveTo(n1.px, n1.py);
+      ctx.lineTo(n2.px, n2.py);
+      ctx.strokeStyle = isConnectedToSelected ? 'rgba(239, 68, 68, 0.9)' : 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = isConnectedToSelected ? 3 : 1.2;
+      if (isConnectedToSelected) {
+        ctx.shadowColor = '#ef4444';
+        ctx.shadowBlur = 10;
+      } else {
+        ctx.shadowBlur = 0;
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    });
+
+    // Draw nodes
+    nodes.forEach(n => {
+      const isSelected = selectedNodeId === n.id;
+      ctx.beginPath();
+      ctx.arc(n.px, n.py, isSelected ? 22 : 16, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15, 17, 32, 0.92)';
+      ctx.fill();
+
+      ctx.strokeStyle = isSelected ? '#ffffff' : n.color;
+      ctx.lineWidth = isSelected ? 3.5 : 2;
+      ctx.shadowColor = n.color;
+      ctx.shadowBlur = isSelected ? 18 : 6;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = isSelected ? '700 11px var(--font-heading)' : '600 10px var(--font-heading)';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.px, n.py + 28);
+    });
+  }
+
+  drawGraph();
+
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+
+    let clicked = null;
+    nodes.forEach(n => {
+      const dist = Math.hypot(cx - n.px, cy - n.py);
+      if (dist <= 22) clicked = n;
+    });
+
+    if (clicked) {
+      selectedNodeId = clicked.id;
+      drawGraph();
+      const detailsEl = document.getElementById('graph-node-details');
+      if (detailsEl) {
+        detailsEl.innerHTML = `🌟 <strong>${clicked.label}:</strong> ${clicked.desc}`;
+      }
+      window.showToast(`Inspecting node: ${clicked.label}`);
+    } else {
+      selectedNodeId = null;
+      drawGraph();
+    }
+  });
+}
+
+// 2. "Trace My Skill" Journey Stepper Engine
+function initSkillTracerEngine() {
+  const stepperContainer = document.getElementById('skill-trace-stepper');
+  if (!stepperContainer) return;
+
+  const skillData = {
+    python: [
+      { step: '1. Learned', title: 'Python Fundamentals', desc: 'Mastered syntax, data structures & OOP principles at R.M.D. Engineering College.' },
+      { step: '2. Practiced', title: 'Automation Scripts', desc: 'Built 20+ OS automation tools, web scrapers & system desktop controllers.' },
+      { step: '3. Project Used', title: 'Jarvis Voice AI Assistant', desc: 'Developed speech recognition & NLP assistant with offline fallback execution.' },
+      { step: '4. Certification', title: 'HP LIFE AI for Beginners', desc: 'Earned HP LIFE AI Certificate validating machine learning & prompt engineering.' },
+      { step: '5. Internship', title: 'CodeAlpha AI & Web', desc: 'Applied Python automation to cloud-deployed web services during internship.' },
+      { step: '6. Achievement', title: 'National Hackathon Finalist', desc: 'Shortlisted among top teams for automated voice AI solution prototype.' }
+    ],
+    react: [
+      { step: '1. Learned', title: 'Modern React & Hooks', desc: 'Mastered component lifecycle, state management & JSX architecture.' },
+      { step: '2. Practiced', title: 'Interactive Portfolio', desc: 'Built high-performance glassmorphism interfaces with 60FPS CSS transforms.' },
+      { step: '3. Project Used', title: 'Job Application Tracker', desc: 'Engineered custom Kanban drag-and-drop board & application status filters.' },
+      { step: '4. Certification', title: 'Infosys Springboard CSS3 & Web', desc: 'Verified responsive layout certification by Infosys Springboard.' },
+      { step: '5. Internship', title: 'CodSoft Web Development', desc: 'Delivered production frontend templates and user interaction workflows.' },
+      { step: '6. Achievement', title: '1st Prize Paper Presentation', desc: 'Awarded 1st Prize for innovative UI component architecture.' }
+    ],
+    java: [
+      { step: '1. Learned', title: 'Java & Object-Oriented Design', desc: 'Learned classes, inheritance, polymorphism, and memory allocation.' },
+      { step: '2. Practiced', title: 'DSA & Algorithms', desc: 'Solved 100+ LeetCode & GeeksforGeeks data structure problems in Java.' },
+      { step: '3. Project Used', title: 'E-Commerce Backend APIs', desc: 'Applied Java OOP concepts to RESTful controller architecture.' },
+      { step: '4. Certification', title: 'Infosys Java Programming', desc: 'Passed Infosys Springboard Java certification assessment.' },
+      { step: '5. Academic Score', title: '2nd Sem Java Grade A+', desc: 'Achieved A+ grade in 2nd Semester Java Programming course.' },
+      { step: '6. Achievement', title: 'Coding Contest Qualifier', desc: 'Secured high rank in college-level competitive coding challenges.' }
+    ],
+    sql: [
+      { step: '1. Learned', title: 'Relational & NoSQL Databases', desc: 'Studied SQL queries, normalization, indexing & MongoDB document schemas.' },
+      { step: '2. Practiced', title: 'Data Schema Design', desc: 'Designed relational tables and JSON document models for production apps.' },
+      { step: '3. Project Used', title: 'MERN E-Commerce App', desc: 'Built MongoDB schemas for users, product catalog, carts & orders.' },
+      { step: '4. Certification', title: 'MongoDB Basics & AI Strategy', desc: 'Earned 2 verified MongoDB credentials.' },
+      { step: '5. Internship', title: 'Thiranex Web Development', desc: 'Integrated database storage endpoints during 1-month internship.' },
+      { step: '6. Achievement', title: 'CGPA 8.47 / 10', desc: 'Consistently scored top marks in Database Management Systems.' }
+    ],
+    ai: [
+      { step: '1. Learned', title: 'AI & Natural Language Processing', desc: 'Studied speech synthesis, intent parsing, and LLM integrations.' },
+      { step: '2. Practiced', title: 'Voice Automation Engine', desc: 'Trained SPK AI chatbot with 100% accurate academic & document rules.' },
+      { step: '3. Project Used', title: 'Jarvis Desktop Assistant', desc: 'Engineered hands-free voice trigger commands and web search pipelines.' },
+      { step: '4. Certification', title: 'HP LIFE AI for Beginners', desc: 'Certified in AI concepts, ethics, and prompt optimization.' },
+      { step: '5. Academic Score', title: '2nd Sem AI Grade A', desc: 'Achieved Grade A in Introduction to Artificial Intelligence course.' },
+      { step: '6. Achievement', title: 'AI Portfolio Assistant', desc: 'Deployed live intelligent chatbot assistant directly on GitHub Pages.' }
+    ]
+  };
+
+  function renderSkillTrace(skillKey) {
+    const steps = skillData[skillKey] || skillData.python;
+    stepperContainer.innerHTML = `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+        ${steps.map(s => `
+          <div class="glass-card trace-step-card" style="padding: 1rem; border-left: 3px solid var(--accent-cyan);">
+            <div style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase;">${s.step}</div>
+            <div style="font-weight: 700; font-size: 0.95rem; margin: 0.25rem 0; color: #fff;">${s.title}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">${s.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  renderSkillTrace('python');
+
+  document.querySelectorAll('.skill-trace-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.skill-trace-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const skillKey = btn.dataset.skill;
+      renderSkillTrace(skillKey);
+      window.showToast(`Tracing journey for ${btn.textContent.trim()}`);
+    });
+  });
+}
+
+// 3. Digital Twin Satellite Navigation
+function initDigitalTwinEngine() {
+  document.querySelectorAll('.orbit-sat').forEach(sat => {
+    sat.addEventListener('click', () => {
+      const targetId = sat.dataset.target;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+        window.showToast(`Zooming into ${sat.textContent.trim()} section`);
+      }
+    });
+  });
+}
+
+// 7. Adaptive Resume Builder Engine
+function initAdaptiveResumeEngine() {
+  const overlay = document.getElementById('adaptive-resume-overlay');
+  const openNavBtn = document.getElementById('adaptive-resume-nav-btn');
+  const closeBtn = document.getElementById('adaptive-resume-close-btn');
+  const previewBox = document.getElementById('adaptive-resume-preview');
+  const copyBtn = document.getElementById('copy-adaptive-resume-btn');
+
+  if (!overlay || !previewBox) return;
+
+  const roleResumes = {
+    fullstack: {
+      title: 'Full-Stack Software Engineer',
+      summary: 'Passionate B.E. Computer Science student (CGPA 8.47) specializing in full-stack web applications, React.js, Node.js, Express, MongoDB, and Python OS automation.',
+      topSkills: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript (ES6+)', 'Python', 'Git/GitHub'],
+      highlightProjects: ['Social Media Platform (Vercel)', 'Job Application Tracker (MERN)', 'Jarvis Voice AI Assistant'],
+      internships: ['CodeAlpha Full-Stack Internship', 'CodSoft Web Development', 'Thiranex Web Internship']
+    },
+    frontend: {
+      title: 'Frontend Developer (React / UI Engineer)',
+      summary: 'Frontend-focused Developer crafting high-performance, accessible (WCAG) glassmorphism web applications with React, JavaScript, HTML5/CSS3, and 60FPS UI animations.',
+      topSkills: ['React.js', 'JavaScript (ES6+)', 'HTML5 & Vanilla CSS3', 'WCAG Web Accessibility', 'Glassmorphism UI', 'Vercel Deployment'],
+      highlightProjects: ['Social Media Platform', 'Job Application Tracker (Kanban Board)', 'Community Hub Platform'],
+      internships: ['CodSoft Web Development Internship', 'Thiranex Frontend Internship']
+    },
+    backend: {
+      title: 'Backend & API Developer',
+      summary: 'Backend-oriented Engineer building secure RESTful APIs, JWT authentication, MongoDB document databases, Node.js microservices, and database query optimization.',
+      topSkills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT Authentication', 'Java', 'SQL & Database Indexing'],
+      highlightProjects: ['E-Commerce MERN Stack App', 'Job Application Tracker Backend', 'RESTful API Weather Dashboard'],
+      internships: ['CodeAlpha Full-Stack Internship', 'Thiranex Database Internship']
+    },
+    ai: {
+      title: 'AI & Python Automation Engineer',
+      summary: 'Python Software Engineer specializing in speech recognition, NLP voice assistants, OS task automation, and intelligent chatbot algorithms.',
+      topSkills: ['Python', 'SpeechRecognition NLP', 'OS Desktop Automation', 'Machine Learning Concepts', 'Jarvis AI Engine', 'C++'],
+      highlightProjects: ['Jarvis AI Voice Assistant', 'SPK AI Portfolio Chatbot Engine', 'Python Web Scrapers & Automation Tools'],
+      internships: ['CodeAlpha Internship', 'Certified HP LIFE AI Engineer']
+    }
+  };
+
+  function renderResume(roleKey) {
+    const data = roleResumes[roleKey] || roleResumes.fullstack;
+    previewBox.innerHTML = `
+      <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem;">
+        <h4 style="font-size: 1.2rem; color: var(--accent-primary); margin-bottom: 0.25rem;">PRAVEEN KUMAR S</h4>
+        <div style="font-size: 0.9rem; font-weight: 600; color: #fff;">${data.title}</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">📧 praveen542spk@gmail.com | 📞 +91 6374060801 | 🌐 R.M.D. Engineering College (B.E. CSE)</div>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: var(--accent-cyan); font-size: 0.85rem;">EXECUTIVE SUMMARY:</strong>
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.3rem;">${data.summary}</p>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: var(--accent-cyan); font-size: 0.85rem;">PRIORITY TECHNICAL SKILLS:</strong>
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem;">
+          ${data.topSkills.map(s => `<span class="skill-tag" style="font-size: 0.75rem;">${s}</span>`).join('')}
+        </div>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <strong style="color: var(--accent-cyan); font-size: 0.85rem;">FEATURED PROJECTS FOR THIS ROLE:</strong>
+        <ul style="font-size: 0.85rem; color: #cbd5e1; padding-left: 1.2rem; margin-top: 0.3rem;">
+          ${data.highlightProjects.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+      </div>
+      <div>
+        <strong style="color: var(--accent-cyan); font-size: 0.85rem;">INTERNSHIPS & CERTIFICATIONS:</strong>
+        <ul style="font-size: 0.85rem; color: #cbd5e1; padding-left: 1.2rem; margin-top: 0.3rem;">
+          ${data.internships.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (openNavBtn) {
+    openNavBtn.addEventListener('click', () => {
+      renderResume('fullstack');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  document.querySelectorAll('.role-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderResume(btn.dataset.role);
+    });
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(previewBox.innerText).then(() => {
+        window.showToast('📋 Tailored resume text copied to clipboard!');
+      });
+    });
+  }
+}
+
+// 9. Project Laboratory Engine
+function initProjectLaboratoryEngine() {
+  const overlay = document.getElementById('project-lab-overlay');
+  const closeBtn = document.getElementById('project-lab-close-btn');
+  const titleEl = document.getElementById('project-lab-title');
+  const contentEl = document.getElementById('project-lab-stage-content');
+  const tagsEl = document.getElementById('project-lab-tech-tags');
+  const ghLink = document.getElementById('project-lab-github-link');
+  const demoLink = document.getElementById('project-lab-demo-link');
+
+  if (!overlay || !contentEl) return;
+
+  const projectLabData = {
+    social: {
+      name: 'Social Media Platform',
+      github: 'https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform',
+      demo: 'https://code-alpha-social-media-platform-self.vercel.app',
+      tags: ['JavaScript', 'Node.js', 'Express', 'Vercel'],
+      stages: {
+        problem: 'Traditional social platforms rely on heavy full-page reloads that degrade mobile user engagement and slow down message exchanges.',
+        idea: 'Engineer a lightweight single-page social platform with instant profile updates, dynamic post creation feeds, and responsive glassmorphism UI.',
+        technology: 'Built using modular JavaScript, Node.js, Express REST APIs, CSS Grid/Flexbox, and deployed on Vercel Edge.',
+        design: 'Light-red ambient glassmorphism aesthetic with floating micro-interaction post cards and high-contrast accessibility.',
+        development: 'Developed asynchronous fetch pipelines for dynamic post rendering, comment feeds, and profile avatar state updates.',
+        testing: 'Validated client-side performance using Chrome Lighthouse (95+ score) and verified cross-browser WCAG contrast ratios.',
+        result: 'Successfully deployed live on Vercel with smooth 60FPS animations and sub-second page transition load times.'
+      }
+    },
+    jobapp: {
+      name: 'Job Application Tracker',
+      github: 'https://github.com/praveen542spk-ship-it/job-app',
+      demo: 'https://github.com/praveen542spk-ship-it/job-app',
+      tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+      stages: {
+        problem: 'Job applicants lose track of interview dates, pending follow-ups, and resume versions when managing applications manually in spreadsheets.',
+        idea: 'Create an interactive MERN tracking dashboard with drag-and-drop Kanban columns (Applied, Interview, Offer, Rejected).',
+        technology: 'React.js, HTML5 Drag & Drop API, Express.js backend controllers, MongoDB Mongoose schema storage.',
+        design: 'Sleek Kanban column pipeline layout with color-coded status badges and instant search filters.',
+        development: 'Built RESTful CRUD API endpoints for real-time application updates, date sorting, and interview reminders.',
+        testing: 'Executed unit tests on database controller routes and validated drag-and-drop state persistence across browser sessions.',
+        result: 'Full-stack operational tracking system reducing application management friction by 70%.'
+      }
+    },
+    jarvis: {
+      name: 'Jarvis AI Voice Assistant',
+      github: 'https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant',
+      demo: 'https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant',
+      tags: ['Python', 'SpeechRecognition', 'NLP', 'Automation'],
+      stages: {
+        problem: 'Desktop users perform repetitive OS navigation steps for launching tools, conducting web queries, and searching local files.',
+        idea: 'Build a hands-free voice assistant that Listens -> Parses Intent -> Executes OS Command -> Speaks Feedback.',
+        technology: 'Python 3, PyTTSx3 text-to-speech engine, SpeechRecognition library, PyAutoGUI automation.',
+        design: 'Console terminal feedback UI with glowing audio visualizer wave and system audio feedback cues.',
+        development: 'Engineered fuzzy regex intent parsing to trigger application launches, web searches, and system shutdown timers.',
+        testing: 'Tested microphone noise cancellation robustness across various background audio environments.',
+        result: 'Fully functional desktop automation assistant executing voice commands in under 800ms.'
+      }
+    },
+    ecom: {
+      name: 'E-Commerce MERN Application',
+      github: 'https://github.com/praveen542spk-ship-it/ecom-app',
+      demo: 'https://github.com/praveen542spk-ship-it/ecom-app',
+      tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+      stages: {
+        problem: 'E-commerce applications require high security for customer transactions, cart persistence, and real-time inventory sync.',
+        idea: 'Build an end-to-end MERN store with JWT authentication, cart state management, and administrative inventory controls.',
+        technology: 'React Hooks state, JWT tokens, Express middleware, MongoDB transactions.',
+        design: 'Clean product grid layout with instant filter drawer, star rating components, and responsive cart modal.',
+        development: 'Integrated password hashing, JWT bearer token validation, and administrative product creation forms.',
+        testing: 'Validated unauthorized route protection and stress-tested shopping cart state during rapid item additions.',
+        result: 'Secure, production-ready MERN e-commerce application.'
+      }
+    },
+    community: {
+      name: 'CodeAlpha Community Hub',
+      github: 'https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub',
+      demo: 'https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub',
+      tags: ['JavaScript', 'Node.js', 'HTML5', 'CSS3'],
+      stages: {
+        problem: 'Developer communities require centralized platforms for sharing knowledge, articles, and discussion threads.',
+        idea: 'Build a community discussion hub with categorised forums, member profiles, and voting mechanics.',
+        technology: 'JavaScript ES6+, Node.js server routes, CSS Grid layout.',
+        design: 'Community portal interface with card feeds, author avatars, and tag filters.',
+        development: 'Implemented discussion submission forms, comment threads, and member reputation counters.',
+        testing: 'Tested responsive layouts across mobile viewport sizes.',
+        result: 'Delivered during CodeAlpha internship to connect developer group members.'
+      }
+    }
+  };
+
+  let currentProjectKey = 'social';
+
+  function renderStage(stageKey) {
+    const proj = projectLabData[currentProjectKey] || projectLabData.social;
+    const text = proj.stages[stageKey] || 'Stage details loading...';
+    contentEl.innerHTML = `
+      <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-purple); text-transform: uppercase; margin-bottom: 0.5rem;">
+        STAGE: ${stageKey.toUpperCase()}
+      </div>
+      <p style="font-size: 0.95rem; color: #f1f5f9; line-height: 1.6;">${text}</p>
+    `;
+  }
+
+  function openProjectLab(projKey) {
+    currentProjectKey = projKey;
+    const proj = projectLabData[projKey] || projectLabData.social;
+    titleEl.textContent = `${proj.name} — Laboratory Pipeline`;
+    ghLink.href = proj.github;
+    demoLink.href = proj.demo;
+    tagsEl.innerHTML = proj.tags.map(t => `<span class="skill-tag">${t}</span>`).join('');
+    
+    document.querySelectorAll('.lab-tab-btn').forEach(b => b.classList.remove('active'));
+    const firstTab = document.querySelector('.lab-tab-btn[data-stage="problem"]');
+    if (firstTab) firstTab.classList.add('active');
+
+    renderStage('problem');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  document.querySelectorAll('.open-project-lab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openProjectLab(btn.dataset.project || 'social');
+    });
+  });
+
+  document.querySelectorAll('.lab-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lab-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderStage(btn.dataset.stage);
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
+  }
+}
+
+// 10. Full-Screen 3D Interactive Explore Canvas Engine
+function initExploreModeEngine() {
+  const overlay = document.getElementById('explore-mode-overlay');
+  const triggerBtn = document.getElementById('explore-mode-btn');
+  const closeBtn = document.getElementById('explore-mode-close-btn');
+  const canvas = document.getElementById('explore-3d-canvas');
+  const previewBox = document.getElementById('explore-node-card-preview');
+
+  if (!overlay || !canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  const exploreNodes = [
+    { label: 'Social Media Platform', cat: 'projects', icon: '📱', desc: 'Full-stack Vercel Web App', color: '#ef4444' },
+    { label: 'Job Application Tracker', cat: 'projects', icon: '💼', desc: 'MERN Kanban Pipeline', color: '#f59e0b' },
+    { label: 'Jarvis Voice Assistant', cat: 'projects', icon: '🎙️', desc: 'Python NLP Assistant', color: '#a855f7' },
+    { label: 'React.js', cat: 'skills', icon: '⚛️', desc: 'Frontend Framework', color: '#06b6d4' },
+    { label: 'Node.js & Express', cat: 'skills', icon: '⚙️', desc: 'Backend Server Architecture', color: '#10b981' },
+    { label: 'Python Automation', cat: 'skills', icon: '🐍', desc: 'OS & NLP Automation', color: '#8b5cf6' },
+    { label: 'MongoDB Databases', cat: 'skills', icon: '🗄️', desc: 'NoSQL Schemas', color: '#10b981' },
+    { label: 'CodeAlpha Internship Cert', cat: 'certs', icon: '📜', desc: 'Full-Stack Internship', color: '#ec4899' },
+    { label: 'Infosys CSS3 Certificate', cat: 'certs', icon: '📜', desc: 'Infosys Verified Credential', color: '#3b82f6' },
+    { label: 'HP LIFE AI Certificate', cat: 'certs', icon: '🤖', desc: 'AI for Beginners', color: '#f59e0b' }
+  ];
+
+  let currentFilter = 'all';
+  let animationId = null;
+  let angle = 0;
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function render3DNodes() {
+    ctx.clearRect(0, 0, width, height);
+    angle += 0.005;
+
+    const filtered = exploreNodes.filter(n => currentFilter === 'all' || n.cat === currentFilter);
+    const radius = Math.min(width, height) * 0.32;
+
+    filtered.forEach((n, idx) => {
+      const nodeAngle = angle + (idx * ((Math.PI * 2) / filtered.length));
+      const x = width / 2 + Math.cos(nodeAngle) * radius;
+      const y = height / 2 + Math.sin(nodeAngle) * (radius * 0.5);
+      const scale = 0.8 + (Math.sin(nodeAngle) + 1) * 0.25;
+
+      n.renderX = x;
+      n.renderY = y;
+      n.renderScale = scale;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 28 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(15, 17, 32, 0.92)';
+      ctx.fill();
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 2 * scale;
+      ctx.stroke();
+
+      ctx.font = `${18 * scale}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(n.icon, x, y - 2);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `${11 * scale}px var(--font-heading)`;
+      ctx.fillText(n.label, x, y + (34 * scale));
+    });
+
+    animationId = requestAnimationFrame(render3DNodes);
+  }
+
+  if (triggerBtn) {
+    triggerBtn.addEventListener('click', () => {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      resizeCanvas();
+      render3DNodes();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      if (animationId) cancelAnimationFrame(animationId);
+    });
+  }
+
+  document.querySelectorAll('.explore-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.explore-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+    });
+  });
+
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+
+    const filtered = exploreNodes.filter(n => currentFilter === 'all' || n.cat === currentFilter);
+    let clicked = null;
+
+    filtered.forEach(n => {
+      if (n.renderX && n.renderY) {
+        const dist = Math.hypot(cx - n.renderX, cy - n.renderY);
+        if (dist <= 30 * (n.renderScale || 1)) clicked = n;
+      }
+    });
+
+    if (clicked && previewBox) {
+      previewBox.style.display = 'block';
+      previewBox.innerHTML = `
+        <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">${clicked.icon}</div>
+        <h4 style="font-size: 1.1rem; color: #fff;">${clicked.label}</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.3rem 0;">${clicked.desc}</p>
+        <span class="skill-tag" style="font-size: 0.75rem;">Category: ${clicked.cat.toUpperCase()}</span>
+      `;
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      overlay.classList.remove('open');
+      if (animationId) cancelAnimationFrame(animationId);
+    }
+  });
+}
+
+// 11. Session Memory Explorer Tracker Engine
+function initSessionExplorerEngine() {
+  const sessProjEl = document.getElementById('sess-proj-count');
+  const sessCertEl = document.getElementById('sess-cert-count');
+  const sessSkillEl = document.getElementById('sess-skill-count');
+
+  let viewedProjects = new Set();
+  let viewedCerts = new Set();
+  let viewedSkills = new Set();
+
+  function updateBadge() {
+    if (sessProjEl) sessProjEl.textContent = viewedProjects.size;
+    if (sessCertEl) sessCertEl.textContent = viewedCerts.size;
+    if (sessSkillEl) sessSkillEl.textContent = viewedSkills.size;
+  }
+
+  document.querySelectorAll('.project-card').forEach((card, idx) => {
+    card.addEventListener('click', () => {
+      viewedProjects.add(idx);
+      if (!card.querySelector('.explored-indicator')) {
+        const tag = document.createElement('span');
+        tag.className = 'explored-indicator';
+        tag.textContent = 'Explored ✓';
+        card.querySelector('.project-card-title')?.appendChild(tag);
+      }
+      updateBadge();
+    });
+  });
+
+  document.querySelectorAll('.cert-btn, .skill-tag').forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      if (item.classList.contains('cert-btn')) viewedCerts.add(idx);
+      else viewedSkills.add(idx);
+      updateBadge();
+    });
+  });
+}
+
+// 12. Micro-Interactions: Magnetic Cursor & 3D Tilt Perspective Engine
+function initMicroInteractionsEngine() {
+  // 3D Perspective Card Tilt
+  document.querySelectorAll('.glass-card, .tilt-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const tiltX = (y / (rect.height / 2)) * -6;
+      const tiltY = (x / (rect.width / 2)) * 6;
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+
+  // Nav Recruiter Mode Button Listener
+  const recruiterNavBtn = document.getElementById('recruiter-mode-nav-btn');
+  const recruiterOverlay = document.getElementById('recruiter-overlay');
+  if (recruiterNavBtn && recruiterOverlay) {
+    recruiterNavBtn.addEventListener('click', () => {
+      recruiterOverlay.classList.add('open');
+      recruiterOverlay.setAttribute('aria-hidden', 'false');
+    });
+  }
 }

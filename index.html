@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=25.0" />
+  <link rel="stylesheet" href="css/style.css?v=26.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -108,6 +108,9 @@
       <div class="nav-controls">
         <button id="cli-trigger-btn" class="theme-toggle" aria-label="Terminal CLI Mode (Ctrl+Shift+T)" title="Terminal CLI Mode (Ctrl+Shift+T)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16, 185, 129, 0.4);">&gt;_ CLI</button>
         <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
+        <button id="recruiter-mode-nav-btn" class="theme-toggle" aria-label="Executive Recruiter Mode" title="Executive Recruiter Mode" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-primary); border-color:rgba(239,68,68,0.4);">👔 Recruiter</button>
+        <button id="explore-mode-btn" class="theme-toggle" aria-label="3D Interactive Explore Mode" title="3D Interactive Explore Mode" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-cyan); border-color:rgba(6,182,212,0.4);">🌌 Explore</button>
+        <button id="adaptive-resume-nav-btn" class="theme-toggle" aria-label="Build Role-Specific Resume" title="Build Role-Specific Resume" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-purple); border-color:rgba(168,85,247,0.4);">📄 Build Resume</button>
         <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
         <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
@@ -198,6 +201,88 @@
                 <img src="assets/profile.jpg" alt="PRAVEEN KUMAR S — Full-Stack Developer" class="avatar-img" />
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       INTERACTIVE DIGITAL TWIN & PERSONAL KNOWLEDGE GRAPH HUB
+       ========================================================================== -->
+    <section id="interactive-hub" class="section" aria-label="Interactive Digital Profile Hub" style="padding: 4rem 0; position: relative;">
+      <div class="container">
+        
+        <div class="section-header reveal">
+          <span class="section-tag">AI-POWERED DIGITAL PROFILE</span>
+          <h2 class="section-title">Interactive Digital Twin &amp; Knowledge Graph</h2>
+          <p class="section-subtitle">Explore connections between Education, Skills, Projects, Certificates, Internships, and Achievements in real time.</p>
+        </div>
+
+        <!-- 3. Digital Twin Central Hub -->
+        <div class="digital-twin-container reveal">
+          <div class="twin-orbit-wrapper">
+            <div class="twin-central-avatar">
+              <img src="assets/profile.jpg" alt="Praveen Kumar S — Digital Twin" />
+              <div class="twin-pulse-ring"></div>
+              <div class="twin-label">PRAVEEN KUMAR S<br><span style="font-size:0.75rem; color:var(--text-muted); font-weight:400;">Digital Twin v2.0</span></div>
+            </div>
+            
+            <button class="orbit-sat sat-skills" data-target="#skills" title="Explore Skills">
+              <span class="sat-icon">💻</span> <span class="sat-text">Skills</span>
+            </button>
+            <button class="orbit-sat sat-projects" data-target="#projects" title="Explore Projects">
+              <span class="sat-icon">🚀</span> <span class="sat-text">Projects</span>
+            </button>
+            <button class="orbit-sat sat-certs" data-target="#achievements" title="Explore Certificates">
+              <span class="sat-icon">📜</span> <span class="sat-text">Certificates</span>
+            </button>
+            <button class="orbit-sat sat-edu" data-target="#education" title="Explore Education">
+              <span class="sat-icon">🎓</span> <span class="sat-text">Education</span>
+            </button>
+            <button class="orbit-sat sat-achieve" data-target="#journey" title="Explore Achievements">
+              <span class="sat-icon">🏆</span> <span class="sat-text">Achievements</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 1.1. Interactive Personal Knowledge Graph Canvas -->
+        <div class="knowledge-graph-wrapper glass-card reveal delay-2" style="margin-top: 2.5rem; padding: 1.5rem; position: relative;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3 style="font-size: 1.25rem; font-family: var(--font-heading);">🕸️ Live Knowledge Network</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Click any node to highlight connected learning paths and project outcomes.</p>
+            </div>
+            <div id="graph-node-details" style="font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: var(--radius-full); background: var(--surface-hover); border: 1px solid var(--border-color); color: var(--accent-cyan);">
+              Select a node to inspect connections
+            </div>
+          </div>
+
+          <div style="position: relative; width: 100%; height: 420px; overflow: hidden; border-radius: var(--radius-md); background: rgba(0,0,0,0.3); border: 1px solid var(--border-color);">
+            <canvas id="knowledge-graph-canvas" width="1000" height="420" style="width: 100%; height: 100%; display: block; cursor: pointer;"></canvas>
+          </div>
+        </div>
+
+        <!-- 2. "Trace My Skill" Interactive Journey Bar -->
+        <div class="trace-skill-wrapper glass-card reveal delay-3" style="margin-top: 2rem; padding: 1.5rem;">
+          <div style="margin-bottom: 1rem;">
+            <h3 style="font-size: 1.25rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 0.5rem;">
+              📍 Trace My Skill Journey
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Click a skill to trace its journey from Learning to Projects, Certifications, and Internships.</p>
+          </div>
+
+          <div class="skill-trace-buttons" style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+            <button class="btn btn-outline btn-sm skill-trace-btn active" data-skill="python">🐍 Python &amp; Automation</button>
+            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="react">⚛️ React &amp; MERN</button>
+            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="java">☕ Java &amp; OOP</button>
+            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="sql">🗄️ SQL &amp; MongoDB</button>
+            <button class="btn btn-outline btn-sm skill-trace-btn" data-skill="ai">🤖 Voice AI &amp; NLP</button>
+          </div>
+
+          <!-- Skill Trace Stepper Timeline -->
+          <div id="skill-trace-stepper" class="skill-trace-stepper">
+            <!-- Dynamically populated via JS -->
           </div>
         </div>
 
@@ -510,9 +595,10 @@
               <span class="skill-tag">Express</span>
               <span class="skill-tag">Vercel</span>
             </div>
-            <div class="project-links">
+            <div class="project-links" style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
               <a href="https://code-alpha-social-media-platform-self.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Live Demo ↗</a>
               <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Source Code 🐙</a>
+              <button class="btn btn-outline btn-sm open-project-lab-btn" data-project="social" style="color:var(--accent-purple); border-color:rgba(168,85,247,0.4);">🧪 Project Lab</button>
             </div>
           </div>
         </div>
@@ -538,8 +624,9 @@
                 <p class="project-problem-text">
                   <strong>Problem Solved:</strong> Helps job seekers organize active applications and track status updates efficiently.
                 </p>
-                <div class="project-card-footer">
+                <div class="project-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
                   <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                  <button class="open-project-lab-btn" data-project="jobapp" style="background:transparent; border:1px solid rgba(168,85,247,0.4); color:var(--accent-purple); padding:0.25rem 0.6rem; border-radius:var(--radius-sm); font-size:0.75rem; cursor:pointer;">🧪 Explore Lab</button>
                 </div>
               </div>
             </div>
@@ -563,8 +650,9 @@
                 <p class="project-problem-text">
                   <strong>Problem Solved:</strong> Streamlines daily desktop operations through hands-free voice automation commands.
                 </p>
-                <div class="project-card-footer">
+                <div class="project-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
                   <a href="https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                  <button class="open-project-lab-btn" data-project="jarvis" style="background:transparent; border:1px solid rgba(168,85,247,0.4); color:var(--accent-purple); padding:0.25rem 0.6rem; border-radius:var(--radius-sm); font-size:0.75rem; cursor:pointer;">🧪 Explore Lab</button>
                 </div>
               </div>
             </div>
@@ -588,8 +676,9 @@
                 <p class="project-problem-text">
                   <strong>Problem Solved:</strong> Provides a secure end-to-end shopping workflow and administrative product management.
                 </p>
-                <div class="project-card-footer">
+                <div class="project-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
                   <a href="https://github.com/praveen542spk-ship-it/ecom-app" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                  <button class="open-project-lab-btn" data-project="ecom" style="background:transparent; border:1px solid rgba(168,85,247,0.4); color:var(--accent-purple); padding:0.25rem 0.6rem; border-radius:var(--radius-sm); font-size:0.75rem; cursor:pointer;">🧪 Explore Lab</button>
                 </div>
               </div>
             </div>
@@ -613,8 +702,9 @@
                 <p class="project-problem-text">
                   <strong>Problem Solved:</strong> Connects community members in an accessible digital environment for knowledge exchange.
                 </p>
-                <div class="project-card-footer">
+                <div class="project-card-footer" style="display:flex; justify-content:space-between; align-items:center;">
                   <a href="https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub" target="_blank" rel="noopener noreferrer" class="project-link-item">GitHub Code 🐙</a>
+                  <button class="open-project-lab-btn" data-project="community" style="background:transparent; border:1px solid rgba(168,85,247,0.4); color:var(--accent-purple); padding:0.25rem 0.6rem; border-radius:var(--radius-sm); font-size:0.75rem; cursor:pointer;">🧪 Explore Lab</button>
                 </div>
               </div>
             </div>
@@ -1351,9 +1441,112 @@
     </div>
   </div>
 
+  <!-- Feature 7: Adaptive Resume Builder Modal -->
+  <div id="adaptive-resume-overlay" class="custom-overlay" aria-hidden="true">
+    <div class="custom-modal-dialog" style="max-width: 850px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+        <div>
+          <span class="section-tag" style="font-size:0.75rem;">ROLE-BASED RESUME BUILDER</span>
+          <h3 style="font-size:1.4rem; font-family:var(--font-heading);">Build My Resume by Target Role</h3>
+        </div>
+        <button id="adaptive-resume-close-btn" class="modal-close-btn">✕</button>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">Select Target Recruiter / Hiring Role:</label>
+        <div class="role-selector-btns" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+          <button class="btn btn-outline btn-sm role-btn active" data-role="fullstack">🚀 Full-Stack Software Engineer</button>
+          <button class="btn btn-outline btn-sm role-btn" data-role="frontend">⚛️ Frontend Developer</button>
+          <button class="btn btn-outline btn-sm role-btn" data-role="backend">⚙️ Backend &amp; API Developer</button>
+          <button class="btn btn-outline btn-sm role-btn" data-role="ai">🤖 AI &amp; Python Engineer</button>
+        </div>
+      </div>
+
+      <div id="adaptive-resume-preview" class="glass-card" style="padding: 1.5rem; max-height: 480px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color);">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <div style="display:flex; gap:1rem; margin-top: 1.25rem; flex-wrap: wrap;">
+        <button id="copy-adaptive-resume-btn" class="btn btn-primary" style="flex:1;">📋 Copy Tailored Resume Text</button>
+        <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline">📄 Open Full Printable Resume Page ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 9: Project Laboratory Pipeline Modal -->
+  <div id="project-lab-overlay" class="custom-overlay" aria-hidden="true">
+    <div class="custom-modal-dialog" style="max-width: 900px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+        <div>
+          <span class="section-tag" style="font-size:0.75rem;">INTERACTIVE PROJECT LABORATORY</span>
+          <h3 id="project-lab-title" style="font-size:1.4rem; font-family:var(--font-heading);">Project Architecture Breakdown</h3>
+        </div>
+        <button id="project-lab-close-btn" class="modal-close-btn">✕</button>
+      </div>
+
+      <!-- 7-Stage Pipeline Tabs -->
+      <div class="lab-pipeline-tabs" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+        <button class="lab-tab-btn active" data-stage="problem">1. Problem</button>
+        <button class="lab-tab-btn" data-stage="idea">2. Idea</button>
+        <button class="lab-tab-btn" data-stage="technology">3. Technology</button>
+        <button class="lab-tab-btn" data-stage="design">4. Design</button>
+        <button class="lab-tab-btn" data-stage="development">5. Development</button>
+        <button class="lab-tab-btn" data-stage="testing">6. Testing</button>
+        <button class="lab-tab-btn" data-stage="result">7. Result</button>
+      </div>
+
+      <div id="project-lab-stage-content" class="glass-card" style="padding: 1.5rem; min-height: 240px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color);">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+      <div style="display:flex; gap:1rem; margin-top: 1.25rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div id="project-lab-tech-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a id="project-lab-github-link" href="#" target="_blank" class="btn btn-outline btn-sm">GitHub Repo 🐙</a>
+          <a id="project-lab-demo-link" href="#" target="_blank" class="btn btn-primary btn-sm">Live Demo 🚀</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 10: Full-Screen 3D Interactive Explore Mode Overlay -->
+  <div id="explore-mode-overlay" class="explore-mode-overlay" aria-hidden="true">
+    <div class="explore-mode-header">
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <span style="font-size:1.4rem;">🌌</span>
+        <div>
+          <h3 style="font-size:1.1rem; font-family:var(--font-heading); color:#fff;">Full-Screen Digital Explore Environment</h3>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Orbit, click, and inspect Praveen's interactive profile universe.</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.75rem; align-items:center;">
+        <div class="explore-filter-group" style="display:flex; gap:0.4rem;">
+          <button class="btn btn-outline btn-sm explore-filter-btn active" data-filter="all">All</button>
+          <button class="btn btn-outline btn-sm explore-filter-btn" data-filter="projects">Projects</button>
+          <button class="btn btn-outline btn-sm explore-filter-btn" data-filter="skills">Skills</button>
+          <button class="btn btn-outline btn-sm explore-filter-btn" data-filter="certs">Certs</button>
+        </div>
+        <button id="explore-mode-close-btn" class="modal-close-btn" style="font-size:1rem; padding:0.4rem 0.8rem;">✕ Close [ESC]</button>
+      </div>
+    </div>
+    <canvas id="explore-3d-canvas" style="width:100%; height:100%; display:block; cursor:grab;"></canvas>
+    <div id="explore-node-card-preview" class="explore-node-preview glass-card" style="display:none;"></div>
+  </div>
+
+  <!-- Feature 11: Session Memory Floating Explorer Badge -->
+  <div id="session-explorer-badge" class="session-explorer-badge glass-card">
+    <span style="font-size:1.1rem;">⚡</span>
+    <div>
+      <div style="font-weight:600; font-size:0.78rem; color:var(--accent-primary);">SESSION EXPLORER</div>
+      <div style="font-size:0.72rem; color:var(--text-muted);">
+        <span id="sess-proj-count">0</span> Projects • <span id="sess-cert-count">0</span> Certs • <span id="sess-skill-count">0</span> Skills viewed
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script src="js/main.js?v=25.0"></script>
+  <script src="js/main.js?v=26.0"></script>
 </body>
 </html>
