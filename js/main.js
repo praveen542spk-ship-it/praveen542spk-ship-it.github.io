@@ -1961,6 +1961,18 @@ Status: Available for Internships & Full-Stack Roles`;
   initExploreModeEngine();
   initSessionExplorerEngine();
   initMicroInteractionsEngine();
+
+  // --- INITIALIZE ADVANCED EXPERIMENTAL INTERACTION LAYER ENGINES ---
+  initInfiniteCanvasEngine();
+  initPhysicsAndMagneticEngine();
+  initTimeMachineEngine();
+  initDualRealityEngine();
+  initEnhancedCmdCenterEngine();
+  initPortfolioStoryEngine();
+  initTraceAnySkillModalEngine();
+  initSelfAdaptingDataUIEngine();
+  initBreakWebsiteEngine();
+  initXRayModeEngine();
 }
 
 /* ==========================================================================
@@ -2631,3 +2643,437 @@ function initMicroInteractionsEngine() {
     });
   }
 }
+
+/* ==========================================================================
+   ADVANCED EXPERIMENTAL INTERACTION LAYER ENGINES (js/main.js)
+   ========================================================================== */
+
+// 1. Infinite Spatial Canvas Engine
+function initInfiniteCanvasEngine() {
+  const btn = document.getElementById('infinite-canvas-btn');
+  const overlay = document.getElementById('infinite-canvas-overlay');
+  const closeBtn = document.getElementById('infinite-canvas-close-btn');
+  const viewport = document.getElementById('infinite-canvas-viewport');
+  const world = document.getElementById('infinite-canvas-world');
+  const zoomInBtn = document.getElementById('canvas-zoom-in');
+  const zoomOutBtn = document.getElementById('canvas-zoom-out');
+  const zoomResetBtn = document.getElementById('canvas-zoom-reset');
+
+  if (!btn || !overlay || !world) return;
+
+  let scale = 1;
+  let panX = 0;
+  let panY = 0;
+  let isPanning = false;
+  let startX = 0;
+  let startY = 0;
+
+  const spatialNodes = [
+    { title: '👤 Profile & Contact', text: 'Praveen Kumar S — B.E. CSE Student at R.M.D. Engg College. Phone: +91 6374060801 | Email: praveen542spk@gmail.com', left: 1300, top: 900, tag: 'Profile' },
+    { title: '📱 Social Media Platform', text: 'Full-stack single page app deployed on Vercel Edge with dynamic post feed & light-red glassmorphism UI.', left: 1750, top: 650, tag: 'Projects' },
+    { title: '💼 Job Application Tracker', text: 'MERN stack Kanban pipeline tracking application status, interviews, and resume versions.', left: 1750, top: 1100, tag: 'Projects' },
+    { title: '🎙️ Jarvis Voice Assistant', text: 'Python NLP speech assistant automating OS desktop actions & offline command pipelines.', left: 850, top: 650, tag: 'Projects' },
+    { title: '⚛️ React.js & Frontend', text: 'Component lifecycles, JSX architecture, 60FPS CSS transforms, state management & WCAG accessibility.', left: 1300, top: 450, tag: 'Skills' },
+    { title: '⚙️ Node.js & REST APIs', text: 'Backend Express controllers, JWT security middleware, MongoDB database schema optimization.', left: 1300, top: 1350, tag: 'Skills' },
+    { title: '📜 CodeAlpha Internship Cert', text: 'Verified Full-Stack Web Development Internship Certificate with practical cloud deployments.', left: 850, top: 1100, tag: 'Certificates' },
+    { title: '🎓 Academic Excellence', text: '10th SSLC: 442/500 (88.4%) | 12th HSC: 532/600 (88.67%) | 1st Sem GPA: 8.21 | 2nd Sem GPA: 8.73', left: 850, top: 1400, tag: 'Education' }
+  ];
+
+  function updateTransform() {
+    world.style.transform = `translate(-50%, -50%) translate(${panX}px, ${panY}px) scale(${scale})`;
+  }
+
+  function renderSpatialNodes() {
+    world.innerHTML = spatialNodes.map(n => `
+      <div class="spatial-node-card" style="left:${n.left}px; top:${n.top}px;">
+        <span class="skill-tag" style="margin-bottom:0.5rem; display:inline-block;">${n.tag}</span>
+        <h4 style="font-size:1.05rem; color:#fff; font-family:var(--font-heading); margin-bottom:0.4rem;">${n.title}</h4>
+        <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">${n.text}</p>
+      </div>
+    `).join('');
+  }
+
+  btn.addEventListener('click', () => {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    renderSpatialNodes();
+    scale = 1;
+    panX = 0;
+    panY = 0;
+    updateTransform();
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  if (viewport) {
+    viewport.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isPanning = false;
+    });
+
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+      scale = Math.min(Math.max(0.3, scale * zoomFactor), 3.0);
+      updateTransform();
+    }, { passive: false });
+  }
+
+  if (zoomInBtn) zoomInBtn.addEventListener('click', () => { scale = Math.min(3.0, scale * 1.2); updateTransform(); });
+  if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => { scale = Math.max(0.3, scale * 0.8); updateTransform(); });
+  if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => { scale = 1; panX = 0; panY = 0; updateTransform(); });
+}
+
+// 2 & 3. Physics & Magnetic Proximity Interaction Engine
+function initPhysicsAndMagneticEngine() {
+  const magneticItems = document.querySelectorAll('.btn, .glass-card, .social-icon-btn, .theme-toggle');
+
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    magneticItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distance = Math.hypot(mouseX - centerX, mouseY - centerY);
+
+      if (distance < 70) {
+        const pullX = (mouseX - centerX) * 0.18;
+        const pullY = (mouseY - centerY) * 0.18;
+        item.style.transform = `translate3d(${pullX}px, ${pullY}px, 0) scale(1.02)`;
+        item.classList.add('magnetic-active');
+      } else {
+        if (item.classList.contains('magnetic-active')) {
+          item.style.transform = '';
+          item.classList.remove('magnetic-active');
+        }
+      }
+    });
+  });
+}
+
+// 4. Time Machine Portfolio Engine
+function initTimeMachineEngine() {
+  const toggleBtn = document.getElementById('time-machine-toggle-btn');
+  const bar = document.getElementById('time-machine-bar');
+  const closeBtn = document.getElementById('tm-close-btn');
+  const yearLabel = document.getElementById('time-machine-year-label');
+
+  if (!toggleBtn || !bar) return;
+
+  const yearData = {
+    '2024': {
+      label: '2024 (Foundations & School)',
+      desc: '10th & 12th Marks, C++ Fundamentals, Initial CodeAlpha & Infosys Learning.'
+    },
+    '2025': {
+      label: '2025 (1st Sem & Projects)',
+      desc: '1st Sem GPA 8.21, Jarvis Voice AI, Social Media Platform, CodSoft & Thiranex Internships.'
+    },
+    '2026': {
+      label: '2026 (All Records — CSE Year 2)',
+      desc: '2nd Sem GPA 8.73 (AI Grade A, DS Grade S), Job Application Tracker, SPK AI Assistant Engine.'
+    }
+  };
+
+  toggleBtn.addEventListener('click', () => {
+    if (bar.style.display === 'none' || !bar.style.display) {
+      bar.style.display = 'flex';
+      window.showToast('⏳ Time Machine Timeline Activated!');
+    } else {
+      bar.style.display = 'none';
+    }
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', () => { bar.style.display = 'none'; });
+
+  document.querySelectorAll('.tm-year-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tm-year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const year = btn.dataset.year;
+      const data = yearData[year] || yearData['2026'];
+      if (yearLabel) yearLabel.textContent = data.label;
+      window.showToast(`Filtering portfolio view for ${year}: ${data.desc}`);
+    });
+  });
+}
+
+// 5. Dual Reality Mode Engine
+function initDualRealityEngine() {
+  const toggleBtn = document.getElementById('reality-mode-toggle-btn');
+  if (!toggleBtn) return;
+
+  let isExperimental = false;
+
+  toggleBtn.addEventListener('click', () => {
+    isExperimental = !isExperimental;
+    if (isExperimental) {
+      document.body.classList.add('experimental-mode');
+      toggleBtn.textContent = '🔮 Exp Mode';
+      toggleBtn.style.borderColor = 'var(--accent-primary)';
+      toggleBtn.style.color = 'var(--accent-primary)';
+      window.showToast('🌌 Reality Shifted: Experimental Mode Enabled!');
+    } else {
+      document.body.classList.remove('experimental-mode');
+      toggleBtn.textContent = '🔮 Pro Mode';
+      toggleBtn.style.borderColor = 'rgba(6,182,212,0.4)';
+      toggleBtn.style.color = 'var(--accent-cyan)';
+      window.showToast('👔 Reality Shifted: Professional Mode Active');
+    }
+  });
+}
+
+// 6. Enhanced Ctrl + K Command Center Engine
+function initEnhancedCmdCenterEngine() {
+  window.enhancedCmdQueries = [
+    { title: 'Highest 12th Mark (Chemistry 98)', icon: '🏆', action: () => window.showToast('Your highest 12th mark is 98 in Chemistry!') },
+    { title: 'Lowest 12th Mark (English 78)', icon: '📊', action: () => window.showToast('Your lowest 12th mark is 78 in English.') },
+    { title: 'Highest 10th Mark (Science 94)', icon: '🥇', action: () => window.showToast('Your highest 10th mark is 94 in Science!') },
+    { title: 'Lowest 10th Mark (Tamil 83)', icon: '📉', action: () => window.showToast('Your lowest 10th mark is 83 in Tamil.') },
+    { title: '1st Semester GPA (8.21 / 10)', icon: '🎓', action: () => window.showToast('1st Sem GPA: 8.21 / 10') },
+    { title: '2nd Semester GPA (8.73 / 10)', icon: '🌟', action: () => window.showToast('2nd Sem GPA: 8.73 / 10 (DS Grade S, Java Grade A+)') },
+    { title: 'CodeAlpha Internship Certificate', icon: '📜', action: () => window.open('cert-codealpha.pdf', '_blank') },
+    { title: 'Trace Python Journey', icon: '🐍', action: () => document.getElementById('trace-skill-overlay')?.classList.add('open') },
+    { title: 'Launch Infinite Canvas', icon: '🌌', action: () => document.getElementById('infinite-canvas-btn')?.click() }
+  ];
+}
+
+// 7. Portfolio Story Engine
+function initPortfolioStoryEngine() {
+  const overlay = document.getElementById('story-engine-overlay');
+  const closeBtn = document.getElementById('story-engine-close-btn');
+  const titleEl = document.getElementById('story-engine-title');
+  const contentEl = document.getElementById('story-engine-content');
+
+  if (!overlay || !contentEl) return;
+
+  window.triggerPortfolioStory = (storyKey) => {
+    const stories = {
+      ai: {
+        title: 'Story of Praveen\'s AI & Voice Automation',
+        steps: [
+          { tag: 'SKILL', title: 'Python & Natural Language Processing', desc: 'Mastered SpeechRecognition, PyTTSx3 text-to-speech engine & regex intent parsing.' },
+          { tag: 'PROJECT', title: 'Jarvis AI Voice Assistant', desc: 'Engineered hands-free desktop voice assistant executing system launch & web queries.' },
+          { tag: 'CHATBOT', title: 'SPK AI Portfolio Chatbot', desc: 'Trained SPK AI chatbot on GitHub Pages with 100% precise academic verification rules.' },
+          { tag: 'CERTIFICATE', title: 'HP LIFE AI for Beginners Certificate', desc: 'Earned HP LIFE credential validating machine learning & prompt engineering.' },
+          { tag: 'ACADEMICS', title: '2nd Sem AI Course Grade A', desc: 'Achieved Grade A in Introduction to Artificial Intelligence course at R.M.D. Engg College.' }
+        ]
+      },
+      react: {
+        title: 'Story of Praveen\'s Full-Stack React Engineering',
+        steps: [
+          { tag: 'SKILL', title: 'Modern React.js & JSX Architecture', desc: 'Mastered React hooks, state management, component lifecycles & glassmorphism styling.' },
+          { tag: 'PROJECT 1', title: 'Social Media Platform (Vercel)', desc: 'Built single-page social media app with dynamic post creation feeds.' },
+          { tag: 'PROJECT 2', title: 'Job Application Tracker (MERN)', desc: 'Engineered drag-and-drop Kanban column pipeline with date filters.' },
+          { tag: 'CERTIFICATE', title: 'CodeAlpha Internship Certificate', desc: 'Delivered production web platform features during CodeAlpha internship.' }
+        ]
+      }
+    };
+
+    const story = stories[storyKey] || stories.ai;
+    titleEl.textContent = story.title;
+    contentEl.innerHTML = story.steps.map(s => `
+      <div class="glass-card" style="padding:1rem; border-left:3px solid var(--accent-cyan);">
+        <span class="skill-tag" style="font-size:0.7rem;">${s.tag}</span>
+        <h4 style="font-size:1rem; color:#fff; margin:0.3rem 0;">${s.title}</h4>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">${s.desc}</p>
+      </div>
+    `).join('');
+
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); });
+}
+
+// 8. Trace Any Skill Modal Engine
+function initTraceAnySkillModalEngine() {
+  const overlay = document.getElementById('trace-skill-overlay');
+  const closeBtn = document.getElementById('trace-skill-close-btn');
+  const stepperModal = document.getElementById('trace-skill-stepper-modal');
+
+  if (!overlay || !stepperModal) return;
+
+  const skillTraceData = {
+    python: [
+      { step: '1. LEARNED', title: 'Python Fundamentals', desc: 'OOP concepts & syntax at R.M.D. Engineering College.' },
+      { step: '2. PRACTICED', title: 'Automation Scripts', desc: 'Built 20+ OS automation scripts & scrapers.' },
+      { step: '3. PROJECT', title: 'Jarvis Voice AI', desc: 'Speech recognition & offline intent parser.' },
+      { step: '4. CERTIFICATE', title: 'HP LIFE AI Cert', desc: 'AI & prompt engineering certification.' }
+    ],
+    react: [
+      { step: '1. LEARNED', title: 'React.js & Hooks', desc: 'Component lifecycles & JSX architecture.' },
+      { step: '2. PRACTICED', title: 'Glassmorphism UI', desc: 'High performance 60FPS web interfaces.' },
+      { step: '3. PROJECT', title: 'Job Application Tracker', desc: 'Kanban drag-and-drop board.' },
+      { step: '4. CERTIFICATE', title: 'Infosys CSS3 Cert', desc: 'Verified responsive layout credential.' }
+    ],
+    java: [
+      { step: '1. LEARNED', title: 'Java OOP Principles', desc: 'Classes, inheritance & polymorphism.' },
+      { step: '2. PRACTICED', title: 'DSA & Algorithms', desc: 'Solved 100+ LeetCode data structure problems.' },
+      { step: '3. ACADEMIC SCORE', title: '2nd Sem Java Grade A+', desc: 'Achieved A+ grade in 2nd Sem Java course.' },
+      { step: '4. CERTIFICATE', title: 'Infosys Java Cert', desc: 'Passed Infosys Springboard assessment.' }
+    ],
+    sql: [
+      { step: '1. LEARNED', title: 'Relational & NoSQL', desc: 'SQL queries, joins & MongoDB document models.' },
+      { step: '2. PRACTICED', title: 'Schema Optimization', desc: 'Designed MongoDB collections for MERN apps.' },
+      { step: '3. PROJECT', title: 'E-Commerce MERN App', desc: 'Product catalog & cart schema storage.' },
+      { step: '4. CERTIFICATE', title: 'MongoDB Basics', desc: 'Earned 2 verified MongoDB credentials.' }
+    ],
+    javascript: [
+      { step: '1. LEARNED', title: 'ES6+ JavaScript', desc: 'Promises, async/await, closures & DOM API.' },
+      { step: '2. PRACTICED', title: 'SPK AI Engine', desc: 'Built client-side AI intent routing logic.' },
+      { step: '3. PROJECT', title: 'Social Media Platform', desc: 'Single-page web application.' },
+      { step: '4. INTERNSHIP', title: 'CodeAlpha Web Intern', desc: 'Delivered production frontend modules.' }
+    ]
+  };
+
+  function renderModalTrace(skillKey) {
+    const steps = skillTraceData[skillKey] || skillTraceData.python;
+    stepperModal.innerHTML = steps.map(s => `
+      <div class="glass-card" style="padding:1rem; border-left:3px solid var(--accent-purple);">
+        <div style="font-size:0.7rem; font-family:var(--font-mono); color:var(--accent-purple);">${s.step}</div>
+        <div style="font-weight:700; font-size:0.92rem; color:#fff; margin:0.2rem 0;">${s.title}</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">${s.desc}</div>
+      </div>
+    `).join('');
+  }
+
+  renderModalTrace('python');
+
+  document.querySelectorAll('.skill-trace-modal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.skill-trace-modal-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderModalTrace(btn.dataset.skill);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); });
+}
+
+// 9. Self-Adapting Data UI Engine
+function initSelfAdaptingDataUIEngine() {
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (!card.querySelector('.data-type-pill')) {
+      const pill = document.createElement('span');
+      pill.className = 'data-type-pill';
+      pill.style.cssText = 'font-size:0.65rem; font-family:var(--font-mono); color:var(--accent-cyan); background:rgba(6,182,212,0.15); border:1px solid rgba(6,182,212,0.3); padding:0.1rem 0.4rem; border-radius:var(--radius-sm); margin-bottom:0.5rem; display:inline-block;';
+      pill.textContent = 'TYPE: INTERACTIVE WORKSPACE';
+      card.querySelector('.project-card-body')?.prepend(pill);
+    }
+  });
+}
+
+// 10. "Break The Website" Experimental Mode Engine
+function initBreakWebsiteEngine() {
+  const toggleBtn = document.getElementById('break-website-btn');
+  const resetBtn = document.getElementById('break-layout-reset-btn');
+
+  if (!toggleBtn || !resetBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.add('break-ui-active');
+    resetBtn.style.display = 'block';
+    window.showToast('🧩 "Break The UI" Mode: Drag any card to rearrange windows!');
+
+    document.querySelectorAll('.glass-card').forEach(card => {
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      card.addEventListener('mousedown', (e) => {
+        if (!document.body.classList.contains('break-ui-active')) return;
+        isDragging = true;
+        offsetX = e.clientX - card.getBoundingClientRect().left;
+        offsetY = e.clientY - card.getBoundingClientRect().top;
+        card.style.zIndex = '100';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        card.style.position = 'fixed';
+        card.style.left = `${e.clientX - offsetX}px`;
+        card.style.top = `${e.clientY - offsetY}px`;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+    });
+  });
+
+  resetBtn.addEventListener('click', () => {
+    document.body.classList.remove('break-ui-active');
+    resetBtn.style.display = 'none';
+    document.querySelectorAll('.glass-card').forEach(card => {
+      card.style.position = '';
+      card.style.left = '';
+      card.style.top = '';
+      card.style.zIndex = '';
+    });
+    window.showToast('🔄 Layout Restored to Normal!');
+  });
+}
+
+// 11. Website X-Ray Mode Engine
+function initXRayModeEngine() {
+  const btn = document.getElementById('xray-mode-btn');
+  if (!btn) return;
+
+  let xrayActive = false;
+
+  btn.addEventListener('click', () => {
+    xrayActive = !xrayActive;
+    if (xrayActive) {
+      document.body.classList.add('xray-active');
+      btn.style.borderColor = 'var(--accent-emerald)';
+      btn.style.color = 'var(--accent-emerald)';
+      attachXRayBadges();
+      window.showToast('⚡ X-Ray Mode: Architecture Badges Revealed!');
+    } else {
+      document.body.classList.remove('xray-active');
+      btn.style.borderColor = 'rgba(16,185,129,0.4)';
+      btn.style.color = 'var(--accent-emerald)';
+      window.showToast('⚡ X-Ray Mode Disabled');
+    }
+  });
+
+  function attachXRayBadges() {
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (!card.querySelector('.xray-badge')) {
+        const badge = document.createElement('div');
+        badge.className = 'xray-badge';
+        badge.innerHTML = '⚡ [Component: ProjectCard | Source: Local | Stack: React/Node]';
+        card.appendChild(badge);
+      }
+    });
+
+    document.querySelectorAll('.cert-card').forEach(card => {
+      if (!card.querySelector('.xray-badge')) {
+        const badge = document.createElement('div');
+        badge.className = 'xray-badge';
+        badge.innerHTML = '⚡ [Component: DocumentViewer | Doc: Stored PDF]';
+        card.appendChild(badge);
+      }
+    });
+  }
+}

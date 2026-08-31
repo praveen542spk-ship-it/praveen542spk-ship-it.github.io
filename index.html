@@ -36,7 +36,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=28.0" />
+  <link rel="stylesheet" href="css/style.css?v=29.0" />
 
   <!-- Pre-render theme check -->
   <script>
@@ -106,8 +106,12 @@
       </nav>
 
       <div class="nav-controls">
-        <button id="cli-trigger-btn" class="theme-toggle" aria-label="Terminal CLI Mode (Ctrl+Shift+T)" title="Terminal CLI Mode (Ctrl+Shift+T)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16, 185, 129, 0.4);">&gt;_ CLI</button>
-        <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.85rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
+        <button id="cli-trigger-btn" class="theme-toggle" aria-label="Terminal CLI Mode (Ctrl+Shift+T)" title="Terminal CLI Mode (Ctrl+Shift+T)" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16, 185, 129, 0.4);">&gt;_ CLI</button>
+        <button id="cmd-trigger-btn" class="theme-toggle" aria-label="Command Palette (Ctrl+K)" title="Quick Search &amp; Commands (Ctrl+K)" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full);">⌘K</button>
+        <button id="reality-mode-toggle-btn" class="theme-toggle" aria-label="Toggle Dual Reality Mode" title="Toggle Professional vs Experimental Reality" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-cyan); border-color:rgba(6,182,212,0.4);">🔮 Pro Mode</button>
+        <button id="time-machine-toggle-btn" class="theme-toggle" aria-label="Time Machine Journey" title="Explore Development Journey by Year" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-purple); border-color:rgba(168,85,247,0.4);">⏳ Timeline</button>
+        <button id="infinite-canvas-btn" class="theme-toggle" aria-label="Infinite Spatial Canvas" title="Explore Infinite Zoomable Canvas" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-primary); border-color:rgba(239,68,68,0.4);">🌌 Canvas</button>
+        <button id="xray-mode-btn" class="theme-toggle" aria-label="Toggle X-Ray Mode" title="Toggle Developer X-Ray Inspection" style="font-size:0.82rem; font-family:var(--font-mono); width:auto; padding:0.4rem 0.75rem; border-radius:var(--radius-full); color:var(--accent-emerald); border-color:rgba(16,185,129,0.4);">⚡ X-Ray</button>
         <button id="theme-toggle-btn" class="theme-toggle" aria-label="Switch theme">☀️</button>
         <a href="resume.html?v=2.0" target="_blank" class="btn btn-outline btn-sm" style="padding:0.5rem 1.1rem; font-size:0.88rem;">CV / Resume ↗</a>
         <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
@@ -1507,9 +1511,91 @@
     <div id="explore-node-card-preview" class="explore-node-preview glass-card" style="display:none;"></div>
   </div>
 
+  <!-- Feature 4: Time Machine Floating Journey Controller -->
+  <div id="time-machine-bar" class="time-machine-bar glass-card" style="display:none;">
+    <div style="font-size:0.8rem; font-family:var(--font-heading); color:var(--accent-purple); display:flex; align-items:center; gap:0.4rem; margin-bottom:0.4rem;">
+      <span>⏳ Time Machine Timeline</span>
+      <span id="time-machine-year-label" style="color:#fff; font-weight:700; background:rgba(168,85,247,0.2); padding:0.1rem 0.5rem; border-radius:var(--radius-full); border:1px solid rgba(168,85,247,0.4);">2026 (All Records)</span>
+    </div>
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button class="btn btn-outline btn-sm tm-year-btn" data-year="2024">2024</button>
+      <button class="btn btn-outline btn-sm tm-year-btn" data-year="2025">2025</button>
+      <button class="btn btn-outline btn-sm tm-year-btn active" data-year="2026">2026</button>
+      <button id="tm-close-btn" class="modal-close-btn" style="width:24px; height:24px; font-size:0.75rem;" title="Close Time Machine">✕</button>
+    </div>
+  </div>
+
+  <!-- Feature 1: Infinite Spatial Canvas Overlay -->
+  <div id="infinite-canvas-overlay" class="infinite-canvas-overlay" aria-hidden="true">
+    <div class="infinite-canvas-controls">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.2rem;">🌌</span>
+        <div>
+          <h4 style="font-size:0.95rem; font-family:var(--font-heading); color:#fff; margin:0;">Infinite Zoomable Canvas</h4>
+          <p style="font-size:0.7rem; color:var(--text-muted); margin:0;">Drag canvas to pan • Scroll wheel to zoom in/out</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+        <button id="canvas-zoom-in" class="btn btn-outline btn-sm">🔍 +</button>
+        <button id="canvas-zoom-out" class="btn btn-outline btn-sm">🔍 -</button>
+        <button id="canvas-zoom-reset" class="btn btn-outline btn-sm">🎯 Center</button>
+        <button id="infinite-canvas-close-btn" class="btn btn-primary btn-sm">Exit Explore Mode ✕</button>
+      </div>
+    </div>
+    <div id="infinite-canvas-viewport" class="infinite-canvas-viewport">
+      <div id="infinite-canvas-world" class="infinite-canvas-world">
+        <!-- Spatial Nodes will be rendered here dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 7: Portfolio Story Engine Modal -->
+  <div id="story-engine-overlay" class="custom-overlay" aria-hidden="true">
+    <div class="custom-modal-dialog" style="max-width: 680px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.25rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="font-size:1.3rem;">📖</span>
+          <h3 id="story-engine-title" style="font-size:1.2rem; font-family:var(--font-heading); color:#fff; margin:0;">Portfolio Story Pipeline</h3>
+        </div>
+        <button id="story-engine-close-btn" class="modal-close-btn">✕</button>
+      </div>
+      <div id="story-engine-content" style="display:flex; flex-direction:column; gap:1rem;">
+        <!-- Story steps rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 8: Trace Any Skill Modal -->
+  <div id="trace-skill-overlay" class="custom-overlay" aria-hidden="true">
+    <div class="custom-modal-dialog" style="max-width: 780px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.25rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="font-size:1.3rem;">📍</span>
+          <h3 id="trace-skill-title" style="font-size:1.2rem; font-family:var(--font-heading); color:#fff; margin:0;">Trace Skill Journey</h3>
+        </div>
+        <button id="trace-skill-close-btn" class="modal-close-btn">✕</button>
+      </div>
+      <div class="skill-trace-buttons" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+        <button class="btn btn-outline btn-sm skill-trace-modal-btn active" data-skill="python">🐍 Python</button>
+        <button class="btn btn-outline btn-sm skill-trace-modal-btn" data-skill="react">⚛️ React</button>
+        <button class="btn btn-outline btn-sm skill-trace-modal-btn" data-skill="java">☕ Java</button>
+        <button class="btn btn-outline btn-sm skill-trace-modal-btn" data-skill="sql">🗄️ SQL</button>
+        <button class="btn btn-outline btn-sm skill-trace-modal-btn" data-skill="javascript">🟨 JavaScript</button>
+      </div>
+      <div id="trace-skill-stepper-modal" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+        <!-- Dynamically rendered steps -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 10: "Break The Website" Floating Reset Button -->
+  <button id="break-layout-reset-btn" class="btn btn-primary" style="display:none; position:fixed; bottom:2rem; right:2rem; z-index:12500; box-shadow:0 10px 30px rgba(239,68,68,0.5);">
+    🔄 Reset Layout
+  </button>
+
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
-  <script src="js/main.js?v=28.0"></script>
+  <script src="js/main.js?v=29.0"></script>
 </body>
 </html>

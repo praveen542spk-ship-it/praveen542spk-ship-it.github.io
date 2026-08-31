@@ -3348,4 +3348,163 @@ body.light-theme .skill-bar-track {
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-full);
   margin-left: 0.5rem;
-}
+}
+
+/* ==========================================================================
+   ADVANCED EXPERIMENTAL INTERACTION LAYER STYLES
+   ========================================================================== */
+
+/* Dual Reality Modes */
+body.experimental-mode {
+  --surface-color: rgba(20, 24, 45, 0.75);
+  --border-color: rgba(239, 68, 68, 0.35);
+  --accent-glow: 0 0 25px rgba(239, 68, 68, 0.4);
+}
+
+body.experimental-mode .glass-card {
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Infinite Canvas Overlay & World */
+.infinite-canvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #0f1325 0%, #05060b 100%);
+  z-index: 11000;
+  display: none;
+  overflow: hidden;
+}
+
+.infinite-canvas-overlay.open {
+  display: block;
+}
+
+.infinite-canvas-controls {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 12;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 17, 32, 0.85);
+  backdrop-filter: blur(16px);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.infinite-canvas-viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: grab;
+}
+
+.infinite-canvas-viewport:active {
+  cursor: grabbing;
+}
+
+.infinite-canvas-world {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3000px;
+  height: 2000px;
+  transform-origin: center center;
+  background-image: radial-gradient(rgba(239, 68, 68, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transition: transform 0.05s ease-out;
+}
+
+.spatial-node-card {
+  position: absolute;
+  width: 340px;
+  padding: 1.5rem;
+  background: rgba(15, 17, 32, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.spatial-node-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+}
+
+/* Time Machine Floating Controller */
+.time-machine-bar {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9800;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: rgba(15, 17, 32, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tm-year-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: var(--radius-full);
+}
+
+.tm-year-btn.active {
+  background: var(--accent-purple);
+  color: #fff;
+  border-color: var(--accent-purple);
+}
+
+/* Developer X-Ray Mode Overlay Badges */
+.xray-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  z-index: 20;
+  display: none;
+}
+
+body.xray-active .xray-badge {
+  display: block;
+}
+
+body.xray-active .glass-card {
+  border-style: dashed !important;
+  border-color: var(--accent-emerald) !important;
+}
+
+/* Break UI Draggable Floating Window Mode */
+body.break-ui-active .glass-card {
+  position: relative !important;
+  cursor: move !important;
+  z-index: 50;
+  user-select: none;
+}
+
+/* Magnetic Proximity Effect */
+.magnetic-active {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
