@@ -1187,8 +1187,142 @@ function initCertCardDeck() {
       if (sender === 'bot') speakText(text);
     };
 
+    const getRankOrdinal = (pos, isLowest) => {
+      const type = isLowest ? 'lowest' : 'highest';
+      if (pos === 1) return `${type}`;
+      if (pos === 2) return `second ${type}`;
+      if (pos === 3) return `third ${type}`;
+      if (pos === 4) return `fourth ${type}`;
+      if (pos === 5) return `fifth ${type}`;
+      return `${pos}th ${type}`;
+    };
+
+    const handleRankingQuery = (q) => {
+      // Determine academic level
+      let level = null;
+      if (q.includes('10th') || q.includes('10 th') || q.includes('sslc') || q.includes('tenth')) {
+        level = '10th';
+      } else if (q.includes('12th') || q.includes('12 th') || q.includes('hsc') || q.includes('twelfth') || q.includes('plus two')) {
+        level = '12th';
+      } else if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
+        level = 'sem1';
+      } else if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
+        level = 'sem2';
+      } else {
+        const semMatch = q.match(/(\d+)(?:st|nd|rd|th)?\s*(?:sem|semester)/i) || q.match(/(?:sem|semester)\s*(\d+)/i);
+        if (semMatch) {
+          const semNum = parseInt(semMatch[1], 10);
+          if (semNum > 2) {
+            const suffix = semNum === 3 ? 'rd' : 'th';
+            return `Invalid academic record. ${semNum}${suffix} semester marks are not available in the student's records.`;
+          }
+        }
+      }
+
+      const isLowest = q.includes('lowest') || q.includes('least') || q.includes('minimum') || q.includes('bottom');
+      let rankPos = 1;
+      if (q.includes('second') || q.includes('2nd')) rankPos = 2;
+      else if (q.includes('third') || q.includes('3rd')) rankPos = 3;
+      else if (q.includes('fourth') || q.includes('4th')) rankPos = 4;
+      else if (q.includes('fifth') || q.includes('5th')) rankPos = 5;
+
+      // 10th Standard Ranking
+      if (level === '10th') {
+        const records10th = [
+          { subject: 'Science', mark: 94 },
+          { subject: 'Mathematics', mark: 90 },
+          { subject: 'Social Science', mark: 88 },
+          { subject: 'English', mark: 87 },
+          { subject: 'Tamil', mark: 83 }
+        ];
+        const sorted = [...records10th].sort((a, b) => isLowest ? a.mark - b.mark : b.mark - a.mark);
+        const distinctMarks = [...new Set(sorted.map(item => item.mark))];
+        const targetMark = distinctMarks[rankPos - 1];
+        if (!targetMark) {
+          return `Invalid rank position. 10th standard has only ${distinctMarks.length} distinct mark tiers.`;
+        }
+        const matchingSubjects = sorted.filter(item => item.mark === targetMark).map(item => item.subject);
+        const rankText = getRankOrdinal(rankPos, isLowest);
+        const subjStr = matchingSubjects.join(' and ');
+        return `Your ${rankText} mark in 10th standard is <strong>${targetMark} / 100</strong> in <strong>${subjStr}</strong>.`;
+      }
+
+      // 12th Standard Ranking
+      if (level === '12th') {
+        const records12th = [
+          { subject: 'Chemistry', mark: 98 },
+          { subject: 'Tamil', mark: 92 },
+          { subject: 'Mathematics', mark: 91 },
+          { subject: 'Physics', mark: 88 },
+          { subject: 'Biology', mark: 85 },
+          { subject: 'English', mark: 78 }
+        ];
+        const sorted = [...records12th].sort((a, b) => isLowest ? a.mark - b.mark : b.mark - a.mark);
+        const distinctMarks = [...new Set(sorted.map(item => item.mark))];
+        const targetMark = distinctMarks[rankPos - 1];
+        if (!targetMark) {
+          return `Invalid rank position. 12th standard has only ${distinctMarks.length} distinct mark tiers.`;
+        }
+        const matchingSubjects = sorted.filter(item => item.mark === targetMark).map(item => item.subject);
+        const rankText = getRankOrdinal(rankPos, isLowest);
+        const subjStr = matchingSubjects.join(' and ');
+        return `Your ${rankText} mark in 12th standard is <strong>${targetMark} / 100</strong> in <strong>${subjStr}</strong>.`;
+      }
+
+      // 1st Semester Ranking
+      if (level === 'sem1') {
+        if (!isLowest && rankPos === 1) {
+          return `Your highest grade in 1st semester is <strong>Grade A+</strong> in <strong>Matrices and Calculus</strong> and <strong>Interpersonal Skills</strong>.`;
+        }
+        if (isLowest && rankPos === 1) {
+          return `Your lowest grade in 1st semester is <strong>Grade A</strong> in <strong>Heritage of Tamils, Engineering Chemistry, Programming in C++, Software Development Practices, Digital Principles and System Design, and Idea Lab - I</strong>.`;
+        }
+        if (!isLowest && rankPos === 2) {
+          return `Your second highest grade in 1st semester is <strong>Grade A</strong> in <strong>Heritage of Tamils, Engineering Chemistry, Programming in C++, Software Development Practices, Digital Principles and System Design, and Idea Lab - I</strong>.`;
+        }
+      }
+
+      // 2nd Semester Ranking
+      if (level === 'sem2') {
+        if (!isLowest && rankPos === 1) {
+          return `Your highest grade in 2nd semester is <strong>Grade S (Outstanding)</strong> in <strong>Data Structures</strong> and <strong>Innovation and Creativity Skills Development</strong>.`;
+        }
+        if (isLowest && rankPos === 1) {
+          return `Your lowest grade in 2nd semester is <strong>Grade B+</strong> in <strong>Idea Lab - II</strong>.`;
+        }
+        if (!isLowest && rankPos === 2) {
+          return `Your second highest grade in 2nd semester is <strong>Grade A+</strong> in <strong>Java Programming</strong> and <strong>Linear Algebra and Applications</strong>.`;
+        }
+        if (isLowest && rankPos === 2) {
+          return `Your second lowest grade in 2nd semester is <strong>Grade A</strong> in <strong>Tamils and Technology, Introduction to Artificial Intelligence, and Physics for Information Science</strong>.`;
+        }
+        if (!isLowest && rankPos === 3) {
+          return `Your third highest grade in 2nd semester is <strong>Grade A</strong> in <strong>Tamils and Technology, Introduction to Artificial Intelligence, and Physics for Information Science</strong>.`;
+        }
+        if (isLowest && rankPos === 3) {
+          return `Your third lowest grade in 2nd semester is <strong>Grade A+</strong> in <strong>Java Programming</strong> and <strong>Linear Algebra and Applications</strong>.`;
+        }
+      }
+
+      // Overall across all records if no specific level mentioned
+      if (!isLowest && rankPos === 1) {
+        return `Your overall highest mark is <strong>98 / 100</strong> in <strong>Chemistry (12th Standard)</strong>.`;
+      }
+      if (isLowest && rankPos === 1) {
+        return `Your overall lowest mark is <strong>78 / 100</strong> in <strong>English (12th Standard)</strong>.`;
+      }
+
+      return null;
+    };
+
     const getJarvisResponse = (query) => {
       const q = query.toLowerCase().trim();
+
+      // Check if this is a ranking or comparison query (highest, lowest, top, rank, best, worst, etc.)
+      if (q.includes('highest') || q.includes('lowest') || q.includes('maximum') || q.includes('minimum') || q.includes('least') || q.includes('best mark') || q.includes('top mark') || q.includes('worst mark')) {
+        const rankingRes = handleRankingQuery(q);
+        if (rankingRes) return rankingRes;
+      }
 
       // --- ACADEMIC QUERY VALIDATION ENGINE ---
 
