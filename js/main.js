@@ -1318,13 +1318,30 @@ function initCertCardDeck() {
     const getJarvisResponse = (query) => {
       const q = query.toLowerCase().trim();
 
-      // Check if this is a ranking or comparison query (highest, lowest, top, rank, best, worst, etc.)
+      // --- 1. GENERAL & CONTACT QUERIES (Priority Check) ---
+      if (q.includes('email') || q.includes('mail')) {
+        return `Praveen's Email ID is 📧 <strong>praveen542spk@gmail.com</strong>.`;
+      }
+      if (q.includes('phone') || q.includes('mobile') || q.includes('number') || q.includes('call')) {
+        return `Praveen's Mobile Number is 📞 <strong>+91 6374060801</strong>.`;
+      }
+      if (q.includes('contact') || q.includes('hire') || q.includes('reach')) {
+        return `Reach Praveen via Phone: 📞 <strong>+91 6374060801</strong> | Email: 📧 <strong>praveen542spk@gmail.com</strong> | LinkedIn: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a>.`;
+      }
+      if (q.includes('linkedin')) {
+        return `Praveen's LinkedIn profile: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">linkedin.com/in/praveen-kumar-s-0bab05411 ↗</a>`;
+      }
+      if (q.includes('github')) {
+        return `Praveen's GitHub profile: 🐙 <a href="https://github.com/praveen542spk-ship-it" target="_blank" style="color:var(--accent-cyan);">github.com/praveen542spk-ship-it ↗</a>`;
+      }
+
+      // --- 2. MARK COMPARISON & RANKING ENGINE ---
       if (q.includes('highest') || q.includes('lowest') || q.includes('maximum') || q.includes('minimum') || q.includes('least') || q.includes('best mark') || q.includes('top mark') || q.includes('worst mark')) {
         const rankingRes = handleRankingQuery(q);
         if (rankingRes) return rankingRes;
       }
 
-      // --- ACADEMIC QUERY VALIDATION ENGINE ---
+      // --- 3. ACADEMIC QUERY VALIDATION ENGINE ---
 
       // Check for unavailable semesters (3rd, 4th, 5th, 6th, 7th, 8th, etc.)
       const semMatch = q.match(/(\d+)(?:st|nd|rd|th)?\s*(?:sem|semester)/i) || q.match(/(?:sem|semester)\s*(\d+)/i);
@@ -1338,8 +1355,8 @@ function initCertCardDeck() {
 
       // Check specific 12th subject queries (12th Subjects: Tamil:92, English:78, Physics:88, Chemistry:98, Biology:85, Maths:91)
       if (q.includes('12th') || q.includes('12 th') || q.includes('hsc') || q.includes('twelfth') || q.includes('plus two')) {
-        if (q.includes('computer') || q.includes('cs') || q.includes('commerce') || q.includes('account') || q.includes('economic') || q.includes('french') || q.includes('hindi')) {
-          const subjName = (q.includes('computer') || q.includes('cs')) ? 'Computer Science' : 'The requested subject';
+        if (q.includes('computer') || /\bcs\b/i.test(q) || q.includes('commerce') || q.includes('account') || q.includes('economic') || q.includes('french') || q.includes('hindi')) {
+          const subjName = (q.includes('computer') || /\bcs\b/i.test(q)) ? 'Computer Science' : 'The requested subject';
           return `Invalid subject. ${subjName} is not available in the student's 12th-standard academic records.`;
         }
         if (q.includes('tamil')) return `Praveen's 12th Tamil Mark is <strong>92 / 100</strong>.`;
@@ -1353,8 +1370,8 @@ function initCertCardDeck() {
 
       // Check specific 10th subject queries (10th Subjects: Tamil:83, English:87, Maths:90, Science:94, Social Science:88)
       if (q.includes('10th') || q.includes('10 th') || q.includes('sslc') || q.includes('tenth')) {
-        if (q.includes('computer') || q.includes('cs') || q.includes('hindi') || q.includes('french') || q.includes('biology') || q.includes('chemistry') || q.includes('physics')) {
-          const subjName = (q.includes('computer') || q.includes('cs')) ? 'Computer Science' : 'The requested subject';
+        if (q.includes('computer') || /\bcs\b/i.test(q) || q.includes('hindi') || q.includes('french') || q.includes('biology') || q.includes('chemistry') || q.includes('physics')) {
+          const subjName = (q.includes('computer') || /\bcs\b/i.test(q)) ? 'Computer Science' : 'The requested subject';
           return `Invalid subject. ${subjName} is not available in the student's 10th-standard academic records.`;
         }
         if (q.includes('tamil')) return `Praveen's 10th Tamil Mark is <strong>83 / 100</strong>.`;
@@ -1365,7 +1382,7 @@ function initCertCardDeck() {
         if (q.includes('mark') || q.includes('score') || q.includes('total')) return `Praveen's 10th SSLC Total Mark is <strong>442 / 500 (88.40%)</strong>.`;
       }
 
-      // Check specific 1st Semester subject queries (Heritage of Tamils: A, Matrices & Calculus: A+, Eng Chem: A, C++: A, SDP: A, DPSD: A, Idea Lab I: A, Interpersonal: A+)
+      // Check specific 1st Semester subject queries
       if (q.includes('1st sem') || q.includes('first sem') || q.includes('sem 1') || q.includes('semester 1')) {
         if (q.includes('heritage') || q.includes('tamil')) return `Praveen's 1st Semester Heritage of Tamils Grade is <strong>A</strong>.`;
         if (q.includes('math') || q.includes('calculus') || q.includes('matrices')) return `Praveen's 1st Semester Matrices and Calculus Grade is <strong>A+</strong>.`;
@@ -1379,10 +1396,10 @@ function initCertCardDeck() {
         if (q.includes('mark') || q.includes('gpa') || q.includes('grade')) return `Praveen's 1st Semester College GPA is <strong>8.21 / 10</strong>.`;
       }
 
-      // Check specific 2nd Semester subject queries (Tamils & Tech: A, AI: A, Data Structures: S, Java: A+, Linear Algebra: A+, Physics for IS: A, Idea Lab II: B+, Innovation Skills: S)
+      // Check specific 2nd Semester subject queries
       if (q.includes('2nd sem') || q.includes('second sem') || q.includes('sem 2') || q.includes('semester 2')) {
         if (q.includes('tamil') || q.includes('technology')) return `Praveen's 2nd Semester Tamils and Technology Grade is <strong>A</strong>.`;
-        if (q.includes('ai') || q.includes('artificial intelligence')) return `Praveen's 2nd Semester Introduction to Artificial Intelligence Grade is <strong>A</strong>.`;
+        if (/\bai\b/i.test(q) || q.includes('artificial intelligence')) return `Praveen's 2nd Semester Introduction to Artificial Intelligence Grade is <strong>A</strong>.`;
         if (q.includes('data structure') || q.includes('ds')) return `Praveen's 2nd Semester Data Structures Grade is <strong>S (Outstanding)</strong>.`;
         if (q.includes('java')) return `Praveen's 2nd Semester Java Programming Grade is <strong>A+</strong>.`;
         if (q.includes('math') || q.includes('linear algebra')) return `Praveen's 2nd Semester Linear Algebra and Applications Grade is <strong>A+</strong>.`;
@@ -1417,7 +1434,7 @@ function initCertCardDeck() {
       if (q.includes('c ') || q.includes('c language')) {
         return `Praveen's 1st Semester Programming in C (Non-Credit) Status is <strong>Completed</strong>.`;
       }
-      if (q.includes('ai') || q.includes('artificial intelligence')) {
+      if (/\bai\b/i.test(q) || q.includes('artificial intelligence')) {
         return `Praveen's 2nd Semester Introduction to Artificial Intelligence Grade is <strong>A</strong>.`;
       }
       if (q.includes('tamil')) {
@@ -1433,7 +1450,7 @@ function initCertCardDeck() {
         return `Praveen's 10th Social Science Mark is <strong>88 / 100</strong>.`;
       }
 
-      // Explicit Invalid Subject Fallback for queries asking for non-existent subjects (e.g., French, Hindi, Commerce, Economics)
+      // Explicit Invalid Subject Fallback
       if (q.includes('french') || q.includes('hindi') || q.includes('commerce') || q.includes('account') || q.includes('economic') || q.includes('history') || q.includes('geography')) {
         return `Invalid subject. The requested subject is not available in the student's academic records.`;
       }
@@ -1442,25 +1459,41 @@ function initCertCardDeck() {
       if (q.includes('college') || q.includes('degree') || q.includes('dept') || q.includes('department') || q.includes('rmd') || q.includes('cse') || q.includes('year') || q.includes('school')) {
         return `Praveen is studying <strong>B.E. Computer Science & Engineering (2nd Year)</strong> at <strong>R.M.D. Engineering College</strong>.`;
       }
-      // Phone / Mobile number
-      if (q.includes('phone') || q.includes('mobile') || q.includes('number') || q.includes('call')) {
-        return `Praveen's Mobile Number is 📞 <strong>+91 6374060801</strong>.`;
+
+      // Specific Projects
+      if (q.includes('job') || q.includes('tracker')) {
+        return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.`;
       }
-      // Email
-      if (q.includes('email') || q.includes('mail')) {
-        return `Praveen's Email ID is 📧 <strong>praveen542spk@gmail.com</strong>.`;
+      if (q.includes('social') || q.includes('media')) {
+        return `<strong>Social Media Platform:</strong> A full-stack web application featuring user profiles, post creation, and responsive design (Deployed on Vercel).`;
       }
-      // LinkedIn
-      if (q.includes('linkedin')) {
-        return `Praveen's LinkedIn profile: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">linkedin.com/in/praveen-kumar-s-0bab05411 ↗</a>`;
+      if (q.includes('jarvis') || q.includes('voice assistant')) {
+        return `<strong>Jarvis AI Voice Assistant:</strong> An intelligent desktop voice automation system developed using Python and NLP.`;
       }
-      // GitHub
-      if (q.includes('github')) {
-        return `Praveen's GitHub profile: 🐙 <a href="https://github.com/praveen542spk-ship-it" target="_blank" style="color:var(--accent-cyan);">github.com/praveen542spk-ship-it ↗</a>`;
+      if (q.includes('ecom') || q.includes('shop') || q.includes('store') || q.includes('cart')) {
+        return `<strong>E-Commerce MERN App:</strong> Full-stack shopping application featuring product filtering, cart management, and JWT authentication.`;
       }
-      // Contact / Hire
-      if (q.includes('contact') || q.includes('hire') || q.includes('reach')) {
-        return `Reach Praveen via Phone: 📞 <strong>+91 6374060801</strong> | Email: 📧 <strong>praveen542spk@gmail.com</strong> | LinkedIn: 💼 <a href="https://www.linkedin.com/in/praveen-kumar-s-0bab05411" target="_blank" style="color:var(--accent-cyan);">LinkedIn Profile ↗</a>.`;
+      if (q.includes('todo') || q.includes('task')) {
+        return `<strong>To-Do Productivity App:</strong> Task management application featuring priority levels, filters, and offline LocalStorage persistence.`;
+      }
+      if (q.includes('weather')) {
+        return `<strong>Weather Dashboard:</strong> Dynamic weather application using HTML5 Geolocation and OpenWeather API.`;
+      }
+      if (q.includes('project') || q.includes('work') || q.includes('built')) {
+        return `Praveen has built 7+ projects including Social Media Platform, Job Application Tracker, Jarvis AI Voice Assistant, and E-Commerce MERN App.`;
+      }
+
+      // Tech Stack / Skills
+      if (q.includes('skill') || q.includes('stack') || q.includes('tech')) {
+        return `Praveen's Tech Stack:<br>• <strong>Frontend:</strong> React.js, HTML5, CSS3, JavaScript<br>• <strong>Backend:</strong> Node.js, Express.js, REST APIs<br>• <strong>Databases:</strong> MongoDB, LocalStorage<br>• <strong>Languages:</strong> Python, C, JavaScript`;
+      }
+
+      // Overall CGPA / GPA / Marks Summary
+      if (q.includes('cgpa') || q.includes('gpa')) {
+        return `Praveen's Cumulative College CGPA is <strong>8.47 / 10</strong> (Sem 1: 8.21 GPA | Sem 2: 8.73 GPA).`;
+      }
+      if (q.includes('mark') || q.includes('score') || q.includes('education') || q.includes('academic') || q.includes('record')) {
+        return `Praveen's Academic Summary:<br>• <strong>College CGPA:</strong> 8.47 / 10 (Sem 1: 8.21 | Sem 2: 8.73)<br>• <strong>12th HSC:</strong> 532 / 600 (88.67%)<br>• <strong>10th SSLC:</strong> 442 / 500 (88.40%)`;
       }
 
       // Specific Projects
