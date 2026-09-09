@@ -1367,6 +1367,27 @@ function initCertCardDeck() {
         return `📄 <strong>MongoDB Certificate Links:</strong><br>• <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics Certificate (PDF) ↗</a><br>• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy Certificate (PDF) ↗</a>`;
       }
 
+      // CodeTantra Certificates Link
+      if (q.includes('codetantra cpp') || q.includes('codetantra c++') || (q.includes('codetantra') && q.includes('c++'))) {
+        return `📄 <strong>CodeTantra C++ Certificate Link:</strong><br><a href="assets/certificates/codetantra-cpp.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeTantra C++ Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('codetantra dsa') || (q.includes('codetantra') && q.includes('dsa'))) {
+        return `📄 <strong>CodeTantra Data Structures & Algorithms Certificate Link:</strong><br><a href="assets/certificates/codetantra-dsa.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeTantra DSA Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('codetantra java') || (q.includes('codetantra') && q.includes('java'))) {
+        return `📄 <strong>CodeTantra Java Programming Certificate Link:</strong><br><a href="assets/certificates/codetantra-java.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeTantra Java Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('codetantra sdp') || (q.includes('codetantra') && q.includes('sdp'))) {
+        return `📄 <strong>CodeTantra Skill Development Program Certificate Link:</strong><br><a href="assets/certificates/codetantra-sdp.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View CodeTantra SDP Certificate (PDF) ↗</a>`;
+      }
+      if (q.includes('codetantra')) {
+        return `📄 <strong>CodeTantra Certificate Links:</strong><br>
+• <a href="assets/certificates/codetantra-cpp.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra C++ Certificate (PDF) ↗</a><br>
+• <a href="assets/certificates/codetantra-dsa.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra DSA Certificate (PDF) ↗</a><br>
+• <a href="assets/certificates/codetantra-java.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra Java Certificate (PDF) ↗</a><br>
+• <a href="assets/certificates/codetantra-sdp.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra SDP Certificate (PDF) ↗</a>`;
+      }
+
       // 10th Standard Marksheet Link
       if (q.includes('10th') || q.includes('10 th') || q.includes('sslc')) {
         return `📄 <strong>10th Standard SSLC Marksheet Link:</strong><br><a href="assets/marksheets/sslc-10th-marksheet.pdf" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">View 10th Marksheet (PDF) ↗</a>`;
@@ -1412,7 +1433,11 @@ function initCertCardDeck() {
 • <a href="assets/certificates/nptel-certificate.pdf" target="_blank" style="color:var(--accent-cyan);">NPTEL Course Certificate ↗</a><br>
 • <a href="assets/certificates/hp-life-ai-beginners.pdf" target="_blank" style="color:var(--accent-cyan);">HP LIFE AI for Beginners ↗</a><br>
 • <a href="assets/certificates/mongodb-basics.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB Basics ↗</a><br>
-• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy ↗</a>`;
+• <a href="assets/certificates/mongodb-ai-strategy.pdf" target="_blank" style="color:var(--accent-cyan);">MongoDB AI Strategy ↗</a><br>
+• <a href="assets/certificates/codetantra-cpp.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra C++ ↗</a><br>
+• <a href="assets/certificates/codetantra-dsa.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra DSA ↗</a><br>
+• <a href="assets/certificates/codetantra-java.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra Java ↗</a><br>
+• <a href="assets/certificates/codetantra-sdp.pdf" target="_blank" style="color:var(--accent-cyan);">CodeTantra SDP ↗</a>`;
       }
 
       // All Marksheets List
@@ -2005,6 +2030,7 @@ function initKnowledgeGraphEngine() {
     { id: 'proj_jarvis', label: 'Jarvis Voice AI', type: 'project', x: 0.6, y: 0.82, color: '#a855f7', desc: 'Python NLP Assistant' },
     { id: 'cert_codealpha', label: 'CodeAlpha Cert', type: 'cert', x: 0.82, y: 0.3, color: '#ec4899', desc: 'Full-Stack Internship' },
     { id: 'cert_infosys', label: 'Infosys CSS/Java', type: 'cert', x: 0.82, y: 0.6, color: '#10b981', desc: 'Verified Tech Certs' },
+    { id: 'cert_codetantra', label: 'CodeTantra Certs', type: 'cert', x: 0.82, y: 0.45, color: '#6366f1', desc: 'C++, DSA, Java & SDP Certs' },
     { id: 'achieve_hack', label: 'Hackathon Finalist', type: 'achieve', x: 0.85, y: 0.85, color: '#f59e0b', desc: 'National Coding Contest' }
   ];
 
@@ -2018,6 +2044,7 @@ function initKnowledgeGraphEngine() {
     { from: 'skill_node', to: 'proj_jobapp' },
     { from: 'proj_social', to: 'cert_codealpha' },
     { from: 'skill_react', to: 'cert_infosys' },
+    { from: 'edu_rmd', to: 'cert_codetantra' },
     { from: 'proj_jarvis', to: 'achieve_hack' }
   ];
 
