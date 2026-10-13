@@ -1608,7 +1608,7 @@ function initCertCardDeck() {
 
       // Specific Projects
       if (q.includes('job') || q.includes('tracker')) {
-        return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.`;
+        return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.<br>• <a href="https://job-app-delta-three.vercel.app/" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">Live Demo (Vercel) ↗</a><br>• <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">GitHub Repository ↗</a>`;
       }
       if (q.includes('social') || q.includes('media')) {
         return `<strong>Social Media Platform:</strong> A full-stack web application featuring user profiles, post creation, and responsive design (Deployed on Vercel).`;
@@ -1644,7 +1644,7 @@ function initCertCardDeck() {
 
       // Specific Projects
       if (q.includes('job') || q.includes('tracker')) {
-        return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.`;
+        return `<strong>Job Application Tracker:</strong> A MERN stack application featuring a drag-and-drop Kanban interface for managing job statuses.<br>• <a href="https://job-app-delta-three.vercel.app/" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">Live Demo (Vercel) ↗</a><br>• <a href="https://github.com/praveen542spk-ship-it/job-app" target="_blank" style="color:var(--accent-cyan); text-decoration:underline;">GitHub Repository ↗</a>`;
       }
       if (q.includes('social') || q.includes('media')) {
         return `<strong>Social Media Platform:</strong> A full-stack web application featuring user profiles, post creation, and responsive design (Deployed on Vercel).`;
@@ -1791,7 +1791,7 @@ function initCertCardDeck() {
 }</pre>`;
           } else if (c === 'projects') {
             res.innerHTML = `1. Social Media Platform (Live Demo: code-alpha-social-media-platform-self.vercel.app)<br>
-2. Job Application Tracker (GitHub: github.com/praveen542spk-ship-it/job-app)<br>
+2. Job Application Tracker (Live Demo: job-app-delta-three.vercel.app | GitHub: github.com/praveen542spk-ship-it/job-app)<br>
 3. Jarvis AI Voice Assistant (GitHub: github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant)<br>
 4. E-Commerce MERN Application (GitHub: github.com/praveen542spk-ship-it/ecom-app)`;
           } else if (c === 'cgpa' || c === 'marks') {
@@ -2362,7 +2362,7 @@ function initProjectLaboratoryEngine() {
     jobapp: {
       name: 'Job Application Tracker',
       github: 'https://github.com/praveen542spk-ship-it/job-app',
-      demo: 'https://github.com/praveen542spk-ship-it/job-app',
+      demo: 'https://job-app-delta-three.vercel.app/',
       tags: ['React', 'Node.js', 'Express', 'MongoDB'],
       stages: {
         problem: 'Job applicants lose track of interview dates, pending follow-ups, and resume versions when managing applications manually in spreadsheets.',

@@ -54,7 +54,7 @@
 | # | Project | Tech Stack | Links |
 |---|---------|------------|-------|
 | 📱 | **Social Media Platform** *(Featured)* | JavaScript, Node.js, Express, Vercel | [Live Demo](https://code-alpha-social-media-platform-self.vercel.app) · [GitHub](https://github.com/praveen542spk-ship-it/CodeAlpha_Social-Media-Platform) |
-| 💼 | **Job Application Tracker** | React, Node.js, Express, MongoDB | [GitHub](https://github.com/praveen542spk-ship-it/job-app) |
+| 💼 | **Job Application Tracker** | React, Node.js, Express, MongoDB | [Live Demo](https://job-app-delta-three.vercel.app/) · [GitHub](https://github.com/praveen542spk-ship-it/job-app) |
 | 🎙️ | **Jarvis AI Voice Assistant** | Python, SpeechRecognition, NLP | [GitHub](https://github.com/praveen542spk-ship-it/Jarvis-AI-Voice-Assistant) |
 | 🛒 | **E-Commerce Application** | React, Node.js, Express, MongoDB | [GitHub](https://github.com/praveen542spk-ship-it/ecom-app) |
 | 🌐 | **Community Hub** | JavaScript, Node.js, HTML5, CSS3 | [GitHub](https://github.com/praveen542spk-ship-it/CodeAlpha_community-Hub) |
